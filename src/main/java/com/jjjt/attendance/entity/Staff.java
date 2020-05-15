@@ -73,11 +73,20 @@ public class Staff {
     @ApiModelProperty(value = "打卡状态('1' 签到  '0' 签退)" , name = "clockstatus")
     private String clockstatus;
 
+    @ApiModelProperty(value = "所属公司id" , name = "company_name")
+    private String company_name;
+
+    @ApiModelProperty(value = "部门id" , name = "department_name")
+    private String department_name;
+
+    @ApiModelProperty(value = "职务id" , name = "position_name")
+    private String position_name;
+
     public Staff(){
         super();
     }
 
-    public Staff(int id, String staff_name, int staff_age, String staff_img, String staff_sex, String staff_card, String staff_nation, String staff_address, String staff_phone, String sos_name, String sos_ship, String sos_phone, String entry_time, int company_id, int department_id, int position_id, String password, String picture, String nickname, String signature, String state, String clockstatus) {
+    public Staff(int id, String staff_name, int staff_age, String staff_img, String staff_sex, String staff_card, String staff_nation, String staff_address, String staff_phone, String sos_name, String sos_ship, String sos_phone, String entry_time, int company_id, int department_id, int position_id, String password, String picture, String nickname, String signature, String state, String clockstatus, String company_name, String department_name, String position_name) {
         this.id = id;
         this.staff_name = staff_name;
         this.staff_age = staff_age;
@@ -100,6 +109,9 @@ public class Staff {
         this.signature = signature;
         this.state = state;
         this.clockstatus = clockstatus;
+        this.company_name = company_name;
+        this.department_name = department_name;
+        this.position_name = position_name;
     }
 
     public int getId() {
@@ -278,6 +290,30 @@ public class Staff {
         this.clockstatus = clockstatus;
     }
 
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
+    }
+
+    public String getPosition_name() {
+        return position_name;
+    }
+
+    public void setPosition_name(String position_name) {
+        this.position_name = position_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -303,6 +339,9 @@ public class Staff {
                 ", signature='" + signature + '\'' +
                 ", state='" + state + '\'' +
                 ", clockstatus='" + clockstatus + '\'' +
+                ", company_name='" + company_name + '\'' +
+                ", department_name='" + department_name + '\'' +
+                ", position_name='" + position_name + '\'' +
                 '}';
     }
 }
