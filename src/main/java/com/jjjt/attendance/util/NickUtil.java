@@ -1,4 +1,4 @@
-package com.jjjt.attendance.entity;
+package com.jjjt.attendance.util;
 
 import java.util.Random;
 

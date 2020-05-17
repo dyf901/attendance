@@ -16,14 +16,22 @@ public class Company {
     @ApiModelProperty(value = "公司人数" , name = "person_count")
     private int person_count;
 
+    @ApiModelProperty(value = "上班时间" , name = "in_time")
+    private String in_time;
+
+    @ApiModelProperty(value = "下班时间" , name = "out_time")
+    private String out_time;
+
     public Company(){
         super();
     }
 
-    public Company(int id, String company_name, int person_count) {
+    public Company(int id, String company_name, int person_count, String in_time, String out_time) {
         this.id = id;
         this.company_name = company_name;
         this.person_count = person_count;
+        this.in_time = in_time;
+        this.out_time = out_time;
     }
 
     public int getId() {
@@ -50,12 +58,30 @@ public class Company {
         this.person_count = person_count;
     }
 
+    public String getIn_time() {
+        return in_time;
+    }
+
+    public void setIn_time(String in_time) {
+        this.in_time = in_time;
+    }
+
+    public String getOut_time() {
+        return out_time;
+    }
+
+    public void setOut_time(String out_time) {
+        this.out_time = out_time;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", company_name='" + company_name + '\'' +
                 ", person_count=" + person_count +
+                ", in_time='" + in_time + '\'' +
+                ", out_time='" + out_time + '\'' +
                 '}';
     }
 }

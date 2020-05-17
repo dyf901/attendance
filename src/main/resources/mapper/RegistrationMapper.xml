@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.RegistrationDao">
+    <!--签到-->
+    <insert id="InsertRegistration" parameterType="java.util.Map">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `attendance`.`registration` (`company_id`, `staff_id`, `department_name`, `in_time`, `in_address`, `remarkD`,stateD`)
+        VALUES (#{company_id}, #{staff_id}, #{department_name}, now(), #{in_address}, #{remarkD}, #{stateD});
+    </insert>
+
+    <!--签退-->
+    <update id="UpdateRegistration" parameterType="java.util.Map">
+        UPDATE `attendance`.`registration` SET `out_time`=now(), `out_address`=#{out_address}, `remarkT`=#{remarkT}, `stateT`=#{stateT} WHERE (`id`=#{id});
+    </update>
+
+    <!--根据id查询打卡信息-->
+    <select id="FindRegistrationById" parameterType="int" resultType="com.jjjt.attendance.entity.Registration">
+        SELECT  `id`, `company_id`, `staff_id`, `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `stateD`, `stateT` FROM `attendance`.`registration` r
+        LEFT JOIN `attendance`.`staff` s ON r.`staff_id`=s.`id`
+        WHERE s.`id`=#{id}
+    </select>
+</mapper>

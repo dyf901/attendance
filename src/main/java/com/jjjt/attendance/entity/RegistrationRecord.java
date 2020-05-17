@@ -25,6 +25,12 @@ public class RegistrationRecord {
     @ApiModelProperty(value = "打卡地址" , name = "address")
     private String address;
 
+    @ApiModelProperty(value = "经度" , name = "longitude")
+    private Long longitude;
+
+    @ApiModelProperty(value = "纬度" , name = "latitude")
+    private Long latitude;
+
     @ApiModelProperty(value = "备注" , name = "remark")
     private String remark;
 
@@ -32,13 +38,15 @@ public class RegistrationRecord {
         super();
     }
 
-    public RegistrationRecord(int id, int company_id, int staff_id, String time, Long timeC, String address, String remark) {
+    public RegistrationRecord(int id, int company_id, int staff_id, String time, Long timeC, String address, Long longitude, Long latitude, String remark) {
         this.id = id;
         this.company_id = company_id;
         this.staff_id = staff_id;
         this.time = time;
         this.timeC = timeC;
         this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.remark = remark;
     }
 
@@ -98,6 +106,22 @@ public class RegistrationRecord {
         this.remark = remark;
     }
 
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -107,6 +131,8 @@ public class RegistrationRecord {
                 ", time='" + time + '\'' +
                 ", timeC=" + timeC +
                 ", address='" + address + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
                 ", remark='" + remark + '\'' +
                 '}';
     }

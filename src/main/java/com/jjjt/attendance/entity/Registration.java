@@ -28,17 +28,29 @@ public class Registration {
     @ApiModelProperty(value = "签退地址" , name = "out_address")
     private String out_address;
 
-    @ApiModelProperty(value = "备注" , name = "remark")
-    private String remark;
+    @ApiModelProperty(value = "签到备注" , name = "remarkD")
+    private String remarkD;
 
-    @ApiModelProperty(value = "状态" , name = "state")
-    private String state;
+    @ApiModelProperty(value = "签退备注" , name = "remarkT")
+    private String remarkT;
+
+    @ApiModelProperty(value = "状态" , name = "stateD")
+    private String stateD;
+
+    @ApiModelProperty(value = "状态" , name = "stateD")
+    private String stateT;
+
+    @ApiModelProperty(value = "员工姓名" , name = "staff_name")
+    private String staff_name;
+
+    @ApiModelProperty(value = "员工姓名" , name = "department_name")
+    private String department_name;
 
     public Registration(){
         super();
     }
 
-    public Registration(int id, int company_id, int staff_id, String in_time, String in_address, String out_time, String out_address, String remark, String state) {
+    public Registration(int id, int company_id, int staff_id, String in_time, String in_address, String out_time, String out_address, String remarkD, String remarkT, String stateD, String stateT, String staff_name, String department_name) {
         this.id = id;
         this.company_id = company_id;
         this.staff_id = staff_id;
@@ -46,8 +58,12 @@ public class Registration {
         this.in_address = in_address;
         this.out_time = out_time;
         this.out_address = out_address;
-        this.remark = remark;
-        this.state = state;
+        this.remarkD = remarkD;
+        this.remarkT = remarkT;
+        this.stateD = stateD;
+        this.stateT = stateT;
+        this.staff_name = staff_name;
+        this.department_name = department_name;
     }
 
     public int getId() {
@@ -106,20 +122,52 @@ public class Registration {
         this.out_address = out_address;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getRemarkD() {
+        return remarkD;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setRemarkD(String remarkD) {
+        this.remarkD = remarkD;
     }
 
-    public String getState() {
-        return state;
+    public String getRemarkT() {
+        return remarkT;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setRemarkT(String remarkT) {
+        this.remarkT = remarkT;
+    }
+
+    public String getStateD() {
+        return stateD;
+    }
+
+    public void setStateD(String stateD) {
+        this.stateD = stateD;
+    }
+
+    public String getStateT() {
+        return stateT;
+    }
+
+    public void setStateT(String stateT) {
+        this.stateT = stateT;
+    }
+
+    public String getStaff_name() {
+        return staff_name;
+    }
+
+    public void setStaff_name(String staff_name) {
+        this.staff_name = staff_name;
+    }
+
+    public String getDepartment_name() {
+        return department_name;
+    }
+
+    public void setDepartment_name(String department_name) {
+        this.department_name = department_name;
     }
 
     @Override
@@ -132,8 +180,12 @@ public class Registration {
                 ", in_address='" + in_address + '\'' +
                 ", out_time='" + out_time + '\'' +
                 ", out_address='" + out_address + '\'' +
-                ", remark='" + remark + '\'' +
-                ", state='" + state + '\'' +
+                ", remarkD='" + remarkD + '\'' +
+                ", remarkT='" + remarkT + '\'' +
+                ", stateD='" + stateD + '\'' +
+                ", stateT='" + stateT + '\'' +
+                ", staff_name='" + staff_name + '\'' +
+                ", department_name='" + department_name + '\'' +
                 '}';
     }
 }

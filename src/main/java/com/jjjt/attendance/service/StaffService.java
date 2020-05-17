@@ -13,57 +13,57 @@ public class StaffService implements StaffDao {
     @Autowired
     private StaffDao staffDao;//员工
 
-    //
+    //增加员工信息
     @Override
     public int InsertStaff(Map map) {
-        return 0;
+        return staffDao.InsertStaff(map);
     }
 
-    //
+    //删除员工信息
     @Override
     public int DeleteStaff(Map map) {
-        return 0;
+        return staffDao.DeleteStaff(map);
     }
 
-    //
+    //修改员工信息
     @Override
     public int UpdateStaff(Map map) {
-        return 0;
+        return staffDao.UpdateStaff(map);
     }
 
-    //
+    //分页模糊查询员工信息
     @Override
     public List<Staff> FindStaff(Map map) {
-        return null;
+        return staffDao.FindStaff(map);
     }
 
-    //
+    //统计总数
     @Override
     public long Total(Map map) {
-        return 0;
+        return staffDao.Total(map);
     }
 
-    //
+    //根据id查询员工信息
     @Override
     public Staff FindStaffById(Map map) {
-        return null;
+        return staffDao.FindStaffById(map);
     }
 
-    //
+    //根据staff_phone查询员工信息
     @Override
     public Staff FindStaffByStaffPhone(Map map) {
-        return null;
+        return staffDao.FindStaffByStaffPhone(map);
     }
 
-    //
+    //修改打卡状态
     @Override
     public int UpdateClockstatus() {
-        return 0;
+        return staffDao.UpdateClockstatus();
     }
 
-    //
+    //手机修改员工信息
     @Override
     public int UpdateStaffApp(Map map) {
-        return 0;
+        return staffDao.UpdateStaffApp(map);
     }
 }

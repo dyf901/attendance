@@ -5,8 +5,8 @@
 <mapper namespace="com.jjjt.attendance.dao.StaffDao">
     <!--增加员工信息-->
     <insert id="InsertStaff" parameterType="java.util.Map">
-        INSERT INTO `attendance`.`staff` (`staff_name`, `staff_age`, `staff_img`, `staff_sex`, `staff_card`, `staff_nation`, `staff_address`, `staff_phone`, `sos_name`, `sos_ship`, `sos_phone`, `entry_time`, `company_id`, `department_id`, `position_id`, `password`, `picture`, `nickname`, `signature`)
-        VALUES (#{staff_name}, #{staff_age}, #{staff_img}, #{staff_sex}, #{staff_card}, #{staff_nation}, #{staff_address}, #{staff_phone}, #{sos_name}, #{sos_ship}, #{sos_phone}, now(), #{company_id}, #{department_id}, #{position_id}, #{password}, #{picture}, #{nickname}, #{signature});
+        INSERT INTO `attendance`.`staff` (`staff_name`, `staff_age`, `staff_img`, `staff_sex`, `staff_card`, `staff_nation`, `staff_address`, `staff_phone`, `sos_name`, `sos_ship`, `sos_phone`, `entry_time`, `company_id`, `department_id`, `position_id`, `password`, `nickname`, `signature`)
+        VALUES (#{staff_name}, #{staff_age}, #{staff_img}, #{staff_sex}, #{staff_card}, #{staff_nation}, #{staff_address}, #{staff_phone}, #{sos_name}, #{sos_ship}, #{sos_phone}, now(), #{company_id}, #{department_id}, #{position_id}, #{password}, #{nickname}, #{signature});
     </insert>
 
     <!--删除员工信息-->
