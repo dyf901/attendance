@@ -79,7 +79,12 @@
 
     <!--修改打卡状态-->
     <update id="UpdateClockstatus" parameterType="java.util.Map">
-        UPDATE `attendance`.`staff` SET `clockstatus`=#{clockstatus}
+        UPDATE `attendance`.`staff` SET `clockstatus`='1'
+    </update>
+
+    <!--修改打卡状态-->
+    <update id="UpdateClockstatusById" parameterType="java.util.Map">
+        UPDATE `attendance`.`staff` SET `clockstatus`='0' WHERE `id`=#{id}
     </update>
 
     <!--手机修改员工信息-->

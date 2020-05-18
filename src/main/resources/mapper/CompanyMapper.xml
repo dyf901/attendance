@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.CompanyDao">
+    <!--根据company_id查询公司信息-->
+    <select id="FindCompanyById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
+        SELECT `id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `id`=#{company_id}
+    </select>
+</mapper>

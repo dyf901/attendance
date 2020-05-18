@@ -27,8 +27,11 @@ public interface StaffDao {
     //根据staff_phone查询员工信息
     Staff FindStaffByStaffPhone(Map map);
 
-    //修改打卡状态
+    //修改全部员工打卡状态
     int UpdateClockstatus();
+
+    //根据id修改员工状态
+    int UpdateClockstatusById(Map map);
 
     //手机修改员工信息
     int UpdateStaffApp(Map map);

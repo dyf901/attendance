@@ -55,10 +55,16 @@ public class StaffService implements StaffDao {
         return staffDao.FindStaffByStaffPhone(map);
     }
 
-    //修改打卡状态
+    //修改全部打卡状态
     @Override
     public int UpdateClockstatus() {
         return staffDao.UpdateClockstatus();
+    }
+
+    //根据id修改打卡状态
+    @Override
+    public int UpdateClockstatusById(Map map) {
+        return staffDao.UpdateClockstatusById(map);
     }
 
     //手机修改员工信息
