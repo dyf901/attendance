@@ -5,6 +5,7 @@ import com.jjjt.attendance.entity.Registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -28,5 +29,23 @@ public class RegistrationService implements RegistrationDao {
     @Override
     public Registration FindRegistrationById(int id) {
         return registrationDao.FindRegistrationById(id);
+    }
+
+    //分页模糊查询打卡信息
+    @Override
+    public List<Registration> FindRegistration(Map map) {
+        return registrationDao.FindRegistration(map);
+    }
+
+    //统计总数
+    @Override
+    public long Total(Map map) {
+        return registrationDao.Total(map);
+    }
+
+    //导出打卡记录
+    @Override
+    public List<Registration> ExportExcel(Map map) {
+        return registrationDao.ExportExcel(map);
     }
 }

@@ -35,4 +35,7 @@ public interface StaffDao {
 
     //手机修改员工信息
     int UpdateStaffApp(Map map);
+
+    //查询打卡状态
+    Staff FindClockstatus(Map map);
 }

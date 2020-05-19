@@ -10,6 +10,9 @@ public class Department {
     @ApiModelProperty(value = "部门id" , name = "id")
     private int id;
 
+    @ApiModelProperty(value = "公司id" , name = "company_id")
+    private int company_id;
+
     @ApiModelProperty(value = "部门名称" , name = "department_name")
     private String department_name;
 
@@ -20,8 +23,9 @@ public class Department {
         super();
     }
 
-    public Department(int id, String department_name, int person_count) {
+    public Department(int id, int company_id, String department_name, int person_count) {
         this.id = id;
+        this.company_id = company_id;
         this.department_name = department_name;
         this.person_count = person_count;
     }
@@ -50,10 +54,19 @@ public class Department {
         this.person_count = person_count;
     }
 
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
+                ", company_id=" + company_id +
                 ", department_name='" + department_name + '\'' +
                 ", person_count=" + person_count +
                 '}';

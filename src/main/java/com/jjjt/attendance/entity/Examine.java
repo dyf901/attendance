@@ -13,6 +13,9 @@ public class Examine {
     @ApiModelProperty(value = "员工id" , name = "staff_id")
     private int staff_id;
 
+    @ApiModelProperty(value = "公司id" , name = "company_id")
+    private int company_id;
+
     @ApiModelProperty(value = "审批类型(审批,报销,出差,加班,请假)" , name = "examine_type")
     private String examine_type;
 
@@ -53,9 +56,10 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress) {
+    public Examine(int id, int staff_id, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress) {
         this.id = id;
         this.staff_id = staff_id;
+        this.company_id = company_id;
         this.examine_type = examine_type;
         this.content = content;
         this.uptime = uptime;
@@ -182,11 +186,20 @@ public class Examine {
         this.outaddress = outaddress;
     }
 
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
+                ", company_id=" + company_id +
                 ", examine_type='" + examine_type + '\'' +
                 ", content='" + content + '\'' +
                 ", uptime='" + uptime + '\'' +

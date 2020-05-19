@@ -13,6 +13,9 @@ public class Client {
     @ApiModelProperty(value = "员工id" , name = "staff_id")
     private int staff_id;
 
+    @ApiModelProperty(value = "公司id" , name = "company_id")
+    private int company_id;
+
     @ApiModelProperty(value = "客户名称" , name = "client_name")
     private String client_name;
 
@@ -41,9 +44,10 @@ public class Client {
         super();
     }
 
-    public Client(int id, int staff_id, String client_name, String client_sex, String client_position, String client_department, String client_phone, String up_time, Long up_timeC, String company) {
+    public Client(int id, int staff_id, int company_id, String client_name, String client_sex, String client_position, String client_department, String client_phone, String up_time, Long up_timeC, String company) {
         this.id = id;
         this.staff_id = staff_id;
+        this.company_id = company_id;
         this.client_name = client_name;
         this.client_sex = client_sex;
         this.client_position = client_position;
@@ -134,11 +138,20 @@ public class Client {
         this.company = company;
     }
 
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
+                ", company_id=" + company_id +
                 ", client_name='" + client_name + '\'' +
                 ", client_sex='" + client_sex + '\'' +
                 ", client_position='" + client_position + '\'' +

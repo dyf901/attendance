@@ -16,6 +16,9 @@ public class Registration {
     @ApiModelProperty(value = "员工id" , name = "staff_id")
     private int staff_id;
 
+    @ApiModelProperty(value = "星期" , name = "week")
+    private String week;
+
     @ApiModelProperty(value = "签到时间" , name = "in_time")
     private String in_time;
 
@@ -34,6 +37,9 @@ public class Registration {
     @ApiModelProperty(value = "签退备注" , name = "remarkT")
     private String remarkT;
 
+    @ApiModelProperty(value = "加班时长" , name = "overtime_hours")
+    private int overtime_hours;
+
     @ApiModelProperty(value = "状态" , name = "stateD")
     private String stateD;
 
@@ -43,23 +49,25 @@ public class Registration {
     @ApiModelProperty(value = "员工姓名" , name = "staff_name")
     private String staff_name;
 
-    @ApiModelProperty(value = "员工姓名" , name = "department_name")
+    @ApiModelProperty(value = "部门名称" , name = "department_name")
     private String department_name;
 
     public Registration(){
         super();
     }
 
-    public Registration(int id, int company_id, int staff_id, String in_time, String in_address, String out_time, String out_address, String remarkD, String remarkT, String stateD, String stateT, String staff_name, String department_name) {
+    public Registration(int id, int company_id, int staff_id, String week, String in_time, String in_address, String out_time, String out_address, String remarkD, String remarkT, int overtime_hours, String stateD, String stateT, String staff_name, String department_name) {
         this.id = id;
         this.company_id = company_id;
         this.staff_id = staff_id;
+        this.week = week;
         this.in_time = in_time;
         this.in_address = in_address;
         this.out_time = out_time;
         this.out_address = out_address;
         this.remarkD = remarkD;
         this.remarkT = remarkT;
+        this.overtime_hours = overtime_hours;
         this.stateD = stateD;
         this.stateT = stateT;
         this.staff_name = staff_name;
@@ -170,18 +178,36 @@ public class Registration {
         this.department_name = department_name;
     }
 
+    public String getWeek() {
+        return week;
+    }
+
+    public void setWeek(String week) {
+        this.week = week;
+    }
+
+    public int getOvertime_hours() {
+        return overtime_hours;
+    }
+
+    public void setOvertime_hours(int overtime_hours) {
+        this.overtime_hours = overtime_hours;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", company_id=" + company_id +
                 ", staff_id=" + staff_id +
+                ", week='" + week + '\'' +
                 ", in_time='" + in_time + '\'' +
                 ", in_address='" + in_address + '\'' +
                 ", out_time='" + out_time + '\'' +
                 ", out_address='" + out_address + '\'' +
                 ", remarkD='" + remarkD + '\'' +
                 ", remarkT='" + remarkT + '\'' +
+                ", overtime_hours='" + overtime_hours + '\'' +
                 ", stateD='" + stateD + '\'' +
                 ", stateT='" + stateT + '\'' +
                 ", staff_name='" + staff_name + '\'' +

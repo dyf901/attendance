@@ -10,6 +10,9 @@ public class Announcement {
     @ApiModelProperty(value = "公告id" , name = "id")
     private int id;
 
+    @ApiModelProperty(value = "公司id" , name = "company_id")
+    private int company_id;
+
     @ApiModelProperty(value = "公告标题" , name = "title")
     private String title;
 
@@ -29,8 +32,9 @@ public class Announcement {
         super();
     }
 
-    public Announcement(int id, String title, String content, String uptime, Long uptimeC, int read_count) {
+    public Announcement(int id, int company_id, String title, String content, String uptime, Long uptimeC, int read_count) {
         this.id = id;
+        this.company_id = company_id;
         this.title = title;
         this.content = content;
         this.uptime = uptime;
@@ -86,10 +90,19 @@ public class Announcement {
         this.read_count = read_count;
     }
 
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
+                ", company_id=" + company_id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", uptime='" + uptime + '\'' +

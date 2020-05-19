@@ -13,6 +13,9 @@ public class Log {
     @ApiModelProperty(value = "员工id" , name = "staff_id")
     private int staff_id;
 
+    @ApiModelProperty(value = "公司id" , name = "company_id")
+    private int company_id;
+
     @ApiModelProperty(value = "内容" , name = "content")
     private String content;
 
@@ -26,9 +29,10 @@ public class Log {
         super();
     }
 
-    public Log(int id, int staff_id, String content, String uptime, Long uptimeC) {
+    public Log(int id, int staff_id, int company_id, String content, String uptime, Long uptimeC) {
         this.id = id;
         this.staff_id = staff_id;
+        this.company_id = company_id;
         this.content = content;
         this.uptime = uptime;
         this.uptimeC = uptimeC;
@@ -74,11 +78,20 @@ public class Log {
         this.uptimeC = uptimeC;
     }
 
+    public int getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(int company_id) {
+        this.company_id = company_id;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
+                ", company_id=" + company_id +
                 ", content='" + content + '\'' +
                 ", uptime='" + uptime + '\'' +
                 ", uptimeC=" + uptimeC +

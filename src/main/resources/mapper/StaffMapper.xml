@@ -112,4 +112,9 @@
         </trim>
         where `id`=#{id}
     </update>
+
+    <!--查询打卡状态-->
+    <select id="FindClockstatus" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
+        SELECT `clockstatus` FROM `attendance`.`staff` WHERE `id`=#{id}
+    </select>
 </mapper>

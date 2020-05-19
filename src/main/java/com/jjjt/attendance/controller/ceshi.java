@@ -1,15 +1,18 @@
 package com.jjjt.attendance.controller;
 
 
+import com.jjjt.attendance.service.RegistrationService;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ceshi {
     public static void main(String args[]) throws ParseException {
+
         /*String id = "356923199104260322";
         String lastWord = id.substring(id.length() - 1);
         String reg = "[a-zA-Z]";
@@ -25,7 +28,7 @@ public class ceshi {
         System.out.println("当前时间毫秒数:"+t1);
         System.out.println("<------------------------------>");*/
 
-        Date date=new Date();
+        /*Date date=new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
         String fmDate=simpleDateFormat.format(date);
         System.out.println(fmDate);
@@ -41,6 +44,36 @@ public class ceshi {
         long zero = current / (1000 * 3600 * 24) * (1000 * 3600 * 24) - TimeZone.getDefault().getRawOffset();//今天零点零分零秒的毫秒数
         System.out.println(zero);
 
-        System.out.println(current>zero);
+        System.out.println(current>zero);*/
+
+
+        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time = format.format(now);
+        System.out.println(time);
+        Date date = format.parse(time);
+        //日期转时间戳（毫秒）
+        long times = date.getTime();*/
+
+        /*Date date = new Date();
+        String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+        System.out.println(weekDays[w]);*/
+
+
+        /*Date datez = new Date();
+        SimpleDateFormat simpleDateFormatz = new SimpleDateFormat("HH:mm:ss");
+        String fmDatez = simpleDateFormatz.format(datez);
+        long time1z = simpleDateFormatz.parse(fmDatez).getTime();
+        //从对象中拿到时间
+        String in_timez = "15:05:50";
+        long createTime = simpleDateFormatz.parse(in_timez).getTime();
+        long diff=(time1z-createTime)/1000/60;
+        System.out.println(diff);*/
+
     }
 }

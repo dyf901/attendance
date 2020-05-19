@@ -3,5 +3,24 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjjt.attendance.dao.LogDao">
+    <!--增加日志-->
+    <insert id="InsertLog" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`log` (`staff_id`, `company_id`, `content`, `uptime`, `uptimeC`) VALUES (#{staff_id}, #{company_id}, #{content}, #{uptime}, #{uptimeC});
+    </insert>
 
+    <!--分页模糊查询-->
+    <select id="FindLog" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Log">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`content`, l.`uptime`, l.`uptimeC` FROM `attendance`.`log` l
+        LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
+        WHERE l.`company_id`=#{company_id}
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`log` WHERE `company_id`=#{company_id}
+    </select>
+
+    <!--查询个人日志-->
 </mapper>

@@ -83,4 +83,10 @@ public class StaffController {
             return jsonResult;
         }
     }
+
+    @ApiOperation(value = "查询员工打卡状态",notes = "")
+    @PostMapping("/FindClockstatus")
+    public Staff FindClockstatus(@RequestBody Map map){
+        return staffService.FindClockstatus(map);
+    }
 }

@@ -8,19 +8,71 @@
         <selectKey resultType="int" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO `attendance`.`registration` (`company_id`, `staff_id`, `department_name`, `in_time`, `in_address`, `remarkD`, `stateD`)
-        VALUES (#{company_id}, #{staff_id}, #{department_name}, now(), #{in_address}, #{remarkD}, #{stateD});
+        INSERT INTO `attendance`.`registration` (`company_id`, `staff_id`, `staff_name`, `department_name`, `week`, `in_time`, `in_address`, `remarkD`, `stateD`)
+        VALUES (#{company_id}, #{staff_id}, #{staff_name}, #{department_name}, #{week}, now(), #{in_address}, #{remarkD}, #{stateD});
     </insert>
 
     <!--签退-->
     <update id="UpdateRegistration" parameterType="java.util.Map">
-        UPDATE `attendance`.`registration` SET `out_time`=now(), `out_address`=#{out_address}, `remarkT`=#{remarkT}, `stateT`=#{stateT} WHERE (`id`=#{id});
+        UPDATE `attendance`.`registration` SET `out_time`=now(), `out_address`=#{out_address}, `remarkT`=#{remarkT}, `overtime_hours`=#{overtime_hours}, `stateT`=#{stateT} WHERE (`id`=#{id});
     </update>
 
     <!--根据id查询打卡信息-->
     <select id="FindRegistrationById" parameterType="int" resultType="com.jjjt.attendance.entity.Registration">
-        SELECT  r.`id`, r.`company_id`, r.`staff_id`, r.`department_name`, r.`in_time`, r.`in_address`, r.`out_time`, r.`out_address`, r.`remarkD`, r.`remarkT`, r.`stateD`, r.`stateT` FROM `attendance`.`registration` r
-        LEFT JOIN `attendance`.`staff` s ON r.`staff_id`=s.`id`
-        WHERE r.`id`=#{id}
+        SELECT  `id`, `company_id`, `staff_id`, `staff_name`, `week` `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
+        WHERE `id`=#{id}
+    </select>
+
+    <!--分页模糊查询打卡信息-->
+    <select id="FindRegistration" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Registration">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT  `id`, `company_id`, `staff_id`, `staff_name`, `week`, `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
+        <where>
+            `company_id`=#{company_id}
+            <if test="staff_name!=null and staff_name!=''">
+                and `staff_name`=#{staff_name}
+            </if>
+            <if test="department_name!=null and department_name!=''">
+                and `department_name`=#{department_name}
+            </if>
+            <if test="start_time!=null and end_time!=null">
+                and  `in_time` &gt;= #{start_time} and `in_time` &lt;= #{end_time}
+            </if>
+        </where>
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT  count(id) FROM `attendance`.`registration`
+        <where>
+            `company_id`=#{company_id}
+            <if test="staff_name!=null and staff_name!=''">
+                and `staff_name`=#{staff_name}
+            </if>
+            <if test="department_name!=null and department_name!=''">
+                and `department_name`=#{department_name}
+            </if>
+            <if test="start_time!=null and end_time!=null">
+                and  `in_time` &gt;= #{start_time} and `in_time` &lt;= #{end_time}
+            </if>
+        </where>
+    </select>
+    
+    <!--导出excel-->
+    <select id="ExportExcel" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Registration">
+        SELECT  `id`, `company_id`, `staff_id`, `staff_name`, `week`, `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
+        <where>
+            `company_id`=#{company_id}
+            <if test="staff_name!=null and staff_name!=''">
+                and `staff_name`=#{staff_name}
+            </if>
+            <if test="department_name!=null and department_name!=''">
+                and `department_name`=#{department_name}
+            </if>
+            <if test="start_time!=null and end_time!=null">
+                and  `in_time` &gt;= #{start_time} and `in_time` &lt; #{end_time}
+            </if>
+        </where>
     </select>
 </mapper>
