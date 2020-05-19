@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.RegistrationRecordDao">
+    <!--添加打卡记录-->
+    <insert id="InsertRegistrationRecord" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`registration_record` (`company_id`, `staff_id`, `time`, `timeC`, `address`, `longitude`, `latitude`, `remark`) VALUES (#{company_id}, #{staff_id}, #{time}, #{timeC}, #{address}, #{longitude}, #{latitude}, #{remark});
+    </insert>
+
+    <!--查询个人打卡记录-->
+    <select id="FindRegistrationRecordByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.RegistrationRecord">
+        SELECT r.`id`, r.`company_id`, r.`staff_id`, r.`time`, r.`timeC`, r.`address`, r.`longitude`, r.`latitude`, r.`remark`, s.`staff_name` as `staff_name` FROM `attendance`.`registration_record` r
+        LEFT JOIN `attendance`.`staff` s ON r.`staff_id`=s.`id`
+
+    </select>
+</mapper>
