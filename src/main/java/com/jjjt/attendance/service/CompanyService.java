@@ -13,11 +13,31 @@ public class CompanyService implements CompanyDao {
     @Autowired
     private CompanyDao companyDao;
 
+    //增加公司信息
+    @Override
+    public int InsertCompany(Map map) {
+        return companyDao.InsertCompany(map);
+    }
+
+    //删除公司信息
+    @Override
+    public int DeleteCompany(Map map) {
+        return companyDao.DeleteCompany(map);
+    }
+
+    //修改公司信息
+    @Override
+    public int UpdateCompany(Map map) {
+        return companyDao.UpdateCompany(map);
+    }
+
+    //根据company_id查询公司信息
     @Override
     public Company FindCompanyById(Map map) {
         return companyDao.FindCompanyById(map);
     }
 
+    //根据conglomerate_id查询公司信息
     @Override
     public List<Company> FindCompanyByConglomerateId(Map map) {
         return companyDao.FindCompanyByConglomerateId(map);

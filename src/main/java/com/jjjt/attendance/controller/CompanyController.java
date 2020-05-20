@@ -18,6 +18,24 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
+    @ApiOperation(value = "增加公司信息",notes = "")
+    @PostMapping("/InsertCompany")
+    public boolean InsertCompany(@RequestBody Map map){
+        return companyService.InsertCompany(map)==1;
+    }
+
+    @ApiOperation(value = "增加公司信息",notes = "")
+    @PostMapping("/DeleteCompany")
+    public boolean DeleteCompany(@RequestBody Map map){
+        return companyService.DeleteCompany(map)==1;
+    }
+
+    @ApiOperation(value = "增加公司信息",notes = "")
+    @PostMapping("/UpdateCompany")
+    public boolean UpdateCompany(@RequestBody Map map){
+        return companyService.UpdateCompany(map)==1;
+    }
+
     @ApiOperation(value = "根据集团id查询公司信息" , notes = "")
     @PostMapping("/FindCompanyByConglomerateId")
     public List<Company> FindCompanyByConglomerateId(@RequestBody Map map){

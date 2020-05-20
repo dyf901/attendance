@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.AnnouncementDao">
+    <!--发布公告-->
+    <insert id="InsertAnnouncement" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`announcement` (`conglomerate_id`, `company_id`, `title`, `content`, `uptime`, `uptimeC`) VALUES (#{conglomerate_id}, #{company_id}, #{title}, #{content}, #{uptime}, #{uptimeC});
+    </insert>
+
+    <!---->
+</mapper>

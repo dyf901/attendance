@@ -3,11 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjjt.attendance.dao.CompanyDao">
+    <!--增加公司信息-->
+    <insert id="InsertCompany" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`company` (`conglomerate_id`, `company_name`, `person_count`, `in_time`, `out_time`) VALUES (#{conglomerate_id}, #{company_name}, #{person_count}, #{in_time}, #{out_time});
+    </insert>
+
+    <!--删除公司信息-->
+    <delete id="DeleteCompany" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`company` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改公司信息-->
+    <update id="UpdateCompany" parameterType="java.util.Map">
+        UPDATE `attendance`.`company` SET  `company_name`=#{company_name}, `in_time`=#{in_time}, `out_time`=#{out_time} WHERE (`id`=#{id});
+    </update>
+
     <!--根据company_id查询公司信息-->
     <select id="FindCompanyById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
         SELECT `id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `id`=#{company_id}
     </select>
 
+    <!--下拉框查询公司信息-->
     <select id="FindCompanyByConglomerateId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
         SELECT `id`, `conglomerate_id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `conglomerate_id`=#{conglomerate_id}
     </select>
