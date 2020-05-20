@@ -40,11 +40,20 @@ public class Client {
     @ApiModelProperty(value = "所属项目" , name = "company")
     private String company;
 
+    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    private int conglomerate_id;
+
+    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    private String conglomerate_name;
+
+    @ApiModelProperty(value = "公司名称" , name = "company_name")
+    private String company_name;
+
     public Client(){
         super();
     }
 
-    public Client(int id, int staff_id, int company_id, String client_name, String client_sex, String client_position, String client_department, String client_phone, String up_time, Long up_timeC, String company) {
+    public Client(int id, int staff_id, int company_id, String client_name, String client_sex, String client_position, String client_department, String client_phone, String up_time, Long up_timeC, String company, int conglomerate_id, String conglomerate_name, String company_name) {
         this.id = id;
         this.staff_id = staff_id;
         this.company_id = company_id;
@@ -56,6 +65,9 @@ public class Client {
         this.up_time = up_time;
         this.up_timeC = up_timeC;
         this.company = company;
+        this.conglomerate_id = conglomerate_id;
+        this.conglomerate_name = conglomerate_name;
+        this.company_name = company_name;
     }
 
     public int getId() {
@@ -146,6 +158,30 @@ public class Client {
         this.company_id = company_id;
     }
 
+    public int getConglomerate_id() {
+        return conglomerate_id;
+    }
+
+    public void setConglomerate_id(int conglomerate_id) {
+        this.conglomerate_id = conglomerate_id;
+    }
+
+    public String getConglomerate_name() {
+        return conglomerate_name;
+    }
+
+    public void setConglomerate_name(String conglomerate_name) {
+        this.conglomerate_name = conglomerate_name;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -160,6 +196,9 @@ public class Client {
                 ", up_time='" + up_time + '\'' +
                 ", up_timeC=" + up_timeC +
                 ", company='" + company + '\'' +
+                ", conglomerate_id=" + conglomerate_id +
+                ", conglomerate_name='" + conglomerate_name + '\'' +
+                ", company_name='" + company_name + '\'' +
                 '}';
     }
 }

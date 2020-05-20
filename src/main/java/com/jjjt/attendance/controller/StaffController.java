@@ -89,4 +89,10 @@ public class StaffController {
     public Staff FindClockstatus(@RequestBody Map map){
         return staffService.FindClockstatus(map);
     }
+
+    @ApiOperation(value = "根据id查询员工信息",notes = "")
+    @PostMapping("/FindStaffById")
+    public Staff FindStaffById(@RequestBody Map map){
+        return staffService.FindStaffById(map);
+    }
 }

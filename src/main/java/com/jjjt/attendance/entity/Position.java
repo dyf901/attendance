@@ -13,17 +13,29 @@ public class Position {
     @ApiModelProperty(value = "公司id" , name = "company_id")
     private int company_id;
 
+    @ApiModelProperty(value = "公司名称",name = "company_name")
+    private String company_name;
+
     @ApiModelProperty(value = "职务名称" , name = "position_name")
     private String position_name;
+
+    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    private int conglomerate_id;
+
+    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    private String conglomerate_name;
 
     public Position(){
         super();
     }
 
-    public Position(int id, int company_id, String position_name) {
+    public Position(int id, int company_id, String company_name, String position_name, int conglomerate_id, String conglomerate_name) {
         this.id = id;
         this.company_id = company_id;
+        this.company_name = company_name;
         this.position_name = position_name;
+        this.conglomerate_id = conglomerate_id;
+        this.conglomerate_name = conglomerate_name;
     }
 
     public int getId() {
@@ -50,12 +62,39 @@ public class Position {
         this.company_id = company_id;
     }
 
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public int getConglomerate_id() {
+        return conglomerate_id;
+    }
+
+    public void setConglomerate_id(int conglomerate_id) {
+        this.conglomerate_id = conglomerate_id;
+    }
+
+    public String getConglomerate_name() {
+        return conglomerate_name;
+    }
+
+    public void setConglomerate_name(String conglomerate_name) {
+        this.conglomerate_name = conglomerate_name;
+    }
+
     @Override
     public String toString() {
-        return "{" +
+        return "Position{" +
                 "id=" + id +
                 ", company_id=" + company_id +
+                ", company_name='" + company_name + '\'' +
                 ", position_name='" + position_name + '\'' +
+                ", conglomerate_id=" + conglomerate_id +
+                ", conglomerate_name='" + conglomerate_name + '\'' +
                 '}';
     }
 }

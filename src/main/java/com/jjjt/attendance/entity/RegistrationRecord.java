@@ -34,11 +34,17 @@ public class RegistrationRecord {
     @ApiModelProperty(value = "备注" , name = "remark")
     private String remark;
 
+    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    private int conglomerate_id;
+
+    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    private String conglomerate_name;
+
     public RegistrationRecord(){
         super();
     }
 
-    public RegistrationRecord(int id, int company_id, int staff_id, String time, Long timeC, String address, Long longitude, Long latitude, String remark) {
+    public RegistrationRecord(int id, int company_id, int staff_id, String time, Long timeC, String address, Long longitude, Long latitude, String remark, int conglomerate_id, String conglomerate_name) {
         this.id = id;
         this.company_id = company_id;
         this.staff_id = staff_id;
@@ -48,6 +54,8 @@ public class RegistrationRecord {
         this.longitude = longitude;
         this.latitude = latitude;
         this.remark = remark;
+        this.conglomerate_id = conglomerate_id;
+        this.conglomerate_name = conglomerate_name;
     }
 
     public int getId() {
@@ -122,6 +130,22 @@ public class RegistrationRecord {
         this.latitude = latitude;
     }
 
+    public int getConglomerate_id() {
+        return conglomerate_id;
+    }
+
+    public void setConglomerate_id(int conglomerate_id) {
+        this.conglomerate_id = conglomerate_id;
+    }
+
+    public String getConglomerate_name() {
+        return conglomerate_name;
+    }
+
+    public void setConglomerate_name(String conglomerate_name) {
+        this.conglomerate_name = conglomerate_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -134,6 +158,8 @@ public class RegistrationRecord {
                 ", longitude=" + longitude +
                 ", latitude=" + latitude +
                 ", remark='" + remark + '\'' +
+                ", conglomerate_id=" + conglomerate_id +
+                ", conglomerate_name='" + conglomerate_name + '\'' +
                 '}';
     }
 }

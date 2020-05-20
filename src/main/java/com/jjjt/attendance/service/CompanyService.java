@@ -5,6 +5,7 @@ import com.jjjt.attendance.entity.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -15,5 +16,10 @@ public class CompanyService implements CompanyDao {
     @Override
     public Company FindCompanyById(Map map) {
         return companyDao.FindCompanyById(map);
+    }
+
+    @Override
+    public List<Company> FindCompanyByConglomerateId(Map map) {
+        return companyDao.FindCompanyByConglomerateId(map);
     }
 }

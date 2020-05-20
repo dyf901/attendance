@@ -82,11 +82,17 @@ public class Staff {
     @ApiModelProperty(value = "职务id" , name = "position_name")
     private String position_name;
 
+    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    private int conglomerate_id;
+
+    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    private String conglomerate_name;
+
     public Staff(){
         super();
     }
 
-    public Staff(int id, String staff_name, int staff_age, String staff_img, String staff_sex, String staff_card, String staff_nation, String staff_address, String staff_phone, String sos_name, String sos_ship, String sos_phone, String entry_time, int company_id, int department_id, int position_id, String password, String picture, String nickname, String signature, String state, String clockstatus, String company_name, String department_name, String position_name) {
+    public Staff(int id, String staff_name, int staff_age, String staff_img, String staff_sex, String staff_card, String staff_nation, String staff_address, String staff_phone, String sos_name, String sos_ship, String sos_phone, String entry_time, int company_id, int department_id, int position_id, String password, String picture, String nickname, String signature, String state, String clockstatus, String company_name, String department_name, String position_name, int conglomerate_id, String conglomerate_name) {
         this.id = id;
         this.staff_name = staff_name;
         this.staff_age = staff_age;
@@ -112,6 +118,8 @@ public class Staff {
         this.company_name = company_name;
         this.department_name = department_name;
         this.position_name = position_name;
+        this.conglomerate_id = conglomerate_id;
+        this.conglomerate_name = conglomerate_name;
     }
 
     public int getId() {
@@ -314,9 +322,25 @@ public class Staff {
         this.position_name = position_name;
     }
 
+    public int getConglomerate_id() {
+        return conglomerate_id;
+    }
+
+    public void setConglomerate_id(int conglomerate_id) {
+        this.conglomerate_id = conglomerate_id;
+    }
+
+    public String getConglomerate_name() {
+        return conglomerate_name;
+    }
+
+    public void setConglomerate_name(String conglomerate_name) {
+        this.conglomerate_name = conglomerate_name;
+    }
+
     @Override
     public String toString() {
-        return "{" +
+        return "Staff{" +
                 "id=" + id +
                 ", staff_name='" + staff_name + '\'' +
                 ", staff_age=" + staff_age +
@@ -342,6 +366,8 @@ public class Staff {
                 ", company_name='" + company_name + '\'' +
                 ", department_name='" + department_name + '\'' +
                 ", position_name='" + position_name + '\'' +
+                ", conglomerate_id=" + conglomerate_id +
+                ", conglomerate_name='" + conglomerate_name + '\'' +
                 '}';
     }
 }

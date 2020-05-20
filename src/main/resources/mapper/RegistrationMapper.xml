@@ -8,8 +8,8 @@
         <selectKey resultType="int" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO `attendance`.`registration` (`company_id`, `staff_id`, `staff_name`, `department_name`, `week`, `in_time`, `in_address`, `remarkD`, `stateD`)
-        VALUES (#{company_id}, #{staff_id}, #{staff_name}, #{department_name}, #{week}, now(), #{in_address}, #{remarkD}, #{stateD});
+        INSERT INTO `attendance`.`registration` (`conglomerate_id`, `company_id`, `staff_id`, `staff_name`, `department_name`, `week`, `in_time`, `in_address`, `remarkD`, `stateD`)
+        VALUES (#{conglomerate_id}, #{company_id}, #{staff_id}, #{staff_name}, #{department_name}, #{week}, now(), #{in_address}, #{remarkD}, #{stateD});
     </insert>
 
     <!--签退-->
@@ -19,24 +19,25 @@
 
     <!--根据id查询打卡信息-->
     <select id="FindRegistrationById" parameterType="int" resultType="com.jjjt.attendance.entity.Registration">
-        SELECT  `id`, `company_id`, `staff_id`, `staff_name`, `week` `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
+        SELECT  `id`, `conglomerate_id`, `company_id`, `staff_id`, `staff_name`, `week` `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
         WHERE `id`=#{id}
     </select>
 
     <!--分页模糊查询打卡信息-->
     <select id="FindRegistration" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Registration">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT  `id`, `company_id`, `staff_id`, `staff_name`, `week`, `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
+        SELECT  r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`staff_name`, r.`week`, r.`department_name`, r.`in_time`, r.`in_address`, r.`out_time`, r.`out_address`, r.`remarkD`, r.`remarkT`, r.`overtime_hours`, r.`stateD`, r.`stateT`,l.`company_name` as `company_name` FROM `attendance`.`registration` r
+        LEFT JOIN `attendance`.`company` l ON r.`company_id`=l.`id`
         <where>
-            `company_id`=#{company_id}
+            r.`company_id`=#{company_id}
             <if test="staff_name!=null and staff_name!=''">
-                and `staff_name`=#{staff_name}
+                and r.`staff_name`=#{staff_name}
             </if>
             <if test="department_name!=null and department_name!=''">
-                and `department_name`=#{department_name}
+                and r.`department_name`=#{department_name}
             </if>
             <if test="start_time!=null and end_time!=null">
-                and  `in_time` &gt;= #{start_time} and `in_time` &lt;= #{end_time}
+                and  r.`in_time` &gt;= #{start_time} and r.`in_time` &lt;= #{end_time}
             </if>
         </where>
         limit #{page},#{pageSize}
@@ -61,17 +62,18 @@
     
     <!--导出excel-->
     <select id="ExportExcel" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Registration">
-        SELECT  `id`, `company_id`, `staff_id`, `staff_name`, `week`, `department_name`, `in_time`, `in_address`, `out_time`, `out_address`, `remarkD`, `remarkT`, `overtime_hours`, `stateD`, `stateT` FROM `attendance`.`registration`
+        SELECT  r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`staff_name`, r.`week`, r.`department_name`, r.`in_time`, r.`in_address`, r.`out_time`, r.`out_address`, r.`remarkD`, r.`remarkT`, r.`overtime_hours`, r.`stateD`, r.`stateT`,l.`company_name` as `company_name` FROM `attendance`.`registration` r
+        LEFT JOIN `attendance`.`company` l ON r.`company_id`=l.`id`
         <where>
-            `company_id`=#{company_id}
+            r.`company_id`=#{company_id}
             <if test="staff_name!=null and staff_name!=''">
-                and `staff_name`=#{staff_name}
+                and r.`staff_name`=#{staff_name}
             </if>
             <if test="department_name!=null and department_name!=''">
-                and `department_name`=#{department_name}
+                and r.`department_name`=#{department_name}
             </if>
             <if test="start_time!=null and end_time!=null">
-                and  `in_time` &gt;= #{start_time} and `in_time` &lt; #{end_time}
+                and  r.`in_time` &gt;= #{start_time} and r.`in_time` &lt;= #{end_time}
             </if>
         </where>
     </select>

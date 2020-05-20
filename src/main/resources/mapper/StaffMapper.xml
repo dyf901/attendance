@@ -5,8 +5,8 @@
 <mapper namespace="com.jjjt.attendance.dao.StaffDao">
     <!--增加员工信息-->
     <insert id="InsertStaff" parameterType="java.util.Map">
-        INSERT INTO `attendance`.`staff` (`staff_name`, `staff_age`, `staff_img`, `staff_sex`, `staff_card`, `staff_nation`, `staff_address`, `staff_phone`, `sos_name`, `sos_ship`, `sos_phone`, `entry_time`, `company_id`, `department_id`, `position_id`, `password`, `nickname`, `signature`)
-        VALUES (#{staff_name}, #{staff_age}, #{staff_img}, #{staff_sex}, #{staff_card}, #{staff_nation}, #{staff_address}, #{staff_phone}, #{sos_name}, #{sos_ship}, #{sos_phone}, now(), #{company_id}, #{department_id}, #{position_id}, #{password}, #{nickname}, #{signature});
+        INSERT INTO `attendance`.`staff` (`staff_name`, `staff_age`, `staff_img`, `staff_sex`, `staff_card`, `staff_nation`, `staff_address`, `staff_phone`, `sos_name`, `sos_ship`, `sos_phone`, `entry_time`, `conglomerate_id`, `company_id`, `department_id`, `position_id`, `password`, `nickname`, `signature`)
+        VALUES (#{staff_name}, #{staff_age}, #{staff_img}, #{staff_sex}, #{staff_card}, #{staff_nation}, #{staff_address}, #{staff_phone}, #{sos_name}, #{sos_ship}, #{sos_phone}, now(), #{conglomerate_id}, #{company_id}, #{department_id}, #{position_id}, #{password}, #{nickname}, #{signature});
     </insert>
 
     <!--删除员工信息-->
@@ -22,12 +22,13 @@
     <!--分页模糊查询员工信息-->
     <select id="FindStaff" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT s.`id`, s.`staff_name`, s.`staff_age`, s.`staff_img`, s.`staff_sex`, s.`staff_card`, s.`staff_nation`, s.`staff_address`, s.`staff_phone`, s.`sos_name`, s.`sos_ship`, s.`sos_phone`, s.`entry_time`, s.`company_id`, s.`department_id`, s.`position_id`, s.`password`, s.`picture`, s.`nickname`, s.`signature`, s.`state`, s.`clockstatus`, l.`company_name` as `company_name`, d.`department_name` as `department_name`, p.`position_name` as `position_name` FROM `attendance`.`staff` s
+        SELECT s.`id`, s.`staff_name`, s.`staff_age`, s.`staff_img`, s.`staff_sex`, s.`staff_card`, s.`staff_nation`, s.`staff_address`, s.`staff_phone`, s.`sos_name`, s.`sos_ship`, s.`sos_phone`, s.`entry_time`, s.`conglomerate_id`, s.`company_id`, s.`department_id`, s.`position_id`, s.`password`, s.`picture`, s.`nickname`, s.`signature`, s.`state`, s.`clockstatus`, l.`company_name` as `company_name`, d.`department_name` as `department_name`, p.`position_name` as `position_name`,z.`conglomerate_name` as `conglomerate_name` FROM `attendance`.`staff` s
         LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
         LEFT JOIN `attendance`.`department` d ON s.`department_id`=d.`id`
         LEFT JOIN `attendance`.`position` p ON s.`position_id`=p.`id`
+        LEFT JOIN `attendance`.`conglomerate` z ON s.`conglomerate_id`=z.`id`
         <where>
-            s.`company_id`=#{company_id}
+            s.`conglomerate_id`=#{conglomerate_id}
             <if test="staff_name!=null and staff_name!=''">
                 and s.`staff_name` like concat("%",#{staff_name},"%")
             </if>
@@ -61,19 +62,21 @@
 
     <!--根据id查询员工信息-->
     <select id="FindStaffById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
-        SELECT s.`id`, s.`staff_name`, s.`staff_age`, s.`staff_img`, s.`staff_sex`, s.`staff_card`, s.`staff_nation`, s.`staff_address`, s.`staff_phone`, s.`sos_name`, s.`sos_ship`, s.`sos_phone`, s.`entry_time`, s.`company_id`, s.`department_id`, s.`position_id`, s.`password`, s.`picture`, s.`nickname`, s.`signature`, s.`state`, s.`clockstatus`, l.`company_name` as `company_name`, d.`department_name` as `department_name`, p.`position_name` as `position_name` FROM `attendance`.`staff` s
+        SELECT s.`id`, s.`staff_name`, s.`staff_age`, s.`staff_img`, s.`staff_sex`, s.`staff_card`, s.`staff_nation`, s.`staff_address`, s.`staff_phone`, s.`sos_name`, s.`sos_ship`, s.`sos_phone`, s.`entry_time`, s.`conglomerate_id`, s.`company_id`, s.`department_id`, s.`position_id`, s.`password`, s.`picture`, s.`nickname`, s.`signature`, s.`state`, s.`clockstatus`, l.`company_name` as `company_name`, d.`department_name` as `department_name`, p.`position_name` as `position_name`,z.`conglomerate_name` as `conglomerate_name` FROM `attendance`.`staff` s
         LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
         LEFT JOIN `attendance`.`department` d ON s.`department_id`=d.`id`
         LEFT JOIN `attendance`.`position` p ON s.`position_id`=p.`id`
+        LEFT JOIN `attendance`.`conglomerate` z ON s.`conglomerate_id`=z.`id`
         WHERE s.`id`=#{id}
     </select>
 
     <!--根据staff_phone查询员工信息-->
     <select id="FindStaffByStaffPhone" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
-        SELECT s.`id`, s.`staff_name`, s.`staff_age`, s.`staff_img`, s.`staff_sex`, s.`staff_card`, s.`staff_nation`, s.`staff_address`, s.`staff_phone`, s.`sos_name`, s.`sos_ship`, s.`sos_phone`, s.`entry_time`, s.`company_id`, s.`department_id`, s.`position_id`, s.`password`, s.`picture`, s.`nickname`, s.`signature`, s.`state`, s.`clockstatus`, l.`company_name` as `company_name`, d.`department_name` as `department_name`, p.`position_name` as `position_name` FROM `attendance`.`staff` s
+        SELECT s.`id`, s.`staff_name`, s.`staff_age`, s.`staff_img`, s.`staff_sex`, s.`staff_card`, s.`staff_nation`, s.`staff_address`, s.`staff_phone`, s.`sos_name`, s.`sos_ship`, s.`sos_phone`, s.`entry_time`, s.`conglomerate_id`, s.`company_id`, s.`department_id`, s.`position_id`, s.`password`, s.`picture`, s.`nickname`, s.`signature`, s.`state`, s.`clockstatus`, l.`company_name` as `company_name`, d.`department_name` as `department_name`, p.`position_name` as `position_name`,z.`conglomerate_name` as `conglomerate_name` FROM `attendance`.`staff` s
         LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
         LEFT JOIN `attendance`.`department` d ON s.`department_id`=d.`id`
         LEFT JOIN `attendance`.`position` p ON s.`position_id`=p.`id`
+        LEFT JOIN `attendance`.`conglomerate` z ON s.`conglomerate_id`=z.`id`
         WHERE s.`staff_phone`=#{staff_phone}
     </select>
 

@@ -7,4 +7,8 @@
     <select id="FindCompanyById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
         SELECT `id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `id`=#{company_id}
     </select>
+
+    <select id="FindCompanyByConglomerateId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
+        SELECT `id`, `conglomerate_id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
 </mapper>

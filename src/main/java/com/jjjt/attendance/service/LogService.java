@@ -30,4 +30,10 @@ public class LogService implements LogDao {
     public long Total(Map map) {
         return logDao.Total(map);
     }
+
+    //查找个人日志
+    @Override
+    public List<Log> FindLogByStaffId(Map map) {
+        return logDao.FindLogByStaffId(map);
+    }
 }

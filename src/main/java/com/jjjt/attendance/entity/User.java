@@ -16,18 +16,22 @@ public class User {
     @ApiModelProperty(value = "密码" , name = "password")
     private String password;
 
-    @ApiModelProperty(value = "公司id" , name = "company_id")
-    private int company_id;
+    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    private int conglomerate_id;
+
+    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    private String conglomerate_name;
 
     public User(){
         super();
     }
 
-    public User(int id, String username, String password, int company_id) {
+    public User(int id, String username, String password, int conglomerate_id, String conglomerate_name) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.company_id = company_id;
+        this.conglomerate_id = conglomerate_id;
+        this.conglomerate_name = conglomerate_name;
     }
 
     public int getId() {
@@ -54,12 +58,20 @@ public class User {
         this.password = password;
     }
 
-    public int getCompany_id() {
-        return company_id;
+    public int getConglomerate_id() {
+        return conglomerate_id;
     }
 
-    public void setCompany_id(int company_id) {
-        this.company_id = company_id;
+    public void setConglomerate_id(int conglomerate_id) {
+        this.conglomerate_id = conglomerate_id;
+    }
+
+    public String getConglomerate_name() {
+        return conglomerate_name;
+    }
+
+    public void setConglomerate_name(String conglomerate_name) {
+        this.conglomerate_name = conglomerate_name;
     }
 
     @Override
@@ -68,7 +80,8 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", company_id=" + company_id +
+                ", conglomerate_id=" + conglomerate_id +
+                ", conglomerate_name='" + conglomerate_name + '\'' +
                 '}';
     }
 }

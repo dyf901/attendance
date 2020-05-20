@@ -5,6 +5,7 @@ import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Registration;
 import com.jjjt.attendance.entity.Staff;
 import com.jjjt.attendance.service.CompanyService;
+import com.jjjt.attendance.service.RegistrationRecordService;
 import com.jjjt.attendance.service.RegistrationService;
 import com.jjjt.attendance.service.StaffService;
 import com.jjjt.attendance.util.Page;
@@ -35,7 +36,10 @@ public class RegistrationController {
     @Autowired
     private CompanyService companyService;
 
-    @ApiOperation(value = "签到", notes = "传参:id(员工id),company_id(登录返回信息),in_address(打卡地址),remarkD(备注),longitude(经度),latitude(纬度)")
+    @Autowired
+    private RegistrationRecordService registrationRecordService;
+
+    @ApiOperation(value = "签到", notes = "传参:id(员工id),conglomerate_id(集团id,登录返回),company_id(登录返回信息),in_address(打卡地址),remarkD(备注),longitude(经度),latitude(纬度)")
     @PostMapping("/InsertRegistration")
     public JsonResult InsertRegistration(@RequestBody Map map) throws ParseException {
         System.out.println("map:"+map);
@@ -77,6 +81,21 @@ public class RegistrationController {
         registration.setDepartment_name(staff.getDepartment_name());
         registration.setRemarkD((String) map.get("remarkD"));
         registration.setStaff_name(staff.getStaff_name());
+        registration.setConglomerate_id((Integer) map.get("conglomerate_id"));
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time2 = format.format(now);
+        Date date2 = format.parse(time2);
+        //日期转时间戳（毫秒）
+        long times = date2.getTime();
+        System.out.println("Format To times:" + times);
+        map.put("staff_id",map.get("id"));
+        map.put("address",map.get("in_address"));
+        map.put("time",time2);
+        map.put("timeC",times);
+        map.put("remark",map.get("remarkD"));
+        registrationRecordService.InsertRegistrationRecord(map);
         if (time1 < time && current > zero) {
             registration.setStateD("正常");
             int s = registrationService.InsertRegistration(registration);//添加打卡记录
@@ -98,6 +117,7 @@ public class RegistrationController {
                 staffService.UpdateClockstatusById(map);
                 jsonResult.setCode(200);
                 jsonResult.setMessage("打卡成功");
+                System.out.println(registration.getId());
                 jsonResult.setData(registrationService.FindRegistrationById(registration.getId()));
                 return jsonResult;
             } else {
@@ -159,6 +179,20 @@ public class RegistrationController {
         registration.setOut_address((String) map.get("out_address"));
         registration.setRemarkT((String) map.get("remarkT"));
         registration.setId((Integer) map.get("registration_id"));
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time2 = format.format(now);
+        Date date2 = format.parse(time2);
+        //日期转时间戳（毫秒）
+        long times = date2.getTime();
+        System.out.print("Format To times:" + times);
+        map.put("staff_id",map.get("id"));
+        map.put("address",map.get("out_address"));
+        map.put("time",time2);
+        map.put("timeC",times);
+        map.put("remark",map.get("remarkT"));
+        registrationRecordService.InsertRegistrationRecord(map);
         if (time1 < time && current > zero) {
             registration.setStateT("早退");
             int s = registrationService.UpdateRegistration(registration);//添加打卡记录
@@ -197,13 +231,23 @@ public class RegistrationController {
        /* Map map = new HashMap();
         map.put("company_id" , 1);*/
         //List<Teacher> classmateList = teacherservice.teacherinfor();
+        if (map.containsKey("start_time1") && map.containsKey("end_time1")){
+            String start_time = map.get("start_time1")+" 00:00:00";
+            String end_time = map.get("end_time1")+" 23:59:59";
+            map.put("start_time",start_time);
+            map.put("end_time",end_time);
+        }else {
+            map.put("start_time",null);
+            map.put("end_time",null);
+
+        }
         List<Registration> list = registrationService.ExportExcel(map);
         String fileName = "checking-in" + ".xls";//设置要导出的文件的名字
         //新增数据行，并且设置单元格数据
 
         int rowNum = 1;
 
-        String[] headers = {"姓名" , "部门" , "星期" , "签到时间" , "签退时间" , "加班时长","备注"};
+        String[] headers = {"姓名" , "公司", "部门" , "星期" , "签到时间" , "签退时间" , "加班时长", "备注"};
         //headers表示excel表中第一行的表头
 
         HSSFRow row = sheet.createRow(0);
@@ -219,12 +263,13 @@ public class RegistrationController {
         for (Registration registration : list) {
             HSSFRow row1 = sheet.createRow(rowNum);
             row1.createCell(0).setCellValue(registration.getStaff_name());
-            row1.createCell(1).setCellValue(registration.getDepartment_name());
-            row1.createCell(2).setCellValue(registration.getWeek());
-            row1.createCell(3).setCellValue(registration.getIn_time());
-            row1.createCell(4).setCellValue(registration.getOut_time());
-            row1.createCell(5).setCellValue(registration.getOvertime_hours());
-            row1.createCell(6).setCellValue(registration.getRemarkT());
+            row1.createCell(1).setCellValue(registration.getCompany_name());
+            row1.createCell(2).setCellValue(registration.getDepartment_name());
+            row1.createCell(3).setCellValue(registration.getWeek());
+            row1.createCell(4).setCellValue(registration.getIn_time());
+            row1.createCell(5).setCellValue(registration.getOut_time());
+            row1.createCell(6).setCellValue(registration.getOvertime_hours());
+            row1.createCell(7).setCellValue(registration.getRemarkT());
             rowNum++;
         }
 
@@ -240,6 +285,17 @@ public class RegistrationController {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
+        if (map.containsKey("start_time1") && map.containsKey("end_time1")){
+            String start_time = map.get("start_time1")+" 00:00:00";
+            String end_time = map.get("end_time1")+" 23:59:59";
+            map.put("start_time",start_time);
+            map.put("end_time",end_time);
+        }else {
+            map.put("start_time",null);
+            map.put("end_time",null);
+
+        }
+
         page.setTotal(registrationService.Total(map));
         page.setItems(registrationService.FindRegistration(map));
         return page;

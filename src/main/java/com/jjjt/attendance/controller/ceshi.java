@@ -2,10 +2,13 @@ package com.jjjt.attendance.controller;
 
 
 import com.jjjt.attendance.service.RegistrationService;
+import com.jjjt.attendance.util.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,13 +50,13 @@ public class ceshi {
         System.out.println(current>zero);*/
 
 
-        /*SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String time = format.format(now);
         System.out.println(time);
         Date date = format.parse(time);
         //日期转时间戳（毫秒）
-        long times = date.getTime();*/
+        long times = date.getTime();
 
         /*Date date = new Date();
         String[] weekDays = { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
@@ -74,6 +77,20 @@ public class ceshi {
         long createTime = simpleDateFormatz.parse(in_timez).getTime();
         long diff=(time1z-createTime)/1000/60;
         System.out.println(diff);*/
+
+
+
+        /*TimeUtils timeUtils = new TimeUtils();
+        String time="1586966400000";
+        System.out.println(timeUtils.toDate(time));
+
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime ldt = LocalDateTime.parse(timeUtils.toDate(time), formatter);
+
+        System.out.println("Year: " + ldt.getYear());
+        System.out.println("Month: " + ldt.getMonth().getValue());
+        System.out.println("DayOfMonth: " + ldt.getDayOfMonth());*/
 
     }
 }

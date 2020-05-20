@@ -52,11 +52,20 @@ public class Examine {
     @ApiModelProperty(value = "出差地址" , name = "outaddress")
     private String outaddress;
 
+    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    private int conglomerate_id;
+
+    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    private String conglomerate_name;
+
+    @ApiModelProperty(value ="公司名称",name = "company_name")
+    private String company_name;
+
     public Examine(){
         super();
     }
 
-    public Examine(int id, int staff_id, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress) {
+    public Examine(int id, int staff_id, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, int conglomerate_id, String conglomerate_name, String company_name) {
         this.id = id;
         this.staff_id = staff_id;
         this.company_id = company_id;
@@ -72,6 +81,9 @@ public class Examine {
         this.intime = intime;
         this.intimeC = intimeC;
         this.outaddress = outaddress;
+        this.conglomerate_id = conglomerate_id;
+        this.conglomerate_name = conglomerate_name;
+        this.company_name = company_name;
     }
 
     public int getId() {
@@ -194,6 +206,30 @@ public class Examine {
         this.company_id = company_id;
     }
 
+    public int getConglomerate_id() {
+        return conglomerate_id;
+    }
+
+    public void setConglomerate_id(int conglomerate_id) {
+        this.conglomerate_id = conglomerate_id;
+    }
+
+    public String getConglomerate_name() {
+        return conglomerate_name;
+    }
+
+    public void setConglomerate_name(String conglomerate_name) {
+        this.conglomerate_name = conglomerate_name;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -212,6 +248,9 @@ public class Examine {
                 ", intime='" + intime + '\'' +
                 ", intimeC=" + intimeC +
                 ", outaddress='" + outaddress + '\'' +
+                ", conglomerate_id=" + conglomerate_id +
+                ", conglomerate_name='" + conglomerate_name + '\'' +
+                ", company_name='" + company_name + '\'' +
                 '}';
     }
 }

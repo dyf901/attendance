@@ -1,6 +1,7 @@
 package com.jjjt.attendance.controller;
 
 import com.jjjt.attendance.entity.JsonResult;
+import com.jjjt.attendance.entity.Log;
 import com.jjjt.attendance.service.LogService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Api(description = "日志接口")
@@ -56,5 +58,11 @@ public class LogController {
         page.setTotal(logService.Total(map));
         page.setItems(logService.FindLog(map));
         return page;
+    }
+
+    @ApiOperation(value = "查找个人日志",notes = "")
+    @PostMapping("/FindLogByStaffId")
+    public List<Log> FindLogByStaffId(@RequestBody Map map){
+        return logService.FindLogByStaffId(map);
     }
 }
