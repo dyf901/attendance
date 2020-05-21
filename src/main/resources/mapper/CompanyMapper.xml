@@ -27,4 +27,9 @@
     <select id="FindCompanyByConglomerateId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
         SELECT `id`, `conglomerate_id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `conglomerate_id`=#{conglomerate_id}
     </select>
+
+    <!--修改公司信息-->
+    <update id="UpdatePersonCount" parameterType="java.util.Map">
+        UPDATE `attendance`.`company` SET  `person_count`=#{person_countC} WHERE (`id`=#{company_id});
+    </update>
 </mapper>

@@ -23,4 +23,10 @@ public interface DepartmentDao {
 
     //下拉框查询部门信息
     List<Department> SelectDepartment(Map map);
+
+    //根据id查询部门信息
+    Department FindDepartmentById(Map map);
+
+    //修改部门人数
+    int UpdatePersonCount(Map map);
 }

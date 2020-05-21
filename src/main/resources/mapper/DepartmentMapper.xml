@@ -50,4 +50,15 @@
         LEFT JOIN `attendance`.`company` a ON d.`company_id`=a.`id`
         WHERE d.`company_id`=#{company_id}
     </select>
+
+    <!--根据id查询部门信息-->
+    <select id="FindDepartmentById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Department">
+        SELECT d.`id`, d.`conglomerate_id`, d.`company_id`, d.`department_name` FROM `attendance`.`department` d
+        WHERE d.`id`=#{department_id}
+    </select>
+
+    <!--修改部门人数-->
+    <update id="UpdatePersonCount" parameterType="java.util.Map">
+        UPDATE `attendance`.`department` SET `person_count`=#{person_countD} WHERE (`id`=#{department_id});
+    </update>
 </mapper>

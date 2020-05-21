@@ -48,4 +48,16 @@ public class DepartmentService implements DepartmentDao {
     public List<Department> SelectDepartment(Map map) {
         return departmentDao.SelectDepartment(map);
     }
+
+    //根据id查询部门信息
+    @Override
+    public Department FindDepartmentById(Map map) {
+        return departmentDao.FindDepartmentById(map);
+    }
+
+    //修改部门人数
+    @Override
+    public int UpdatePersonCount(Map map) {
+        return departmentDao.UpdatePersonCount(map);
+    }
 }

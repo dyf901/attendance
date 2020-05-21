@@ -1,7 +1,11 @@
 package com.jjjt.attendance.controller;
 
+import com.jjjt.attendance.entity.Company;
+import com.jjjt.attendance.entity.Department;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Staff;
+import com.jjjt.attendance.service.CompanyService;
+import com.jjjt.attendance.service.DepartmentService;
 import com.jjjt.attendance.service.StaffService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
@@ -23,13 +27,19 @@ public class StaffController {
     @Autowired
     private StaffService staffService;//员工
 
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Autowired
+    private CompanyService companyService;
+
     @ApiOperation(value = "增加员工信息",notes = "")
     @PostMapping("/InsertStaff")
     public boolean InsertStaff(@RequestBody Map map){
         setNickname();
         String nickname=getNickname();
         map.put("nickname",nickname);
-        String id = (String) map.get("staff_card");
+        String id = (String) map.get("staff_phone");
         String lastWord = id.substring(id.length() - 1);
         String reg = "[a-zA-Z]";
         if (lastWord.matches(reg)) {//截取身份证号后六位数字当app登录密码
@@ -41,14 +51,37 @@ public class StaffController {
             System.out.println(id.substring(id.length() - 6));
             map.put("password",password);
         }
-        return staffService.InsertStaff(map)==1;
+
+        int i=staffService.InsertStaff(map);
+        if(i==1){
+            Department department = departmentService.FindDepartmentById(map);
+            map.put("person_countD",department.getPerson_count()+1);
+            departmentService.UpdatePersonCount(map);
+            Company company = companyService.FindCompanyById(map);
+            map.put("person_countC",company.getPerson_count()+1);
+            companyService.UpdatePersonCount(map);
+            return true;
+        }else {
+            return false;
+        }
     }
 
 
     @ApiOperation(value = "删除员工信息",notes = "")
     @PostMapping("/DeleteStaff")
     public boolean DeleteStaff(@RequestBody Map map){
-        return staffService.DeleteStaff(map)==1;
+        int i=staffService.DeleteStaff(map);
+        if(i==1){
+            Department department = departmentService.FindDepartmentById(map);
+            map.put("person_countD",department.getPerson_count()-1);
+            departmentService.UpdatePersonCount(map);
+            Company company = companyService.FindCompanyById(map);
+            map.put("person_countC",company.getPerson_count()-1);
+            companyService.UpdatePersonCount(map);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @ApiOperation(value = "修改员工信息",notes = "")

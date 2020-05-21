@@ -20,4 +20,7 @@ public interface CompanyDao {
 
     //根据conglomerate_id查询公司信息
     List<Company> FindCompanyByConglomerateId(Map map);
+
+    //修改公司人数
+    int UpdatePersonCount(Map map);
 }

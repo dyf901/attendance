@@ -42,4 +42,10 @@ public class CompanyService implements CompanyDao {
     public List<Company> FindCompanyByConglomerateId(Map map) {
         return companyDao.FindCompanyByConglomerateId(map);
     }
+
+    //修改公司人数
+    @Override
+    public int UpdatePersonCount(Map map) {
+        return companyDao.UpdatePersonCount(map);
+    }
 }

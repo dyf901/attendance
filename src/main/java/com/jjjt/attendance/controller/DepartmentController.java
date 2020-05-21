@@ -51,6 +51,7 @@ public class DepartmentController {
     @ApiOperation(value = "下拉框查询部门信息",notes = "")
     @PostMapping("/SelectDepartment")
     public List<Department> SelectDepartment(@RequestBody Map map){
+        System.out.println(map);
         return departmentService.SelectDepartment(map);
     }
 }
