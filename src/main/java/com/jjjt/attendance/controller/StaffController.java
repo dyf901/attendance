@@ -23,7 +23,7 @@ public class StaffController {
     @Autowired
     private StaffService staffService;//员工
 
-    @ApiOperation(value = "增加员工信息",notes = "staff_phone(电话号码),password(密码)")
+    @ApiOperation(value = "增加员工信息",notes = "")
     @PostMapping("/InsertStaff")
     public boolean InsertStaff(@RequestBody Map map){
         setNickname();

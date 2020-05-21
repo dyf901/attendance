@@ -25,9 +25,17 @@
 
     <!--查询个人日志-->
     <select id="FindLogByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Log">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
         SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
         LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
         LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
         WHERE l.`staff_id`=#{staff_id}
+        ORDER BY l.`uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数_个人-->
+    <select id="TotalStaff" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`log` WHERE `staff_id`=#{staff_id}
     </select>
 </mapper>

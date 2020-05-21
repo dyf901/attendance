@@ -16,16 +16,16 @@
 
     <!--修改部门信息-->
     <update id="UpdateDepartment" parameterType="java.util.Map">
-        UPDATE `attendance`.`department` SET `department_name`='开发部' WHERE (`id`=#{id});
+        UPDATE `attendance`.`department` SET `department_name`=#{department_name} WHERE (`id`=#{id});
     </update>
 
     <!--查询部门信息-->
     <select id="FindDepartment" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Department">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT d.`id`, d.`conglomerate_id`, d.`company_id`, d.`department_name`, a.`company_name` as `company_name` FROM `attendance`.`department` d
+        SELECT d.`id`, d.`conglomerate_id`, d.`company_id`, d.`person_count`, d.`department_name`, a.`company_name` as `company_name` FROM `attendance`.`department` d
         LEFT JOIN `attendance`.`company` a ON d.`company_id`=a.`id`
         <where>
-            `conglomerate_id`=#{conglomerate_id}
+            d.`conglomerate_id`=#{conglomerate_id}
             <if test="company_id!=null">
                 `company_id`=#{company_id}
             </if>
@@ -35,7 +35,7 @@
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT `id`, `conglomerate_id`, `company_id`, `department_name` FROM `attendance`.`department`
+        SELECT COUNT(id) FROM `attendance`.`department`
         <where>
             `conglomerate_id`=#{conglomerate_id}
             <if test="company_id!=null">

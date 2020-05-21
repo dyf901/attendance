@@ -12,6 +12,6 @@
     <select id="FindRegistrationRecordByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.RegistrationRecord">
         SELECT r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`time`, r.`timeC`, r.`address`, r.`longitude`, r.`latitude`, r.`remark`, s.`staff_name` as `staff_name` FROM `attendance`.`registration_record` r
         LEFT JOIN `attendance`.`staff` s ON r.`staff_id`=s.`id`
-        WHERE r.`staff_id`=#{staff_id} and year(r.`time`)=#{Year} and  month(r.`time`)=#{Month} and
+        WHERE r.`staff_id`=#{staff_id} and year(r.`time`)=#{Year} and  month(r.`time`)=#{Month}  and  day(r.`time`)=#{Day}
     </select>
 </mapper>

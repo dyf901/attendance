@@ -47,7 +47,7 @@
     <select id="Total" parameterType="java.util.Map" resultType="long">
         SELECT COUNT(id) FROM `attendance`.`staff`
         <where>
-            `company_id`=#{company_id}
+            `conglomerate_id`=#{conglomerate_id}
             <if test="staff_name!=null and staff_name!=''">
                 and `staff_name` like concat("%",#{staff_name},"%")
             </if>

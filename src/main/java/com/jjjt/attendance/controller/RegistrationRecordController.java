@@ -24,6 +24,7 @@ public class RegistrationRecordController {
     @ApiOperation(value = "查找个人打卡记录",notes = "传参:staff_id(员工id,登录返回),timeC(要查询日期时间戳)")
     @PostMapping("/FindRegistrationRecordByStaffId")
     public List<RegistrationRecord> FindRegistrationRecordByStaffId(@RequestBody Map map){
+        System.out.println(map);
         TimeUtils timeUtils = new TimeUtils();
         String time= (String) map.get("timeC");
         System.out.println(timeUtils.toDate(time));
@@ -34,6 +35,7 @@ public class RegistrationRecordController {
         System.out.println("DayOfMonth: " + ldt.getDayOfMonth());
         map.put("Year",ldt.getYear());
         map.put("Month",ldt.getMonth().getValue());
+        map.put("Day",ldt.getDayOfMonth());
         return registrationRecordService.FindRegistrationRecordByStaffId(map);
     }
 }

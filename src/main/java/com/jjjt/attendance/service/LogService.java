@@ -36,4 +36,10 @@ public class LogService implements LogDao {
     public List<Log> FindLogByStaffId(Map map) {
         return logDao.FindLogByStaffId(map);
     }
+
+    //统计个人总数
+    @Override
+    public long TotalStaff(Map map) {
+        return logDao.TotalStaff(map);
+    }
 }

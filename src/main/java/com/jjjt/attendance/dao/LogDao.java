@@ -17,4 +17,7 @@ public interface LogDao {
 
     //查找个人日志
     List<Log> FindLogByStaffId(Map map);
+
+    //统计个人总数
+    long TotalStaff(Map map);
 }

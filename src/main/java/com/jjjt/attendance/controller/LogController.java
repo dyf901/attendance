@@ -62,7 +62,12 @@ public class LogController {
 
     @ApiOperation(value = "查找个人日志",notes = "")
     @PostMapping("/FindLogByStaffId")
-    public List<Log> FindLogByStaffId(@RequestBody Map map){
-        return logService.FindLogByStaffId(map);
+    public Page<T> FindLogByStaffId(@RequestBody Map map){
+        Page page = new Page();
+        page.setPageNo((Integer) map.get("pageNo"));
+        page.setPageSize((Integer) map.get("pageSize"));
+        page.setTotal(logService.TotalStaff(map));
+        page.setItems(logService.FindLogByStaffId(map));
+        return page;
     }
 }
