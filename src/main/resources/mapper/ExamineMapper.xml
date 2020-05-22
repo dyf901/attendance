@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.ExamineDao">
+    <!--新建审批-->
+    <insert id="InsertExamine" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`examine` (`staff_id`, `company_id`, `conglomerate_id`, `examine_type`, `content`, `uptime`, `uptimeC`, `expenses_type`, `expenses_sum`, `expenses_picture`, `outtime`, `outtimeC`, `intime`, `intimeC`, `outaddress`)
+        VALUES (#{staff_id}, #{company_id}, #{conglomerate_id}, #{examine_type}, #{content}, #{uptime}, #{uptimeC}, #{expenses_type}, #{expenses_sum}, #{expenses_picture}, #{outtime}, #{outtimeC}, #{intime}, #{intimeC}, #{outaddress});
+    </insert>
+
+    <!--删除审批-->
+    <delete id="DeleteExamine" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`examine` WHERE `id`=#{id}
+    </delete>
+
+    <!--分页查询审批信息-->
+    <select id="FindExamine" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Examine">
+        SELECT e.`id`, e.`staff_id`, e.`company_id`, e.`conglomerate_id`, e.`examine_type`, e.`content`, e.`uptime`, e.`uptimeC`, e.`expenses_type`, e.`expenses_sum`, e.`expenses_picture`, e.`outtime`, e.`outtimeC`, e.`intime`, e.`intimeC`, e.`outaddress` FROM  `attendance`.`examine` e
+        LEFT JOIN `attendance`.`staff` s ON e.`staff_id`=s.`id`
+        LEFT JOIN `attendance`.`company` l ON e.`company_id`=l.`id`
+
+    </select>
+</mapper>
