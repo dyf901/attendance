@@ -52,6 +52,9 @@ public class Examine {
     @ApiModelProperty(value = "出差地址" , name = "outaddress")
     private String outaddress;
 
+    @ApiModelProperty(value = "审批状态" , name = "state")
+    private String state;
+
     @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
     private int conglomerate_id;
 
@@ -65,7 +68,7 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, int conglomerate_id, String conglomerate_name, String company_name) {
+    public Examine(int id, int staff_id, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name) {
         this.id = id;
         this.staff_id = staff_id;
         this.company_id = company_id;
@@ -81,6 +84,7 @@ public class Examine {
         this.intime = intime;
         this.intimeC = intimeC;
         this.outaddress = outaddress;
+        this.state = state;
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
         this.company_name = company_name;
@@ -230,6 +234,14 @@ public class Examine {
         this.company_name = company_name;
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -248,6 +260,7 @@ public class Examine {
                 ", intime='" + intime + '\'' +
                 ", intimeC=" + intimeC +
                 ", outaddress='" + outaddress + '\'' +
+                ", state='" + state + '\'' +
                 ", conglomerate_id=" + conglomerate_id +
                 ", conglomerate_name='" + conglomerate_name + '\'' +
                 ", company_name='" + company_name + '\'' +
