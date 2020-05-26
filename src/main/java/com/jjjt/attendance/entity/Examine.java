@@ -13,6 +13,12 @@ public class Examine {
     @ApiModelProperty(value = "员工id" , name = "staff_id")
     private int staff_id;
 
+    @ApiModelProperty(value = "客户id" , name = "client_id")
+    private int client_id;
+
+    @ApiModelProperty(value = "关联项目" , name = "client_company")
+    private String client_company;
+
     @ApiModelProperty(value = "公司id" , name = "company_id")
     private int company_id;
 
@@ -32,7 +38,7 @@ public class Examine {
     private String expenses_type;
 
     @ApiModelProperty(value = "报销金额" , name = "expenses_sum")
-    private int expenses_sum;
+    private double expenses_sum;
 
     @ApiModelProperty(value = "报销照片" , name = "expenses_picture")
     private String expenses_picture;
@@ -64,13 +70,30 @@ public class Examine {
     @ApiModelProperty(value ="公司名称",name = "company_name")
     private String company_name;
 
+    @ApiModelProperty(value ="加班开始时间",name = "start_time")
+    private String start_time;
+
+    @ApiModelProperty(value ="加班开始时间戳",name = "start_timeC")
+    private long start_timeC;
+
+    @ApiModelProperty(value ="加班结束时间",name = "end_time")
+    private String end_time;
+
+    @ApiModelProperty(value ="加班结束时间戳",name = "end_timeC")
+    private long end_timeC;
+
+    @ApiModelProperty(value = "员工姓名" , name = "staff_name")
+    private String staff_name;
+
     public Examine(){
         super();
     }
 
-    public Examine(int id, int staff_id, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, int expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name) {
+    public Examine(int id, int staff_id, int client_id, String client_company, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name) {
         this.id = id;
         this.staff_id = staff_id;
+        this.client_id = client_id;
+        this.client_company = client_company;
         this.company_id = company_id;
         this.examine_type = examine_type;
         this.content = content;
@@ -88,6 +111,11 @@ public class Examine {
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
         this.company_name = company_name;
+        this.start_time = start_time;
+        this.start_timeC = start_timeC;
+        this.end_time = end_time;
+        this.end_timeC = end_timeC;
+        this.staff_name = staff_name;
     }
 
     public int getId() {
@@ -146,11 +174,11 @@ public class Examine {
         this.expenses_type = expenses_type;
     }
 
-    public int getExpenses_sum() {
+    public double getExpenses_sum() {
         return expenses_sum;
     }
 
-    public void setExpenses_sum(int expenses_sum) {
+    public void setExpenses_sum(double expenses_sum) {
         this.expenses_sum = expenses_sum;
     }
 
@@ -242,11 +270,69 @@ public class Examine {
         this.state = state;
     }
 
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public long getStart_timeC() {
+        return start_timeC;
+    }
+
+    public void setStart_timeC(long start_timeC) {
+        this.start_timeC = start_timeC;
+    }
+
+    public String getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
+    }
+
+    public long getEnd_timeC() {
+        return end_timeC;
+    }
+
+    public void setEnd_timeC(long end_timeC) {
+        this.end_timeC = end_timeC;
+    }
+
+    public String getStaff_name() {
+        return staff_name;
+    }
+
+    public void setStaff_name(String staff_name) {
+        this.staff_name = staff_name;
+    }
+
+    public int getClient_id() {
+        return client_id;
+    }
+
+    public void setClient_id(int client_id) {
+        this.client_id = client_id;
+    }
+
+    public String getClient_company() {
+        return client_company;
+    }
+
+    public void setClient_company(String client_company) {
+        this.client_company = client_company;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
+                ", client_id=" + client_id +
+                ", client_company='" + client_company + '\'' +
                 ", company_id=" + company_id +
                 ", examine_type='" + examine_type + '\'' +
                 ", content='" + content + '\'' +
@@ -264,6 +350,11 @@ public class Examine {
                 ", conglomerate_id=" + conglomerate_id +
                 ", conglomerate_name='" + conglomerate_name + '\'' +
                 ", company_name='" + company_name + '\'' +
+                ", start_time='" + start_time + '\'' +
+                ", start_timeC=" + start_timeC +
+                ", end_time='" + end_time + '\'' +
+                ", end_timeC=" + end_timeC +
+                ", staff_name='" + staff_name + '\'' +
                 '}';
     }
 }

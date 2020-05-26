@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.FeedbackDao">
+    <!--新增反馈信息-->
+    <insert id="InsertFeedback" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`feedback` (`conglomerate_id`, `staff_id`, `content`, `picture`, `uptime`) VALUES (#{conglomerate_id}, #{staff_id}, #{content}, #{picture}, now());
+    </insert>
+
+    <!--分页查询反馈信息-->
+    <select id="FindFeedback" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Feedback">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT f.`id`, f.`conglomerate_id`, f.`staff_id`, f.`content`, f.`picture`, f.`uptime`, s.`staff_name` as `staff_name` FROM `attendance`.`feedback` f
+        LEFT JOIN `attendance`.`staff` s ON f.`staff_id`=s.`id`
+        order by f.`uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`feedback`
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.PositionDao">
+    <!--增加职务-->
+    <insert id="InsertPosition" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`position` (`conglomerate_id`,`position_name`) VALUES (#{conglomerate_id}, #{position_name});
+    </insert>
+
+    <!--删除职务-->
+    <delete id="DeletePosition" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`position` WHERE `id`=#{id}
+    </delete>
+
+    <!--分页查询职务-->
+    <select id="FindPosition" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Position">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT `id`, `conglomerate_id`, `position_name` FROM `attendance`.`position` WHERE `conglomerate_id`=#{conglomerate_id}
+        limiy #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`position` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+
+    <!--下拉框查询职务-->
+    <select id="SelectPosition" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Position">
+        SELECT `id`, `position_name` FROM `attendance`.`position` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+</mapper>

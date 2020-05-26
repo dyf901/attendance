@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.ClientDao">
+    <!--增加客户-->
+    <insert id="InsertClient" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`client` (`staff_id`, `conglomerate_id`, `company_id`, `client_name`, `client_sex`, `client_position`, `client_department`, `client_phone`, `up_time`, `up_timeC`, `company`) 
+        VALUES (#{staff_id}, #{conglomerate_id}, #{company_id}, #{client_name}, #{client_sex}, #{client_position}, #{client_department}, #{client_phone}, #{up_time}, #{up_timeC}, #{company});
+    </insert>
+
+    <!--删除客户-->
+    <delete id="DeleteClient" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`client` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改客户-->
+    <update id="UpdateClient" parameterType="java.util.Map">
+        UPDATE `attendance`.`client` SET  `client_name`=#{client_name}, `client_sex`=#{client_sex}, `client_position`=#{}, `client_department`=#{}, `client_phone`=#{}, `up_time`=#{}, `up_timeC`=#{}, `company`=#{} WHERE (`id`=0);
+    </update>
+</mapper>

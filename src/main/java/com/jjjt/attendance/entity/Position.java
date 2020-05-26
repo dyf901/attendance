@@ -10,12 +10,6 @@ public class Position {
     @ApiModelProperty(value = "职务id" , name = "id")
     private int id;
 
-    @ApiModelProperty(value = "公司id" , name = "company_id")
-    private int company_id;
-
-    @ApiModelProperty(value = "公司名称",name = "company_name")
-    private String company_name;
-
     @ApiModelProperty(value = "职务名称" , name = "position_name")
     private String position_name;
 
@@ -29,10 +23,8 @@ public class Position {
         super();
     }
 
-    public Position(int id, int company_id, String company_name, String position_name, int conglomerate_id, String conglomerate_name) {
+    public Position(int id, String position_name, int conglomerate_id, String conglomerate_name) {
         this.id = id;
-        this.company_id = company_id;
-        this.company_name = company_name;
         this.position_name = position_name;
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
@@ -54,22 +46,6 @@ public class Position {
         this.position_name = position_name;
     }
 
-    public int getCompany_id() {
-        return company_id;
-    }
-
-    public void setCompany_id(int company_id) {
-        this.company_id = company_id;
-    }
-
-    public String getCompany_name() {
-        return company_name;
-    }
-
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
-    }
-
     public int getConglomerate_id() {
         return conglomerate_id;
     }
@@ -88,10 +64,8 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" +
+        return "{" +
                 "id=" + id +
-                ", company_id=" + company_id +
-                ", company_name='" + company_name + '\'' +
                 ", position_name='" + position_name + '\'' +
                 ", conglomerate_id=" + conglomerate_id +
                 ", conglomerate_name='" + conglomerate_name + '\'' +
