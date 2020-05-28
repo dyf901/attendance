@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.ItemsDao">
+    <!--增加客户-->
+    <insert id="InsertItems" parameterType="com.jjjt.attendance.entity.Items">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `attendance`.`items` (`conglomerate_id`, `items_name`, `bloc_name`, `type`, `uptime`, `uptimeC`) 
+        VALUES (#{conglomerate_id}, #{items_name}, #{bloc_name}, #{type}, #{uptime}, #{uptimeC});
+    </insert>
+
+    <!--删除客户-->
+    <delete id="DeleteItems" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`items` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改客户信息-->
+    <update id="UpdateItems" parameterType="java.util.Map">
+        UPDATE `attendance`.`items` SET  `items_name`=#{items_name}, `bloc_name`=#{bloc_name}, `type`=#{type} WHERE (`id`=#{id});
+    </update>
+
+    <!--分页模糊查询客户信息-->
+    <select id="FindItems" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Items">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT `id`, `conglomerate_id`, `items_name`, `bloc_name`, `type`, `uptime`, `uptimeC` WHERE `attendance`.`items`
+        <where>
+            `conglomerate_id`=#{conglomerate_id}
+            <if test="items_name!=null">
+                `items_name`=#{items_name}
+            </if>
+            <if test="bloc_name!=null">
+                `bloc_name`=#{bloc_name}
+            </if>
+            <if test="type!=null">
+                `type`=#{type}
+            </if>
+        </where>
+        ORDER BY `uptime` DESC
+        limit #{page},#{pageNo}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`items`
+        <where>
+            `conglomerate_id`=#{conglomerate_id}
+            <if test="items_name!=null">
+                `items_name`=#{items_name}
+            </if>
+            <if test="bloc_name!=null">
+                `bloc_name`=#{bloc_name}
+            </if>
+            <if test="type!=null">
+                `type`=#{type}
+            </if>
+        </where>
+    </select>
+
+    <!--App查询客户信息-->
+    <select id="FindItemsApp" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Items">
+        SELECT `id`, `conglomerate_id`, `items_name`, `bloc_name`, `type`, `uptime`, `uptimeC` FROM `attendance`.`items` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+</mapper>

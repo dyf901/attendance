@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.ClientDao">
+    <!--增加联系人-->
+    <insert id="InsertClient" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`client` (`items_id`, `client_name`, `client_sex`, `client_position`, `client_department`, `client_phone`) 
+        VALUES (#{items_id}, #{client_name}, #{client_sex}, #{client_position}, #{client_department}, #{client_phone});
+    </insert>
+
+    <!--删除联系人-->
+    <delete id="DeleteClient" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`client` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改联系人-->
+    <update id="UpdateClient" parameterType="java.util.Map">
+        UPDATE `attendance`.`client` SET  `client_name`=#{client_name}, `client_sex`=#{client_sex}, `client_position`=#{client_position}, `client_department`=#{client_department}, `client_phone`=#{client_phone} WHERE (`id`=#{id});
+    </update>
+
+    <!--根据items_id查询联系人信息-->
+    <select id="FindClientByItemsId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Client">
+        SELECT `id`, `items_id`, `client_name`, `client_sex`, `client_position`, `client_department`, `client_phone` FROM `attendance`.`client` WHERE `items_id`=#{items_id}
+    </select>
+</mapper>
