@@ -18,7 +18,7 @@ public class StaffItemsService implements StaffItemsDao {
     }
 
     @Override
-    public List<Long> FindItemsId(Map map) {
+    public List<Integer> FindItemsId(Map map) {
         return staffItemsDao.FindItemsId(map);
     }
 }

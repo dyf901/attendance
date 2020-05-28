@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface ItemsDao {
     //增加客户
-    int InsertItems(Map map);
+    int InsertItems(Items items);
 
     //删除客户
     int DeleteItems(Map map);
@@ -23,4 +23,7 @@ public interface ItemsDao {
 
     //App查询客户信息
     List<Items> FindItemsApp(Map map);
+
+    //根据id查询客户信息
+    Items FindItemsById(int id);
 }

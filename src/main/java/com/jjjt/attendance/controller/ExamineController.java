@@ -50,7 +50,7 @@ public class ExamineController {
         }else if (map.get("examine_type").equals("请假")){
             long start_timeC= (long) map.get("start_timeC");
             long end_timeC= (long) map.get("end_timeC");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             long lt = new Long(start_timeC);
             Date date1 = new Date(lt);
             long lts = new Long(end_timeC);

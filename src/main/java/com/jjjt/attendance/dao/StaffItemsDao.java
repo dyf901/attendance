@@ -8,5 +8,5 @@ public interface StaffItemsDao {
     int InsertStaffItems(Map map);
 
     //根据staff_id查询客户信息
-    List<Long> FindItemsId(Map map);
+    List<Integer> FindItemsId(Map map);
 }

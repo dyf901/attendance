@@ -15,8 +15,8 @@ public class ItemsService implements ItemsDao {
 
     //增加客户
     @Override
-    public int InsertItems(Map map) {
-        return itemsDao.InsertItems(map);
+    public int InsertItems(Items items) {
+        return itemsDao.InsertItems(items);
     }
 
     //删除客户
@@ -47,5 +47,11 @@ public class ItemsService implements ItemsDao {
     @Override
     public List<Items> FindItemsApp(Map map) {
         return itemsDao.FindItemsApp(map);
+    }
+
+    //根据id查询员工信息
+    @Override
+    public Items FindItemsById(int id) {
+        return itemsDao.FindItemsById(id);
     }
 }

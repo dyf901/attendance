@@ -9,7 +9,7 @@
     </insert>
 
     <!--根据staff_id查询项目信息-->
-    <select id="FindItemsId" parameterType="java.util.Map" resultType="long">
+    <select id="FindItemsId" parameterType="java.util.Map" resultType="int">
         SELECT `items_id` FROM `attendance`.`staff_items` WHERE `staff_id`=#{staff_id}
     </select>
 </mapper>

@@ -21,7 +21,7 @@ public class UploadController {
         String extName = oldFileName.substring(lastDotIndex);
         String newName = UUID.randomUUID() + extName;
         File excelFile =
-                new File("E:/test/"//   /root/img/    E:/test/
+                new File("/root/img/"//   /root/img/    E:/test/
                         + newName);
         try {
             file.transferTo(excelFile);
@@ -40,7 +40,7 @@ public class UploadController {
             BufferedInputStream bis =
                     new BufferedInputStream(
                             new FileInputStream(
-                                    new File("E:/test/" + img_url)));//   /root/img/    E:/test/
+                                    new File("/root/img/" + img_url)));//   /root/img/    E:/test/
             int num;
             byte[] b = new byte[1024];
 
