@@ -70,4 +70,10 @@ public class LogController {
         page.setItems(logService.FindLogByStaffId(map));
         return page;
     }
+
+    @ApiOperation(value = "根据id查询详细日志信息",notes = "传参:id(日志信息的id)")
+    @PostMapping("/FindLogById")
+    public Log FindLogById(@RequestBody Map map){
+        return logService.FindLogById(map);
+    }
 }

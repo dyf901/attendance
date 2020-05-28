@@ -22,6 +22,9 @@ public class Log {
     @ApiModelProperty(value = "内容" , name = "content")
     private String content;
 
+    @ApiModelProperty(value = "明日计划",notes = "")
+    private String tomorrow_plan;
+
     @ApiModelProperty(value = "上传时间" , name = "uptime")
     private String uptime;
 
@@ -41,12 +44,13 @@ public class Log {
         super();
     }
 
-    public Log(int id, int staff_id, int company_id, String company_name, String content, String uptime, Long uptimeC, String staff_name, int conglomerate_id, String conglomerate_name) {
+    public Log(int id, int staff_id, int company_id, String company_name, String content, String tomorrow_plan, String uptime, Long uptimeC, String staff_name, int conglomerate_id, String conglomerate_name) {
         this.id = id;
         this.staff_id = staff_id;
         this.company_id = company_id;
         this.company_name = company_name;
         this.content = content;
+        this.tomorrow_plan = tomorrow_plan;
         this.uptime = uptime;
         this.uptimeC = uptimeC;
         this.staff_name = staff_name;
@@ -134,6 +138,14 @@ public class Log {
         this.company_name = company_name;
     }
 
+    public String getTomorrow_plan() {
+        return tomorrow_plan;
+    }
+
+    public void setTomorrow_plan(String tomorrow_plan) {
+        this.tomorrow_plan = tomorrow_plan;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -142,6 +154,7 @@ public class Log {
                 ", company_id=" + company_id +
                 ", company_name='" + company_name + '\'' +
                 ", content='" + content + '\'' +
+                ", tomorrow_plan='" + tomorrow_plan + '\'' +
                 ", uptime='" + uptime + '\'' +
                 ", uptimeC=" + uptimeC +
                 ", staff_name='" + staff_name + '\'' +

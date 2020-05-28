@@ -31,6 +31,18 @@ public class CompanyService implements CompanyDao {
         return companyDao.UpdateCompany(map);
     }
 
+    //分页查询公司信息
+    @Override
+    public List<Company> FindCompany(Map map) {
+        return companyDao.FindCompany(map);
+    }
+
+    //统计总数
+    @Override
+    public long Total(Map map) {
+        return companyDao.Total(map);
+    }
+
     //根据company_id查询公司信息
     @Override
     public Company FindCompanyById(Map map) {
@@ -47,5 +59,11 @@ public class CompanyService implements CompanyDao {
     @Override
     public int UpdatePersonCount(Map map) {
         return companyDao.UpdatePersonCount(map);
+    }
+
+    //修改上下班时间
+    @Override
+    public int UpdateTime(Map map) {
+        return companyDao.UpdateTime(map);
     }
 }

@@ -60,4 +60,10 @@ public class ExamineService implements ExamineDao {
     public int UpdateStateW(Map map) {
         return examineDao.UpdateStateW(map);
     }
+
+    //根据id查询审批信息
+    @Override
+    public Examine FindExamineById(Map map) {
+        return examineDao.FindExamineById(map);
+    }
 }

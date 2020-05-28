@@ -29,4 +29,7 @@ public interface ExamineDao {
 
     //审核未通过
     int UpdateStateW(Map map);
+
+    //根据id查询审批信息
+    Examine FindExamineById(Map map);
 }

@@ -13,8 +13,8 @@ public class Examine {
     @ApiModelProperty(value = "员工id" , name = "staff_id")
     private int staff_id;
 
-    @ApiModelProperty(value = "客户id" , name = "client_id")
-    private int client_id;
+    @ApiModelProperty(value = "客户id" , name = "itmes_id")
+    private int itmes_id;
 
     @ApiModelProperty(value = "关联项目" , name = "client_company")
     private String client_company;
@@ -89,10 +89,10 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, int client_id, String client_company, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name) {
+    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name) {
         this.id = id;
         this.staff_id = staff_id;
-        this.client_id = client_id;
+        this.itmes_id = itmes_id;
         this.client_company = client_company;
         this.company_id = company_id;
         this.examine_type = examine_type;
@@ -310,12 +310,12 @@ public class Examine {
         this.staff_name = staff_name;
     }
 
-    public int getClient_id() {
-        return client_id;
+    public int getItmes_id() {
+        return itmes_id;
     }
 
-    public void setClient_id(int client_id) {
-        this.client_id = client_id;
+    public void setItmes_id(int itmes_id) {
+        this.itmes_id = itmes_id;
     }
 
     public String getClient_company() {
@@ -331,7 +331,7 @@ public class Examine {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
-                ", client_id=" + client_id +
+                ", itmes_id=" + itmes_id +
                 ", client_company='" + client_company + '\'' +
                 ", company_id=" + company_id +
                 ", examine_type='" + examine_type + '\'' +

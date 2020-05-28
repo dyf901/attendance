@@ -1,5 +1,6 @@
 package com.jjjt.attendance.controller;
 
+import com.jjjt.attendance.entity.Examine;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.service.ExamineService;
 import com.jjjt.attendance.util.Page;
@@ -49,7 +50,7 @@ public class ExamineController {
         }else if (map.get("examine_type").equals("请假")){
             long start_timeC= (long) map.get("start_timeC");
             long end_timeC= (long) map.get("end_timeC");
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             long lt = new Long(start_timeC);
             Date date1 = new Date(lt);
             long lts = new Long(end_timeC);
@@ -91,6 +92,7 @@ public class ExamineController {
     @ApiOperation(value = "查询个人审批记录",notes = "传参:staff_id(登录返回id),pageNo,pageSize")
     @PostMapping("/FindExamineByStaffId")
     public Page FindExamineByStaffId(@RequestBody Map map){
+        System.out.println("map"+map);
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
@@ -109,5 +111,11 @@ public class ExamineController {
     @PostMapping("/UpdateStateW")
     public boolean UpdateStateW(@RequestBody Map map){
         return examineService.UpdateStateW(map)==1;
+    }
+
+    @ApiOperation(value = "根据id查询详细审批信息",notes = "传参:id(每条记录对应的id)")
+    @PostMapping("/FindExamineById")
+    public Examine FindExamineById(@RequestBody Map map){
+        return examineService.FindExamineById(map);
     }
 }

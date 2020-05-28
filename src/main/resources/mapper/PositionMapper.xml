@@ -17,7 +17,7 @@
     <select id="FindPosition" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Position">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
         SELECT `id`, `conglomerate_id`, `position_name` FROM `attendance`.`position` WHERE `conglomerate_id`=#{conglomerate_id}
-        limiy #{page},#{pageSize}
+        limit #{page},#{pageSize}
     </select>
 
     <!--统计总数-->

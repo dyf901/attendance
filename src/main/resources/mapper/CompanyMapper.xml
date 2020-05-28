@@ -18,6 +18,20 @@
         UPDATE `attendance`.`company` SET  `company_name`=#{company_name}, `in_time`=#{in_time}, `out_time`=#{out_time} WHERE (`id`=#{id});
     </update>
 
+    <!--分页查询公司信息-->
+    <select id="FindCompany" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT `id`, `conglomerate_id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company`
+        WHERE `conglomerate_id`=#{conglomerate_id}
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`company`
+        WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+
     <!--根据company_id查询公司信息-->
     <select id="FindCompanyById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Company">
         SELECT `id`, `company_name`, `person_count`, `in_time`, `out_time` FROM `attendance`.`company` WHERE `id`=#{company_id}
@@ -31,5 +45,10 @@
     <!--修改公司信息-->
     <update id="UpdatePersonCount" parameterType="java.util.Map">
         UPDATE `attendance`.`company` SET  `person_count`=#{person_countC} WHERE (`id`=#{company_id});
+    </update>
+
+    <!--修改上下班时间-->
+    <update id="UpdateTime" parameterType="java.util.Map">
+        UPDATE `attendance`.`company` SET  `in_time`=#{in_time},`out_time`=#{out_time} WHERE (`id`=#{id});
     </update>
 </mapper>
