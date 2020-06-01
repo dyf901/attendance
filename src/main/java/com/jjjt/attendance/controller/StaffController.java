@@ -56,10 +56,10 @@ public class StaffController {
         if(i==1){
             Department department = departmentService.FindDepartmentById(map);
             map.put("person_countD",department.getPerson_count()+1);
-            departmentService.UpdatePersonCount(map);
+            int iq=departmentService.UpdatePersonCount(map);
             Company company = companyService.FindCompanyById(map);
             map.put("person_countC",company.getPerson_count()+1);
-            companyService.UpdatePersonCount(map);
+            int iqa=companyService.UpdatePersonCount(map);
             return true;
         }else {
             return false;
@@ -104,6 +104,7 @@ public class StaffController {
     @ApiOperation(value = "app修改员工信息",notes = "")
     @PostMapping("/UpdateStaffApp")
     public JsonResult UpdateStaffApp(@RequestBody Map map){
+        System.out.println("map:"+map);
         JsonResult jsonResult = new JsonResult();
         int i = staffService.UpdateStaffApp(map);
         if (i==1){

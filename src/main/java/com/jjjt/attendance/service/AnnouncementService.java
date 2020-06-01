@@ -36,4 +36,16 @@ public class AnnouncementService implements AnnouncementDao {
     public long Total(Map map) {
         return announcementDao.Total(map);
     }
+
+    //修改阅读量
+    @Override
+    public int UpdateReadCount(Map map) {
+        return announcementDao.UpdateReadCount(map);
+    }
+
+    //根据id查询公告信息
+    @Override
+    public Announcement FindAnnouncementById(Map map) {
+        return announcementDao.FindAnnouncementById(map);
+    }
 }

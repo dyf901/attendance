@@ -35,7 +35,6 @@ public class ClientController {
         JsonResult jsonResult = new JsonResult();
         int i = clientService.InsertClient(map);
         if(i==1){
-            staffItemsService.InsertStaffItems(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("添加成功!");
             return jsonResult;

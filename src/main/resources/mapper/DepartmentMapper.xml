@@ -53,7 +53,7 @@
 
     <!--根据id查询部门信息-->
     <select id="FindDepartmentById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Department">
-        SELECT d.`id`, d.`conglomerate_id`, d.`company_id`, d.`department_name` FROM `attendance`.`department` d
+        SELECT d.`id`, d.`conglomerate_id`, d.`company_id`, d.`department_name`,d.`person_count` FROM `attendance`.`department` d
         WHERE d.`id`=#{department_id}
     </select>
 

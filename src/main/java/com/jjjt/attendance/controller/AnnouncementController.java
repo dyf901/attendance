@@ -1,5 +1,7 @@
 package com.jjjt.attendance.controller;
 
+import com.jjjt.attendance.entity.Announcement;
+import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.service.AnnouncementService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
@@ -38,5 +40,23 @@ public class AnnouncementController {
         page.setTotal(announcementService.Total(map));
         page.setItems(announcementService.FindAnnouncement(map));
         return page;
+    }
+
+    @ApiOperation(value = "修改阅读量",notes = "传参:id(公告id)")
+    @PostMapping("/UpdateReadCount")
+    public JsonResult UpdateReadCount(@RequestBody Map map){
+        JsonResult jsonResult = new JsonResult();
+        Announcement announcement = announcementService.FindAnnouncementById(map);
+        map.put("read_count",announcement.getRead_count());
+        int i = announcementService.UpdateReadCount(map);
+        if (i==1){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("增加成功!");
+            return jsonResult;
+        }else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("增加失败!");
+            return jsonResult;
+        }
     }
 }
