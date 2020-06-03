@@ -104,7 +104,7 @@ public class ItemsController {
         if(staff.getPosition_name().equals("管理员") || staff.getPosition_name().equals("市场总监")){
             jsonResult.setData(itemsService.FindItemsApp(map));
             return jsonResult;
-        }else if(staff.getPosition_name().equals("普通员工")){
+        }else {
             List lista = new ArrayList();
             List<Integer> list = staffItemsService.FindItemsId(map);
             for (Integer l : list){
@@ -113,7 +113,6 @@ public class ItemsController {
             jsonResult.setData(lista);
             return jsonResult;
         }
-        return jsonResult;
     }
 
     @ApiOperation(value = "推送客户",notes = "传参:staff_id(被推送人的id,滚动选择),items_id(客户id)")

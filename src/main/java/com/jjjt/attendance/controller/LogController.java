@@ -55,6 +55,16 @@ public class LogController {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
+        if (map.containsKey("start_time1") && map.containsKey("end_time1")){
+            String start_time = map.get("start_time1")+" 00:00:00";
+            String end_time = map.get("end_time1")+" 23:59:59";
+            map.put("start_time",start_time);
+            map.put("end_time",end_time);
+        }else {
+            map.put("start_time",null);
+            map.put("end_time",null);
+
+        }
         page.setTotal(logService.Total(map));
         page.setItems(logService.FindLog(map));
         return page;

@@ -247,7 +247,7 @@ public class RegistrationController {
 
         int rowNum = 1;
 
-        String[] headers = {"姓名" , "公司", "部门" , "星期" , "签到时间" , "签退时间" , "加班时长", "备注"};
+        String[] headers = {"姓名" , "公司", "部门" , "星期" , "签到时间" , "签退时间" , "加班时长", "签到备注", "签退备注"};
         //headers表示excel表中第一行的表头
 
         HSSFRow row = sheet.createRow(0);
@@ -269,7 +269,8 @@ public class RegistrationController {
             row1.createCell(4).setCellValue(registration.getIn_time());
             row1.createCell(5).setCellValue(registration.getOut_time());
             row1.createCell(6).setCellValue(registration.getOvertime_hours());
-            row1.createCell(7).setCellValue(registration.getRemarkT());
+            row1.createCell(7).setCellValue(registration.getRemarkD());
+            row1.createCell(8).setCellValue(registration.getRemarkT());
             rowNum++;
         }
 

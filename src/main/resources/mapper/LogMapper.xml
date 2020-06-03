@@ -14,13 +14,24 @@
         SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
         LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
         LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
-        WHERE l.`conglomerate_id`=#{conglomerate_id}
+        <where>
+            l.`conglomerate_id`=#{conglomerate_id}
+            <if test="start_time!=null and end_time!=null">
+                and  l.`uptime` &gt;= #{start_time} and l.`uptime` &lt;= #{end_time}
+            </if>
+        </where>
         limit #{page},#{pageSize}
     </select>
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(id) FROM `attendance`.`log` WHERE `conglomerate_id`=#{conglomerate_id}
+        SELECT COUNT(id) FROM `attendance`.`log`
+        <where>
+            `conglomerate_id`=#{conglomerate_id}
+            <if test="start_time!=null and end_time!=null">
+                and  `uptime` &gt;= #{start_time} and `uptime` &lt;= #{end_time}
+            </if>
+        </where>
     </select>
 
     <!--查询个人日志-->
