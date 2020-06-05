@@ -5,63 +5,63 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Registration" , description = "打卡表对象")
+@ApiModel(value = "Registration", description = "打卡表对象")
 public class Registration {
-    @ApiModelProperty(value = "打卡id" , name = "id")
+    @ApiModelProperty(value = "打卡id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "公司id" , name = "company_id")
+    @ApiModelProperty(value = "公司id", name = "company_id")
     private int company_id;
 
-    @ApiModelProperty(value = "员工id" , name = "staff_id")
+    @ApiModelProperty(value = "员工id", name = "staff_id")
     private int staff_id;
 
-    @ApiModelProperty(value = "星期" , name = "week")
+    @ApiModelProperty(value = "星期", name = "week")
     private String week;
 
-    @ApiModelProperty(value = "签到时间" , name = "in_time")
+    @ApiModelProperty(value = "签到时间", name = "in_time")
     private String in_time;
 
-    @ApiModelProperty(value = "签到地址" , name = "in_address")
+    @ApiModelProperty(value = "签到地址", name = "in_address")
     private String in_address;
 
-    @ApiModelProperty(value = "签退时间" , name = "out_time")
+    @ApiModelProperty(value = "签退时间", name = "out_time")
     private String out_time;
 
-    @ApiModelProperty(value = "签退地址" , name = "out_address")
+    @ApiModelProperty(value = "签退地址", name = "out_address")
     private String out_address;
 
-    @ApiModelProperty(value = "签到备注" , name = "remarkD")
+    @ApiModelProperty(value = "签到备注", name = "remarkD")
     private String remarkD;
 
-    @ApiModelProperty(value = "签退备注" , name = "remarkT")
+    @ApiModelProperty(value = "签退备注", name = "remarkT")
     private String remarkT;
 
-    @ApiModelProperty(value = "加班时长" , name = "overtime_hours")
+    @ApiModelProperty(value = "加班时长", name = "overtime_hours")
     private int overtime_hours;
 
-    @ApiModelProperty(value = "状态" , name = "stateD")
+    @ApiModelProperty(value = "状态", name = "stateD")
     private String stateD;
 
-    @ApiModelProperty(value = "状态" , name = "stateD")
+    @ApiModelProperty(value = "状态", name = "stateD")
     private String stateT;
 
-    @ApiModelProperty(value = "员工姓名" , name = "staff_name")
+    @ApiModelProperty(value = "员工姓名", name = "staff_name")
     private String staff_name;
 
-    @ApiModelProperty(value = "部门名称" , name = "department_name")
+    @ApiModelProperty(value = "部门名称", name = "department_name")
     private String department_name;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    @ApiModelProperty(value = "公司名称" , name = "company_name")
+    @ApiModelProperty(value = "公司名称", name = "company_name")
     private String company_name;
 
-    public Registration(){
+    public Registration() {
         super();
     }
 

@@ -5,30 +5,30 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Feedback" , description = "意见反馈表对象")
+@ApiModel(value = "Feedback", description = "意见反馈表对象")
 public class Feedback {
-    @ApiModelProperty(value = "公告id" , name = "id")
+    @ApiModelProperty(value = "公告id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "员工id" , name = "staff_id")
+    @ApiModelProperty(value = "员工id", name = "staff_id")
     private int staff_id;
 
-    @ApiModelProperty(value = "反馈内容" , name = "content")
+    @ApiModelProperty(value = "反馈内容", name = "content")
     private String content;
 
-    @ApiModelProperty(value = "反馈图片" , name = "picture")
+    @ApiModelProperty(value = "反馈图片", name = "picture")
     private String picture;
 
-    @ApiModelProperty(value = "上传时间" , name = "uptime")
+    @ApiModelProperty(value = "上传时间", name = "uptime")
     private String uptime;
 
-    @ApiModelProperty(value = "员工名称",name = "staff_name")
+    @ApiModelProperty(value = "员工名称", name = "staff_name")
     private String staff_name;
 
-    public Feedback(){
+    public Feedback() {
         super();
     }
 

@@ -5,24 +5,24 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "User" , description = "用户表对象")
+@ApiModel(value = "User", description = "用户表对象")
 public class User {
-    @ApiModelProperty(value = "用户id" , name = "id")
+    @ApiModelProperty(value = "用户id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "账号" , name = "username")
+    @ApiModelProperty(value = "账号", name = "username")
     private String username;
 
-    @ApiModelProperty(value = "密码" , name = "password")
+    @ApiModelProperty(value = "密码", name = "password")
     private String password;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    public User(){
+    public User() {
         super();
     }
 

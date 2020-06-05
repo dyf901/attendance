@@ -18,23 +18,23 @@ public class AppLogin {
     @Autowired
     private StaffService staffService;
 
-    @ApiOperation(value = "App登录" , notes = "传参:staff_phone(员工手机号),password(密码)")
+    @ApiOperation(value = "App登录", notes = "传参:staff_phone(员工手机号),password(密码)")
     @PostMapping("/AppLogin")
-    public JsonResult AppLogin(@RequestBody Map map){
+    public JsonResult AppLogin(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
         Staff staff = staffService.FindStaffByStaffPhone(map);
-        if(staff!=null){
-            if(staff.getPassword().equals(map.get("password"))){
+        if (staff != null) {
+            if (staff.getPassword().equals(map.get("password"))) {
                 jsonResult.setCode(200);
                 jsonResult.setMessage("登录成功!");
                 jsonResult.setData(staff);
                 return jsonResult;
-            }else{
+            } else {
                 jsonResult.setCode(20006);
                 jsonResult.setMessage("密码错误,登录失败!");
                 return jsonResult;
             }
-        }else {
+        } else {
             jsonResult.setCode(20006);
             jsonResult.setMessage("账号不存在!");
             return jsonResult;

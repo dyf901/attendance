@@ -5,21 +5,21 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Position" , description = "职务表对象")
+@ApiModel(value = "Position", description = "职务表对象")
 public class Position {
-    @ApiModelProperty(value = "职务id" , name = "id")
+    @ApiModelProperty(value = "职务id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "职务名称" , name = "position_name")
+    @ApiModelProperty(value = "职务名称", name = "position_name")
     private String position_name;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    public Position(){
+    public Position() {
         super();
     }
 

@@ -18,25 +18,25 @@ public class FeedbackController {
     @Autowired
     private FeedbackService feedbackService;
 
-    @ApiOperation(value = "上传反馈意见",notes = "")
+    @ApiOperation(value = "上传反馈意见", notes = "")
     @PostMapping("/InsertFeedback")
-    public JsonResult InsertFeedback(@RequestBody Map map){
+    public JsonResult InsertFeedback(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
         int i = feedbackService.InsertFeedback(map);
-        if (i==1){
+        if (i == 1) {
             jsonResult.setCode(200);
             jsonResult.setMessage("提交成功!");
             return jsonResult;
-        }else {
+        } else {
             jsonResult.setCode(20006);
             jsonResult.setMessage("提交失败!");
             return jsonResult;
         }
     }
 
-    @ApiOperation(value = "分页查询反馈信息",notes = "")
+    @ApiOperation(value = "分页查询反馈信息", notes = "")
     @PostMapping("/FindFeedback")
-    public Page FindFeedback(@RequestBody Map map){
+    public Page FindFeedback(@RequestBody Map map) {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));

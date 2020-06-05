@@ -5,18 +5,18 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Conglomerate" , description = "集团表对象")
+@ApiModel(value = "Conglomerate", description = "集团表对象")
 public class Conglomerate {
-    @ApiModelProperty(value = "集团id" , name = "id")
+    @ApiModelProperty(value = "集团id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    @ApiModelProperty(value = "集团人数" , name = "person_count")
+    @ApiModelProperty(value = "集团人数", name = "person_count")
     private int person_count;
 
-    public Conglomerate(){
+    public Conglomerate() {
         super();
     }
 

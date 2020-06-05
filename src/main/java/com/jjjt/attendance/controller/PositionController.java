@@ -19,21 +19,21 @@ public class PositionController {
     @Autowired
     private PositionService positionService;
 
-    @ApiOperation(value = "增加职务",notes = "")
+    @ApiOperation(value = "增加职务", notes = "")
     @PostMapping("/InsertPosition")
-    public boolean InsertPosition(@RequestBody Map map){
-        return positionService.InsertPosition(map)==1;
+    public boolean InsertPosition(@RequestBody Map map) {
+        return positionService.InsertPosition(map) == 1;
     }
 
-    @ApiOperation(value = "删除职务",notes = "")
+    @ApiOperation(value = "删除职务", notes = "")
     @PostMapping("/DeletePosition")
-    public boolean DeletePosition(@RequestBody Map map){
-        return positionService.DeletePosition(map)==1;
+    public boolean DeletePosition(@RequestBody Map map) {
+        return positionService.DeletePosition(map) == 1;
     }
 
-    @ApiOperation(value = "查询职务",notes = "")
+    @ApiOperation(value = "查询职务", notes = "")
     @PostMapping("/FindPosition")
-    public Page FindPosition(@RequestBody Map map){
+    public Page FindPosition(@RequestBody Map map) {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
@@ -42,9 +42,9 @@ public class PositionController {
         return page;
     }
 
-    @ApiOperation(value = "下拉框查询职务",notes = "")
+    @ApiOperation(value = "下拉框查询职务", notes = "")
     @PostMapping("/SelectPosition")
-    public List<Position> SelectPosition(@RequestBody Map map){
+    public List<Position> SelectPosition(@RequestBody Map map) {
         return positionService.SelectPosition(map);
     }
 }

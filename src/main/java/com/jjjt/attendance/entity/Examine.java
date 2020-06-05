@@ -5,87 +5,87 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "examine" , description = "审批表对象")
+@ApiModel(value = "examine", description = "审批表对象")
 public class Examine {
-    @ApiModelProperty(value = "审批id" , name = "id")
+    @ApiModelProperty(value = "审批id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "员工id" , name = "staff_id")
+    @ApiModelProperty(value = "员工id", name = "staff_id")
     private int staff_id;
 
-    @ApiModelProperty(value = "客户id" , name = "itmes_id")
+    @ApiModelProperty(value = "客户id", name = "itmes_id")
     private int itmes_id;
 
-    @ApiModelProperty(value = "关联项目" , name = "client_company")
+    @ApiModelProperty(value = "关联项目", name = "client_company")
     private String client_company;
 
-    @ApiModelProperty(value = "公司id" , name = "company_id")
+    @ApiModelProperty(value = "公司id", name = "company_id")
     private int company_id;
 
-    @ApiModelProperty(value = "审批类型(审批,报销,出差,加班,请假)" , name = "examine_type")
+    @ApiModelProperty(value = "审批类型(审批,报销,出差,加班,请假)", name = "examine_type")
     private String examine_type;
 
-    @ApiModelProperty(value = "审批内容(包括报销内容,加班内容,出差内容,请假内容)" , name = "content")
+    @ApiModelProperty(value = "审批内容(包括报销内容,加班内容,出差内容,请假内容)", name = "content")
     private String content;
 
-    @ApiModelProperty(value = "上传时间(包括审批时间,报销时间)" , name = "uptime")
+    @ApiModelProperty(value = "上传时间(包括审批时间,报销时间)", name = "uptime")
     private String uptime;
 
-    @ApiModelProperty(value = "添加时间戳" , name = "up_timeC")
+    @ApiModelProperty(value = "添加时间戳", name = "up_timeC")
     private Long up_timeC;
 
-    @ApiModelProperty(value = "报销类型" , name = "expenses_type")
+    @ApiModelProperty(value = "报销类型", name = "expenses_type")
     private String expenses_type;
 
-    @ApiModelProperty(value = "报销金额" , name = "expenses_sum")
+    @ApiModelProperty(value = "报销金额", name = "expenses_sum")
     private double expenses_sum;
 
-    @ApiModelProperty(value = "报销照片" , name = "expenses_picture")
+    @ApiModelProperty(value = "报销照片", name = "expenses_picture")
     private String expenses_picture;
 
-    @ApiModelProperty(value = "出发时间(出差)" , name = "outtime")
+    @ApiModelProperty(value = "出发时间(出差)", name = "outtime")
     private String outtime;
 
-    @ApiModelProperty(value = "添加时间戳" , name = "outtimeC")
+    @ApiModelProperty(value = "添加时间戳", name = "outtimeC")
     private Long outtimeC;
 
-    @ApiModelProperty(value = "返程时间" , name = "intime")
+    @ApiModelProperty(value = "返程时间", name = "intime")
     private String intime;
 
-    @ApiModelProperty(value = "返程时间戳" , name = "intimeC")
+    @ApiModelProperty(value = "返程时间戳", name = "intimeC")
     private Long intimeC;
 
-    @ApiModelProperty(value = "出差地址" , name = "outaddress")
+    @ApiModelProperty(value = "出差地址", name = "outaddress")
     private String outaddress;
 
-    @ApiModelProperty(value = "审批状态" , name = "state")
+    @ApiModelProperty(value = "审批状态", name = "state")
     private String state;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    @ApiModelProperty(value ="公司名称",name = "company_name")
+    @ApiModelProperty(value = "公司名称", name = "company_name")
     private String company_name;
 
-    @ApiModelProperty(value ="加班开始时间",name = "start_time")
+    @ApiModelProperty(value = "加班开始时间", name = "start_time")
     private String start_time;
 
-    @ApiModelProperty(value ="加班开始时间戳",name = "start_timeC")
+    @ApiModelProperty(value = "加班开始时间戳", name = "start_timeC")
     private long start_timeC;
 
-    @ApiModelProperty(value ="加班结束时间",name = "end_time")
+    @ApiModelProperty(value = "加班结束时间", name = "end_time")
     private String end_time;
 
-    @ApiModelProperty(value ="加班结束时间戳",name = "end_timeC")
+    @ApiModelProperty(value = "加班结束时间戳", name = "end_timeC")
     private long end_timeC;
 
-    @ApiModelProperty(value = "员工姓名" , name = "staff_name")
+    @ApiModelProperty(value = "员工姓名", name = "staff_name")
     private String staff_name;
 
-    public Examine(){
+    public Examine() {
         super();
     }
 

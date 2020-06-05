@@ -8,12 +8,13 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.UUID;
+
 @Api(description = "图片接口")
 @RestController
 @RequestMapping("img")
 @CrossOrigin
 public class UploadController {
-    @ApiOperation(value = "上传图片" , notes = "")
+    @ApiOperation(value = "上传图片", notes = "")
     @PostMapping("upload")
     public String picture(@RequestParam("file") MultipartFile file) {
         String oldFileName = file.getOriginalFilename();
@@ -32,7 +33,7 @@ public class UploadController {
         return "false";
     }
 
-    @ApiOperation(value = "下载图片" , notes = "测试数据:{\"img_url\":\"安全行为之星系统.pdf\"}")
+    @ApiOperation(value = "下载图片", notes = "测试数据:{\"img_url\":\"安全行为之星系统.pdf\"}")
     @GetMapping("/download_img")
     public void find_img(@RequestParam String img_url, HttpServletResponse response) {
         System.out.println(img_url);

@@ -5,39 +5,39 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "announcement" , description = "公告表对象")
+@ApiModel(value = "announcement", description = "公告表对象")
 public class Announcement {
-    @ApiModelProperty(value = "公告id" , name = "id")
+    @ApiModelProperty(value = "公告id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "公司id" , name = "company_id")
+    @ApiModelProperty(value = "公司id", name = "company_id")
     private int company_id;
 
-    @ApiModelProperty(value = "公告标题" , name = "title")
+    @ApiModelProperty(value = "公告标题", name = "title")
     private String title;
 
-    @ApiModelProperty(value = "公告内容" , name = "content")
+    @ApiModelProperty(value = "公告内容", name = "content")
     private String content;
 
-    @ApiModelProperty(value = "发布时间" , name = "uptime")
+    @ApiModelProperty(value = "发布时间", name = "uptime")
     private String uptime;
 
-    @ApiModelProperty(value = "发布时间戳" , name = "uptimeC")
+    @ApiModelProperty(value = "发布时间戳", name = "uptimeC")
     private Long uptimeC;
 
-    @ApiModelProperty(value = "阅读量" , name = "read_count")
+    @ApiModelProperty(value = "阅读量", name = "read_count")
     private int read_count;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    @ApiModelProperty(value = "公司名称" , name = "company_name")
+    @ApiModelProperty(value = "公司名称", name = "company_name")
     private String company_name;
 
-    public Announcement(){
+    public Announcement() {
         super();
     }
 

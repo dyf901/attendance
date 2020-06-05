@@ -5,18 +5,18 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "StaffItems" , description = "员工项目关联表对象")
+@ApiModel(value = "StaffItems", description = "员工项目关联表对象")
 public class StaffItems {
-    @ApiModelProperty(value = "客户id" , name = "id")
+    @ApiModelProperty(value = "客户id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "员工id" , name = "staff_id")
+    @ApiModelProperty(value = "员工id", name = "staff_id")
     private int staff_id;
 
-    @ApiModelProperty(value = "项目id" , name = "items_id")
+    @ApiModelProperty(value = "项目id", name = "items_id")
     private int items_id;
 
-    public StaffItems(){
+    public StaffItems() {
         super();
     }
 

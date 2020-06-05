@@ -24,7 +24,7 @@ public class LogController {
     @Autowired
     private LogService logService;
 
-    @ApiOperation(value = "添加日志",notes = "传参:staff_id(员工id),company_id(公司id),content(日志内容)")
+    @ApiOperation(value = "添加日志", notes = "传参:staff_id(员工id),company_id(公司id),content(日志内容)")
     @PostMapping("/InsertLog")
     public JsonResult InsertLog(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
@@ -35,34 +35,34 @@ public class LogController {
         Date date = format.parse(time);
         //日期转时间戳（毫秒）
         long times = date.getTime();
-        map.put("uptimeC",times);
-        map.put("uptime",time);
+        map.put("uptimeC", times);
+        map.put("uptime", time);
         int s = logService.InsertLog(map);
-        if(s==1){
+        if (s == 1) {
             jsonResult.setCode(200);
             jsonResult.setMessage("上传成功!");
             return jsonResult;
-        }else {
+        } else {
             jsonResult.setCode(20006);
             jsonResult.setMessage("上传失败!");
             return jsonResult;
         }
     }
 
-    @ApiOperation(value ="分页模糊查询日志",notes = "")
+    @ApiOperation(value = "分页模糊查询日志", notes = "")
     @PostMapping("/FindLog")
-    public Page<T> FindLog(@RequestBody Map map){
+    public Page<T> FindLog(@RequestBody Map map) {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
-        if (map.containsKey("start_time1") && map.containsKey("end_time1")){
-            String start_time = map.get("start_time1")+" 00:00:00";
-            String end_time = map.get("end_time1")+" 23:59:59";
-            map.put("start_time",start_time);
-            map.put("end_time",end_time);
-        }else {
-            map.put("start_time",null);
-            map.put("end_time",null);
+        if (map.containsKey("start_time1") && map.containsKey("end_time1")) {
+            String start_time = map.get("start_time1") + " 00:00:00";
+            String end_time = map.get("end_time1") + " 23:59:59";
+            map.put("start_time", start_time);
+            map.put("end_time", end_time);
+        } else {
+            map.put("start_time", null);
+            map.put("end_time", null);
 
         }
         page.setTotal(logService.Total(map));
@@ -70,9 +70,9 @@ public class LogController {
         return page;
     }
 
-    @ApiOperation(value = "查找个人日志",notes = "")
+    @ApiOperation(value = "查找个人日志", notes = "")
     @PostMapping("/FindLogByStaffId")
-    public Page<T> FindLogByStaffId(@RequestBody Map map){
+    public Page<T> FindLogByStaffId(@RequestBody Map map) {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
@@ -81,9 +81,9 @@ public class LogController {
         return page;
     }
 
-    @ApiOperation(value = "根据id查询详细日志信息",notes = "传参:id(日志信息的id)")
+    @ApiOperation(value = "根据id查询详细日志信息", notes = "传参:id(日志信息的id)")
     @PostMapping("/FindLogById")
-    public Log FindLogById(@RequestBody Map map){
+    public Log FindLogById(@RequestBody Map map) {
         return logService.FindLogById(map);
     }
 }

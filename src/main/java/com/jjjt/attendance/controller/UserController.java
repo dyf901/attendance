@@ -18,22 +18,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @ApiOperation(value = "PC登录" , notes = "")
+    @ApiOperation(value = "PC登录", notes = "")
     @PostMapping("/Login")
     public JsonResult DeleteRiskshow(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
         User user = userService.FindUserByUserName(map);
-        if(user==null){
+        if (user == null) {
             jsonResult.setCode(200);
             jsonResult.setMessage("账号不存在!");
             return jsonResult;
-        }else {
-            if(user.getPassword().equals(map.get("password"))){
+        } else {
+            if (user.getPassword().equals(map.get("password"))) {
                 jsonResult.setCode(200);
                 jsonResult.setData(user);
                 jsonResult.setMessage("登录成功!");
                 return jsonResult;
-            }else {
+            } else {
                 jsonResult.setCode(200);
                 jsonResult.setMessage("密码错误,登录失败!");
                 return jsonResult;

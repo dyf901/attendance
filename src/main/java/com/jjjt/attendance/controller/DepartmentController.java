@@ -19,27 +19,27 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
-    @ApiOperation(value = "增加部门",notes = "")
+    @ApiOperation(value = "增加部门", notes = "")
     @PostMapping("/InsertDepartment")
-    public boolean InsertDepartment(@RequestBody Map map){
-        return departmentService.InsertDepartment(map)==1;
+    public boolean InsertDepartment(@RequestBody Map map) {
+        return departmentService.InsertDepartment(map) == 1;
     }
 
-    @ApiOperation(value = "删除部门",notes = "")
+    @ApiOperation(value = "删除部门", notes = "")
     @PostMapping("/DeleteDepartment")
-    public boolean DeleteDepartment(@RequestBody Map map){
-        return departmentService.DeleteDepartment(map)==1;
+    public boolean DeleteDepartment(@RequestBody Map map) {
+        return departmentService.DeleteDepartment(map) == 1;
     }
 
-    @ApiOperation(value = "修改部门",notes = "")
+    @ApiOperation(value = "修改部门", notes = "")
     @PostMapping("/UpdateDepartment")
-    public boolean UpdateDepartment(@RequestBody Map map){
-        return departmentService.UpdateDepartment(map)==1;
+    public boolean UpdateDepartment(@RequestBody Map map) {
+        return departmentService.UpdateDepartment(map) == 1;
     }
 
-    @ApiOperation(value = "分页模糊查询",notes = "")
+    @ApiOperation(value = "分页模糊查询", notes = "")
     @PostMapping("/FindDepartment")
-    public Page<Department> FindDepartment(@RequestBody Map map){
+    public Page<Department> FindDepartment(@RequestBody Map map) {
         Page<Department> page = new Page<Department>();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
@@ -48,9 +48,9 @@ public class DepartmentController {
         return page;
     }
 
-    @ApiOperation(value = "下拉框查询部门信息",notes = "")
+    @ApiOperation(value = "下拉框查询部门信息", notes = "")
     @PostMapping("/SelectDepartment")
-    public List<Department> SelectDepartment(@RequestBody Map map){
+    public List<Department> SelectDepartment(@RequestBody Map map) {
         System.out.println(map);
         return departmentService.SelectDepartment(map);
     }

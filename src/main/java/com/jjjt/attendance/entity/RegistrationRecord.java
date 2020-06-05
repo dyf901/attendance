@@ -5,42 +5,42 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "RegistrationRecord" , description = "打卡记录表对象")
+@ApiModel(value = "RegistrationRecord", description = "打卡记录表对象")
 public class RegistrationRecord {
-    @ApiModelProperty(value = "打卡id" , name = "id")
+    @ApiModelProperty(value = "打卡id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "公司id" , name = "company_id")
+    @ApiModelProperty(value = "公司id", name = "company_id")
     private int company_id;
 
-    @ApiModelProperty(value = "员工id" , name = "staff_id")
+    @ApiModelProperty(value = "员工id", name = "staff_id")
     private int staff_id;
 
-    @ApiModelProperty(value = "打卡时间" , name = "time")
+    @ApiModelProperty(value = "打卡时间", name = "time")
     private String time;
 
-    @ApiModelProperty(value = "打卡时间戳" , name = "timeC")
+    @ApiModelProperty(value = "打卡时间戳", name = "timeC")
     private Long timeC;
 
-    @ApiModelProperty(value = "打卡地址" , name = "address")
+    @ApiModelProperty(value = "打卡地址", name = "address")
     private String address;
 
-    @ApiModelProperty(value = "经度" , name = "longitude")
+    @ApiModelProperty(value = "经度", name = "longitude")
     private Long longitude;
 
-    @ApiModelProperty(value = "纬度" , name = "latitude")
+    @ApiModelProperty(value = "纬度", name = "latitude")
     private Long latitude;
 
-    @ApiModelProperty(value = "备注" , name = "remark")
+    @ApiModelProperty(value = "备注", name = "remark")
     private String remark;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    public RegistrationRecord(){
+    public RegistrationRecord() {
         super();
     }
 

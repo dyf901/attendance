@@ -23,22 +23,22 @@ public class ClientController {
     @Autowired
     private StaffItemsService staffItemsService;
 
-    @ApiOperation(value = "根据items_id查询联系人信息",notes = "")
+    @ApiOperation(value = "根据items_id查询联系人信息", notes = "")
     @PostMapping("/FindClientByItemsId")
-    public List<Client> FindClientByItemsId(@RequestBody Map map){
+    public List<Client> FindClientByItemsId(@RequestBody Map map) {
         return clientService.FindClientByItemsId(map);
     }
 
-    @ApiOperation(value = "增加项目联系人",notes = "传参:client_name(联系人姓名),client_sex(性别),client_position(职务),client_department(所在部门),client_phone(联系电话),staff_id,items_id(客户id)")
+    @ApiOperation(value = "增加项目联系人", notes = "传参:client_name(联系人姓名),client_sex(性别),client_position(职务),client_department(所在部门),client_phone(联系电话),staff_id,items_id(客户id)")
     @PostMapping("/InsertClient")
-    public JsonResult InsertClient(@RequestBody Map map){
+    public JsonResult InsertClient(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
         int i = clientService.InsertClient(map);
-        if(i==1){
+        if (i == 1) {
             jsonResult.setCode(200);
             jsonResult.setMessage("添加成功!");
             return jsonResult;
-        }else {
+        } else {
             jsonResult.setCode(20006);
             jsonResult.setMessage("添加失败!");
             return jsonResult;

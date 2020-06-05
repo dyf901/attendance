@@ -5,33 +5,33 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "client" , description = "客户表对象")
+@ApiModel(value = "client", description = "客户表对象")
 public class Client {
-    @ApiModelProperty(value = "客户id" , name = "id")
+    @ApiModelProperty(value = "客户id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "项目id" , name = "items_id")
+    @ApiModelProperty(value = "项目id", name = "items_id")
     private int items_id;
 
-    @ApiModelProperty(value = "联系人姓名" , name = "client_name")
+    @ApiModelProperty(value = "联系人姓名", name = "client_name")
     private String client_name;
 
-    @ApiModelProperty(value = "联系人性别" , name = "client_sex")
+    @ApiModelProperty(value = "联系人性别", name = "client_sex")
     private String client_sex;
 
-    @ApiModelProperty(value = "联系人所属职位" , name = "client_position")
+    @ApiModelProperty(value = "联系人所属职位", name = "client_position")
     private String client_position;
 
-    @ApiModelProperty(value = "联系人所在部门" , name = "client_department")
+    @ApiModelProperty(value = "联系人所在部门", name = "client_department")
     private String client_department;
 
-    @ApiModelProperty(value = "联系人手机号" , name = "client_phone")
+    @ApiModelProperty(value = "联系人手机号", name = "client_phone")
     private String client_phone;
 
-    @ApiModelProperty(value = "项目名称" , name = "items_name")
+    @ApiModelProperty(value = "项目名称", name = "items_name")
     private String items_name;
 
-    public Client(){
+    public Client() {
         super();
     }
 

@@ -37,13 +37,13 @@ public class ItemsController {
     @Autowired
     private StaffItemsService staffItemsService;
 
-    @ApiOperation(value = "增加客户信息",notes = "conglomerate_id,staff_id,items_name,bloc_name,type,uptime,uptimeC,client_name,client_sex,client_position,client_department,client_phone")
+    @ApiOperation(value = "增加客户信息", notes = "conglomerate_id,staff_id,items_name,bloc_name,type,uptime,uptimeC,client_name,client_sex,client_position,client_department,client_phone")
     @PostMapping("/InsertItems")
-    public JsonResult InsertItems(@RequestBody Map map){
+    public JsonResult InsertItems(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
         Items items = new Items();
         //增加客户信息
-        long uptimeC= (long) map.get("uptimeC");
+        long uptimeC = (long) map.get("uptimeC");
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long lts = new Long(uptimeC);
         Date date2 = new Date(lts);
@@ -55,22 +55,22 @@ public class ItemsController {
         items.setUptime(uptime);
         items.setUptimeC((Long) map.get("uptimeC"));
         int i = itemsService.InsertItems(items);
-        if(i==1){
-            System.out.println("返回id:"+items.getId());
-            String client_name= (String) map.get("client_name");
-            if(client_name.equals("")){
+        if (i == 1) {
+            System.out.println("返回id:" + items.getId());
+            String client_name = (String) map.get("client_name");
+            if (client_name.equals("")) {
                 jsonResult.setCode(200);
                 jsonResult.setMessage("客户添加成功,暂无联系人!");
                 return jsonResult;
-            }else {
-                map.put("items_id",items.getId());
+            } else {
+                map.put("items_id", items.getId());
                 int l = clientService.InsertClient(map);
-                if(l==1){
+                if (l == 1) {
                     staffItemsService.InsertStaffItems(map);
                     jsonResult.setCode(200);
                     jsonResult.setMessage("客户添加成功,联系人已添加");
                     return jsonResult;
-                }else {
+                } else {
                     jsonResult.setCode(20006);
                     jsonResult.setMessage("客户添加成功,联系人添加失败!");
                     return jsonResult;
@@ -82,9 +82,9 @@ public class ItemsController {
         return jsonResult;
     }
 
-    @ApiOperation(value = "分页查询客户信息",notes = "")
+    @ApiOperation(value = "分页查询客户信息", notes = "")
     @PostMapping("/FindItems")
-    public Page FindItems(@RequestBody Map map){
+    public Page FindItems(@RequestBody Map map) {
         Page page = new Page();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
@@ -93,21 +93,21 @@ public class ItemsController {
         return page;
     }
 
-    @ApiOperation(value = "App查询客户信息",notes = "传参:staff_id,conglomerate_id")
+    @ApiOperation(value = "App查询客户信息", notes = "传参:staff_id,conglomerate_id")
     @PostMapping("/FindItemsApp")
-    public JsonResult FindItemsApp(@RequestBody Map map){
+    public JsonResult FindItemsApp(@RequestBody Map map) {
         System.out.println(map);
         JsonResult jsonResult = new JsonResult();
-        map.put("id",map.get("staff_id"));
+        map.put("id", map.get("staff_id"));
         Staff staff = staffService.FindStaffById(map);
         System.out.println(staff);
-        if(staff.getPosition_name().equals("管理员") || staff.getPosition_name().equals("市场总监")){
+        if (staff.getPosition_name().equals("管理员") || staff.getPosition_name().equals("市场总监")) {
             jsonResult.setData(itemsService.FindItemsApp(map));
             return jsonResult;
-        }else {
+        } else {
             List lista = new ArrayList();
             List<Integer> list = staffItemsService.FindItemsId(map);
-            for (Integer l : list){
+            for (Integer l : list) {
                 lista.add(itemsService.FindItemsById(l));
             }
             jsonResult.setData(lista);
@@ -115,16 +115,16 @@ public class ItemsController {
         }
     }
 
-    @ApiOperation(value = "推送客户",notes = "传参:staff_id(被推送人的id,滚动选择),items_id(客户id)")
+    @ApiOperation(value = "推送客户", notes = "传参:staff_id(被推送人的id,滚动选择),items_id(客户id)")
     @PostMapping("/PushItems")
-    public JsonResult PushItems(@RequestBody Map map){
+    public JsonResult PushItems(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
         int i = staffItemsService.InsertStaffItems(map);
-        if(i==1){
+        if (i == 1) {
             jsonResult.setCode(200);
             jsonResult.setMessage("推送成功!");
             return jsonResult;
-        }else {
+        } else {
             jsonResult.setCode(20006);
             jsonResult.setMessage("推送失败!");
             return jsonResult;

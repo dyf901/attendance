@@ -19,9 +19,9 @@ public class Test {
     @Autowired
     private RegistrationService registrationService;
 
-    @ApiOperation(value = "App登录" , notes = "传参:staff_phone(员工手机号),password(密码)")
+    @ApiOperation(value = "App登录", notes = "传参:staff_phone(员工手机号),password(密码)")
     @PostMapping("/test")
-    public List<Registration> Test(@RequestBody Map map){
+    public List<Registration> Test(@RequestBody Map map) {
         return registrationService.FindRegistration(map);
     }
 

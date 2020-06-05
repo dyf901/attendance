@@ -5,30 +5,30 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Items" , description = "项目表对象")
+@ApiModel(value = "Items", description = "项目表对象")
 public class Items {
-    @ApiModelProperty(value = "项目id" , name = "id")
+    @ApiModelProperty(value = "项目id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "集团id" , name = "id")
+    @ApiModelProperty(value = "集团id", name = "id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "项目名称" , name = "items_name")
+    @ApiModelProperty(value = "项目名称", name = "items_name")
     private String items_name;
 
-    @ApiModelProperty(value = "所属集团" , name = "bloc_name")
+    @ApiModelProperty(value = "所属集团", name = "bloc_name")
     private String bloc_name;
 
-    @ApiModelProperty(value = "类型" , name = "type")
+    @ApiModelProperty(value = "类型", name = "type")
     private String type;
 
-    @ApiModelProperty(value = "上传时间" , name = "uptime")
+    @ApiModelProperty(value = "上传时间", name = "uptime")
     private String uptime;
 
-    @ApiModelProperty(value = "上传时间戳" , name = "uptimeC")
+    @ApiModelProperty(value = "上传时间戳", name = "uptimeC")
     private long uptimeC;
 
-    public Items(){
+    public Items() {
         super();
     }
 

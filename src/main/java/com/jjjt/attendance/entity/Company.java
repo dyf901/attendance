@@ -5,30 +5,30 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "company" , description = "公司表对象")
+@ApiModel(value = "company", description = "公司表对象")
 public class Company {
-    @ApiModelProperty(value = "公司id" , name = "id")
+    @ApiModelProperty(value = "公司id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "公司名称" , name = "company_name")
+    @ApiModelProperty(value = "公司名称", name = "company_name")
     private String company_name;
 
-    @ApiModelProperty(value = "公司人数" , name = "person_count")
+    @ApiModelProperty(value = "公司人数", name = "person_count")
     private int person_count;
 
-    @ApiModelProperty(value = "上班时间" , name = "in_time")
+    @ApiModelProperty(value = "上班时间", name = "in_time")
     private String in_time;
 
-    @ApiModelProperty(value = "下班时间" , name = "out_time")
+    @ApiModelProperty(value = "下班时间", name = "out_time")
     private String out_time;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    public Company(){
+    public Company() {
         super();
     }
 

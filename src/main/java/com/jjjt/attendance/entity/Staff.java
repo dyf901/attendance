@@ -5,90 +5,90 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ApiModel(value = "Staff" , description = "员工表对象")
+@ApiModel(value = "Staff", description = "员工表对象")
 public class Staff {
-    @ApiModelProperty(value = "员工id" , name = "id")
+    @ApiModelProperty(value = "员工id", name = "id")
     private int id;
 
-    @ApiModelProperty(value = "员工姓名" , name = "staff_name")
+    @ApiModelProperty(value = "员工姓名", name = "staff_name")
     private String staff_name;
 
-    @ApiModelProperty(value = "员工年龄" , name = "staff_age")
+    @ApiModelProperty(value = "员工年龄", name = "staff_age")
     private int staff_age;
 
-    @ApiModelProperty(value = "性别" , name = "staff_img")
+    @ApiModelProperty(value = "性别", name = "staff_img")
     private String staff_img;
 
-    @ApiModelProperty(value = "签到时间" , name = "staff_sex")
+    @ApiModelProperty(value = "签到时间", name = "staff_sex")
     private String staff_sex;
 
-    @ApiModelProperty(value = "身份证号码" , name = "staff_card")
+    @ApiModelProperty(value = "身份证号码", name = "staff_card")
     private String staff_card;
 
-    @ApiModelProperty(value = "民族" , name = "staff_nation")
+    @ApiModelProperty(value = "民族", name = "staff_nation")
     private String staff_nation;
 
-    @ApiModelProperty(value = "身份证地址" , name = "staff_address")
+    @ApiModelProperty(value = "身份证地址", name = "staff_address")
     private String staff_address;
 
-    @ApiModelProperty(value = "手机号(app登录账号)" , name = "staff_phone")
+    @ApiModelProperty(value = "手机号(app登录账号)", name = "staff_phone")
     private String staff_phone;
 
-    @ApiModelProperty(value = "紧急联系人姓名" , name = "sos_name")
+    @ApiModelProperty(value = "紧急联系人姓名", name = "sos_name")
     private String sos_name;
 
-    @ApiModelProperty(value = "紧急联系人关系" , name = "sos_ship")
+    @ApiModelProperty(value = "紧急联系人关系", name = "sos_ship")
     private String sos_ship;
 
-    @ApiModelProperty(value = "紧急联系人电话" , name = "sos_phone")
+    @ApiModelProperty(value = "紧急联系人电话", name = "sos_phone")
     private String sos_phone;
 
-    @ApiModelProperty(value = "入职时间" , name = "entry_time")
+    @ApiModelProperty(value = "入职时间", name = "entry_time")
     private String entry_time;
 
-    @ApiModelProperty(value = "所属公司id" , name = "company_id")
+    @ApiModelProperty(value = "所属公司id", name = "company_id")
     private int company_id;
 
-    @ApiModelProperty(value = "部门id" , name = "department_id")
+    @ApiModelProperty(value = "部门id", name = "department_id")
     private int department_id;
 
-    @ApiModelProperty(value = "职务id" , name = "position_id")
+    @ApiModelProperty(value = "职务id", name = "position_id")
     private int position_id;
 
-    @ApiModelProperty(value = "账号密码" , name = "password")
+    @ApiModelProperty(value = "账号密码", name = "password")
     private String password;
 
-    @ApiModelProperty(value = "头像" , name = "picture")
+    @ApiModelProperty(value = "头像", name = "picture")
     private String picture;
 
-    @ApiModelProperty(value = "昵称" , name = "nickname")
+    @ApiModelProperty(value = "昵称", name = "nickname")
     private String nickname;
 
-    @ApiModelProperty(value = "个性签名" , name = "signature")
+    @ApiModelProperty(value = "个性签名", name = "signature")
     private String signature;
 
-    @ApiModelProperty(value = "在职状态('0' 离职  '1'在职)" , name = "state")
+    @ApiModelProperty(value = "在职状态('0' 离职  '1'在职)", name = "state")
     private String state;
 
-    @ApiModelProperty(value = "打卡状态('1' 签到  '0' 签退)" , name = "clockstatus")
+    @ApiModelProperty(value = "打卡状态('1' 签到  '0' 签退)", name = "clockstatus")
     private String clockstatus;
 
-    @ApiModelProperty(value = "所属公司id" , name = "company_name")
+    @ApiModelProperty(value = "所属公司id", name = "company_name")
     private String company_name;
 
-    @ApiModelProperty(value = "部门id" , name = "department_name")
+    @ApiModelProperty(value = "部门id", name = "department_name")
     private String department_name;
 
-    @ApiModelProperty(value = "职务id" , name = "position_name")
+    @ApiModelProperty(value = "职务id", name = "position_name")
     private String position_name;
 
-    @ApiModelProperty(value = "集团id" , name = "conglomerate_id")
+    @ApiModelProperty(value = "集团id", name = "conglomerate_id")
     private int conglomerate_id;
 
-    @ApiModelProperty(value = "集团名称" , name = "conglomerate_name")
+    @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
-    public Staff(){
+    public Staff() {
         super();
     }
 
