@@ -88,4 +88,13 @@
         LEFT JOIN `attendance`.`items` z ON e.`itmes_id`=z.`id`
         WHERE e.`id`=#{id}
     </select>
+
+    <!--根据id查询审批信息(App)-->
+    <select id="FindExamineByIdApp" parameterType="int" resultType="com.jjjt.attendance.entity.Examine">
+        SELECT e.`id`, e.`staff_id`, e.`company_id`, e.`conglomerate_id`, e.`itmes_id`, e.`examine_type`, e.`content`, e.`uptime`, e.`uptimeC`, e.`expenses_type`, e.`expenses_sum`, e.`expenses_picture`, e.`outtime`, e.`outtimeC`, e.`intime`, e.`intimeC`, e.`outaddress`, e.`start_time`, e.`start_timeC`, e.`end_time`, e.`end_timeC`,e.`state`,s.`staff_name` as `staff_name`, l.`company_name` as `company_name`,z.`items_name` as `client_company` FROM  `attendance`.`examine` e
+        LEFT JOIN `attendance`.`staff` s ON e.`staff_id`=s.`id`
+        LEFT JOIN `attendance`.`company` l ON e.`company_id`=l.`id`
+        LEFT JOIN `attendance`.`items` z ON e.`itmes_id`=z.`id`
+        WHERE e.`id`=#{id}
+    </select>
 </mapper>

@@ -66,4 +66,10 @@ public class ExamineService implements ExamineDao {
     public Examine FindExamineById(Map map) {
         return examineDao.FindExamineById(map);
     }
+
+    //根据id查询审批信息(App)
+    @Override
+    public Examine FindExamineByIdApp(int id) {
+        return examineDao.FindExamineByIdApp(id);
+    }
 }
