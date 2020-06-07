@@ -12,6 +12,7 @@ import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -228,7 +229,6 @@ public class RegistrationController {
     public void downloadAllClassmate(HttpServletResponse response, @RequestBody Map map) throws IOException {
         HSSFWorkbook workbook = new HSSFWorkbook();
         HSSFSheet sheet = workbook.createSheet("考勤表");
-
        /* Map map = new HashMap();
         map.put("company_id" , 1);*/
         //List<Teacher> classmateList = teacherservice.teacherinfor();
@@ -279,6 +279,19 @@ public class RegistrationController {
             rowNum++;
         }
 
+        sheet.autoSizeColumn(0, true);
+        sheet.autoSizeColumn(1, true);
+        sheet.autoSizeColumn(2, true);
+        sheet.autoSizeColumn(3, true);
+        sheet.autoSizeColumn(4, true);
+        sheet.autoSizeColumn(5, true);
+        sheet.autoSizeColumn(6, true);
+        sheet.autoSizeColumn(7, true);
+        sheet.autoSizeColumn(8, true);
+        sheet.autoSizeColumn(9, true);
+        sheet.autoSizeColumn(10, true);
+        sheet.autoSizeColumn(11, true);
+        sheet.autoSizeColumn(12, true);
         response.setContentType("application/octet-stream");
         response.setHeader("Content-disposition", "attachment;filename=" + fileName);
         response.flushBuffer();
