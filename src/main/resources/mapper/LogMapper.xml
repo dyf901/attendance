@@ -4,8 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjjt.attendance.dao.LogDao">
     <!--增加日志-->
-    <insert id="InsertLog" parameterType="java.util.Map">
-        INSERT INTO `attendance`.`log` (`staff_id`, `company_id`, `conglomerate_id`, `content`, `tomorrow_plan`, `uptime`, `uptimeC`) VALUES (#{staff_id}, #{company_id}, #{conglomerate_id}, #{content}, #{tomorrow_plan}, #{uptime}, #{uptimeC});
+    <insert id="InsertLog" parameterType="com.jjjt.attendance.entity.Log">
+        <selectKey resultType="int" order="AFTER" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO `attendance`.`log` (`staff_id`, `company_id`, `conglomerate_id`, `content`, `tomorrow_plan`, `uptime`, `uptimeC`)
+        VALUES (#{staff_id}, #{company_id}, #{conglomerate_id}, #{content}, #{tomorrow_plan}, #{uptime}, #{uptimeC});
     </insert>
 
     <!--分页模糊查询-->

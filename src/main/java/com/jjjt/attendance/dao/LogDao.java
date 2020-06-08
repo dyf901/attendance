@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface LogDao {
     //添加日志
-    int InsertLog(Map map);
+    int InsertLog(Log log);
 
     //分页模糊查询日志
     List<Log> FindLog(Map map);

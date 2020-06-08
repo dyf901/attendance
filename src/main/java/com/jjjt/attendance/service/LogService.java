@@ -15,8 +15,8 @@ public class LogService implements LogDao {
 
     //添加日志
     @Override
-    public int InsertLog(Map map) {
-        return logDao.InsertLog(map);
+    public int InsertLog(Log log) {
+        return logDao.InsertLog(log);
     }
 
     //分页模糊查询

@@ -33,6 +33,7 @@ public class LogController {
     @PostMapping("/InsertLog")
     public JsonResult InsertLog(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
+        Log log = new Log();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String time = format.format(now);
@@ -40,10 +41,18 @@ public class LogController {
         Date date = format.parse(time);
         //日期转时间戳（毫秒）
         long times = date.getTime();
-        map.put("uptimeC", times);
-        map.put("uptime", time);
-        int s = logService.InsertLog(map);
+        log.setStaff_id((Integer) map.get("staff_id"));
+        log.setCompany_id((Integer) map.get("company_id"));
+        log.setConglomerate_id((Integer) map.get("conglomerate_id"));
+        log.setContent((String) map.get("content"));
+        log.setTomorrow_plan((String) map.get("tomorrow_plan"));
+        log.setUptime(time);
+        log.setUptimeC(times);
+        int s = logService.InsertLog(log);
+        System.out.println("返回最近添加的日志id:"+log.getId());
         if (s == 1) {
+            map.put("log_id",log.getId());
+            staffLogService.InsertStaffLog(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("上传成功!");
             return jsonResult;
