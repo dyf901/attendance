@@ -3,6 +3,7 @@ package com.jjjt.attendance.controller;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Log;
 import com.jjjt.attendance.service.LogService;
+import com.jjjt.attendance.service.StaffLogService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +25,9 @@ import java.util.Map;
 public class LogController {
     @Autowired
     private LogService logService;
+
+    @Autowired
+    private StaffLogService staffLogService;
 
     @ApiOperation(value = "添加日志", notes = "传参:staff_id(员工id),company_id(公司id),content(日志内容)")
     @PostMapping("/InsertLog")
@@ -85,5 +90,25 @@ public class LogController {
     @PostMapping("/FindLogById")
     public Log FindLogById(@RequestBody Map map) {
         return logService.FindLogById(map);
+    }
+
+    @ApiOperation(value = "查询提交给我的日志信息", notes = "")
+    @PostMapping("FindLogByIdY")
+    public JsonResult FindLogByIdY(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
+        List<Integer> list = staffLogService.FindStaffLog(map);//根据staff_id查询对应的审批信息id
+        System.out.println("list:" + list);
+        List list1 = new ArrayList();
+        for (Integer l : list) {
+            map.put("id", l);
+            System.out.println("详细信息:" + logService.FindLogByIdY(map));
+            if(logService.FindLogByIdY(map)==null){
+
+            }else {
+                list1.add(logService.FindLogByIdY(map));
+            }
+        }
+        jsonResult.setData(list1);
+        return jsonResult;
     }
 }

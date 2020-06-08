@@ -23,4 +23,7 @@ public interface LogDao {
 
     //根据id查询日志的详细信息
     Log FindLogById(Map map);
+
+    //根据id查询日志的详细信息(App)
+    Log FindLogByIdY(Map map);
 }

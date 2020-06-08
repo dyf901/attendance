@@ -48,4 +48,10 @@ public class LogService implements LogDao {
     public Log FindLogById(Map map) {
         return logDao.FindLogById(map);
     }
+
+    //根据id查询日志的详细信息(App)
+    @Override
+    public Log FindLogByIdY(Map map) {
+        return logDao.FindLogByIdY(map);
+    }
 }

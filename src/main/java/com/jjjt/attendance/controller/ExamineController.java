@@ -68,6 +68,7 @@ public class ExamineController {
         }
         int i = examineService.InsertExamine(map);
         if (i == 1) {
+
             jsonResult.setCode(200);
             jsonResult.setMessage("提交成功!");
             return jsonResult;
