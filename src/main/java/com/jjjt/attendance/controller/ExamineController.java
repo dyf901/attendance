@@ -3,6 +3,7 @@ package com.jjjt.attendance.controller;
 import com.jjjt.attendance.entity.Examine;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.service.ExamineService;
+import com.jjjt.attendance.service.StaffExamineService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Api(description = "审批接口")
@@ -21,6 +24,9 @@ import java.util.Map;
 public class ExamineController {
     @Autowired
     private ExamineService examineService;
+
+    @Autowired
+    private StaffExamineService staffExamineService;
 
     @ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
@@ -119,5 +125,23 @@ public class ExamineController {
         return examineService.FindExamineById(map);
     }
 
+    @ApiOperation(value = "查询由我审批的审批信息", notes = "")
+    @PostMapping("FindExamineByY")
+    public JsonResult FindExamineByY(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
+        List<Integer> list = staffExamineService.FindExamineId(map);//根据staff_id查询对应的审批信息id
+        System.out.println("list:" + list);
+        List list1 = new ArrayList();
+        for (Integer l : list) {
+            map.put("id", l);
+            System.out.println("详细信息:" + examineService.FindExamineByIdApp(map));
+            if(examineService.FindExamineByIdApp(map)==null){
 
+            }else {
+                list1.add(examineService.FindExamineByIdApp(map));
+            }
+        }
+        jsonResult.setData(list1);
+        return jsonResult;
+    }
 }
