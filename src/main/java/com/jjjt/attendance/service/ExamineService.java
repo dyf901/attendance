@@ -15,8 +15,8 @@ public class ExamineService implements ExamineDao {
 
     //新建审批
     @Override
-    public int InsertExamine(Map map) {
-        return examineDao.InsertExamine(map);
+    public int InsertExamine(Examine examine) {
+        return examineDao.InsertExamine(examine);
     }
 
     //删除审批

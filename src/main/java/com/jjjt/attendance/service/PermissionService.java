@@ -33,7 +33,7 @@ public class PermissionService implements PermissionDao {
 
     //根据id查询权限类型
     @Override
-    public List<Permission> FindPermissionById(int id) {
+    public Permission FindPermissionById(int id) {
         return permissionDao.FindPermissionById(id);
     }
 }

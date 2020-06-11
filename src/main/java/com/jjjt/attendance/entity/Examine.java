@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @ApiModel(value = "examine", description = "审批表对象")
 public class Examine {
@@ -31,8 +33,8 @@ public class Examine {
     @ApiModelProperty(value = "上传时间(包括审批时间,报销时间)", name = "uptime")
     private String uptime;
 
-    @ApiModelProperty(value = "添加时间戳", name = "up_timeC")
-    private Long up_timeC;
+    @ApiModelProperty(value = "添加时间戳", name = "uptimeC")
+    private Long uptimeC;
 
     @ApiModelProperty(value = "报销类型", name = "expenses_type")
     private String expenses_type;
@@ -85,11 +87,14 @@ public class Examine {
     @ApiModelProperty(value = "员工姓名", name = "staff_name")
     private String staff_name;
 
+    @ApiModelProperty(value = "数组",name = "list")
+    private List list;
+
     public Examine() {
         super();
     }
 
-    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long up_timeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name) {
+    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, List list) {
         this.id = id;
         this.staff_id = staff_id;
         this.itmes_id = itmes_id;
@@ -98,7 +103,7 @@ public class Examine {
         this.examine_type = examine_type;
         this.content = content;
         this.uptime = uptime;
-        this.up_timeC = up_timeC;
+        this.uptimeC = uptimeC;
         this.expenses_type = expenses_type;
         this.expenses_sum = expenses_sum;
         this.expenses_picture = expenses_picture;
@@ -116,6 +121,7 @@ public class Examine {
         this.end_time = end_time;
         this.end_timeC = end_timeC;
         this.staff_name = staff_name;
+        this.list = list;
     }
 
     public int getId() {
@@ -158,12 +164,12 @@ public class Examine {
         this.uptime = uptime;
     }
 
-    public Long getUp_timeC() {
-        return up_timeC;
+    public Long getUptimeC() {
+        return uptimeC;
     }
 
-    public void setUp_timeC(Long up_timeC) {
-        this.up_timeC = up_timeC;
+    public void setUptimeC(Long uptimeC) {
+        this.uptimeC = uptimeC;
     }
 
     public String getExpenses_type() {
@@ -326,9 +332,17 @@ public class Examine {
         this.client_company = client_company;
     }
 
+    public List getList() {
+        return list;
+    }
+
+    public void setList(List list) {
+        this.list = list;
+    }
+
     @Override
     public String toString() {
-        return "{" +
+        return "Examine{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
                 ", itmes_id=" + itmes_id +
@@ -337,7 +351,7 @@ public class Examine {
                 ", examine_type='" + examine_type + '\'' +
                 ", content='" + content + '\'' +
                 ", uptime='" + uptime + '\'' +
-                ", up_timeC=" + up_timeC +
+                ", uptimeC=" + uptimeC +
                 ", expenses_type='" + expenses_type + '\'' +
                 ", expenses_sum=" + expenses_sum +
                 ", expenses_picture='" + expenses_picture + '\'' +
@@ -355,6 +369,7 @@ public class Examine {
                 ", end_time='" + end_time + '\'' +
                 ", end_timeC=" + end_timeC +
                 ", staff_name='" + staff_name + '\'' +
+                ", list=" + list +
                 '}';
     }
 }

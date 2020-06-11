@@ -51,8 +51,14 @@ public class LogController {
         int s = logService.InsertLog(log);
         System.out.println("返回最近添加的日志id:"+log.getId());
         if (s == 1) {
-            map.put("log_id",log.getId());
-            staffLogService.InsertStaffLog(map);
+            List l = (List) map.get("list");
+            System.out.println(l);
+            for (int i=0;i<l.size();i++){
+                System.out.println(l.get(i));
+                map.put("log_id",log.getId());
+                map.put("staff_idT",l.get(i));
+                staffLogService.InsertStaffLog(map);
+            }
             jsonResult.setCode(200);
             jsonResult.setMessage("上传成功!");
             return jsonResult;

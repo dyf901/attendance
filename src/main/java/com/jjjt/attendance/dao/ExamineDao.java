@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface ExamineDao {
     //新建审批
-    int InsertExamine(Map map);
+    int InsertExamine(Examine examine);
 
     //删除审批
     int DeleteExamine(Map map);

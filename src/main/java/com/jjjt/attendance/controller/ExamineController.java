@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Api(description = "审批接口")
 @RestController
@@ -28,7 +25,7 @@ public class ExamineController {
     @Autowired
     private StaffExamineService staffExamineService;
 
-    @ApiOperation(value = "新建审批", notes = "")
+    /*@ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
     public JsonResult InsertExamine(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
@@ -69,6 +66,70 @@ public class ExamineController {
         int i = examineService.InsertExamine(map);
         if (i == 1) {
 
+            jsonResult.setCode(200);
+            jsonResult.setMessage("提交成功!");
+            return jsonResult;
+        } else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("提交失败!");
+            return jsonResult;
+        }
+    }*/
+    @ApiOperation(value = "新建审批", notes = "")
+    @PostMapping("/InsertExamine")
+    public JsonResult InsertExamine(Examine examine) throws ParseException {
+        JsonResult jsonResult = new JsonResult();
+        Map map = new HashMap();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time = format.format(now);
+        System.out.println(time);
+        Date date = format.parse(time);
+        //日期转时间戳（毫秒）
+        long times = date.getTime();
+        /*map.put("uptimeC", times);
+        map.put("uptime", time);*/
+        examine.setUptimeC(times);
+        examine.setUptime(time);
+        if (examine.getExamine_type().equals("出差")) {
+            long outtimeC = examine.getOuttimeC();
+            long intimeC = examine.getIntimeC();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long lt = new Long(outtimeC);
+            Date date1 = new Date(lt);
+            long lts = new Long(intimeC);
+            Date date2 = new Date(lts);
+            String outtime = simpleDateFormat.format(date1);
+            String intime = simpleDateFormat.format(date2);
+            /*map.put("outtime", outtime);
+            map.put("intime", intime);*/
+            examine.setOuttime(outtime);
+            examine.setIntime(intime);
+        } else if (examine.getExamine_type().equals("请假")) {
+            long start_timeC = examine.getStart_timeC();
+            long end_timeC = examine.getEnd_timeC();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long lt = new Long(start_timeC);
+            Date date1 = new Date(lt);
+            long lts = new Long(end_timeC);
+            Date date2 = new Date(lts);
+            String start_time = simpleDateFormat.format(date1);
+            String end_time = simpleDateFormat.format(date2);
+            /*map.put("start_time", start_time);
+            map.put("end_time", end_time);*/
+            examine.setStart_time(start_time);
+            examine.setEnd_time(end_time);
+        }
+        int i = examineService.InsertExamine(examine);
+        if (i == 1) {
+            List l = examine.getList();
+            System.out.println(l);
+            for (int s=0;s<l.size();s++){
+                System.out.println(l.get(s));
+                map.put("examine_id",examine.getId());
+                map.put("staff_idT",l.get(s));
+                staffExamineService.InsertStaffExamine(map);
+            }
             jsonResult.setCode(200);
             jsonResult.setMessage("提交成功!");
             return jsonResult;

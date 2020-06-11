@@ -16,6 +16,6 @@ public interface PermissionDao {
     List<Permission> FindPermission();
 
     //根据id查询权限类型
-    List<Permission> FindPermissionById(int id);
+    Permission FindPermissionById(int id);
 
 }
