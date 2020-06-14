@@ -189,8 +189,8 @@ public class ExamineController {
 
     @ApiOperation(value = "查询由我审批的审批信息", notes = "")
     @PostMapping("FindExamineByY")
-    public JsonResult FindExamineByY(@RequestBody Map map) {
-        JsonResult jsonResult = new JsonResult();
+    public Page FindExamineByY(@RequestBody Map map) {
+        Page page = new Page();
         List<Integer> list = staffExamineService.FindExamineId(map);//根据staff_id查询对应的审批信息id
         System.out.println("list:" + list);
         List list1 = new ArrayList();
@@ -203,7 +203,10 @@ public class ExamineController {
                 list1.add(examineService.FindExamineByIdApp(map));
             }
         }
-        jsonResult.setData(list1);
-        return jsonResult;
+        page.setPageNo((Integer) map.get("pageNo"));
+        page.setPageSize((Integer) map.get("pageSize"));
+        page.setTotal(staffExamineService.Total(map));
+        page.setItems(list1);
+        return page;
     }
 }

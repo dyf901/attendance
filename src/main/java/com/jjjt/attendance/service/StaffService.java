@@ -78,4 +78,10 @@ public class StaffService implements StaffDao {
     public Staff FindClockstatus(Map map) {
         return staffDao.FindClockstatus(map);
     }
+
+    //App查询所有员工
+    @Override
+    public List<Staff> FindAllApp(Map map) {
+        return staffDao.FindAllApp(map);
+    }
 }

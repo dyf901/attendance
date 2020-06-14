@@ -38,4 +38,7 @@ public interface StaffDao {
 
     //查询打卡状态
     Staff FindClockstatus(Map map);
+
+    //App查询所有员工
+    List<Staff> FindAllApp(Map map);
 }

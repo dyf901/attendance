@@ -129,4 +129,10 @@ public class StaffController {
     public Staff FindStaffById(@RequestBody Map map) {
         return staffService.FindStaffById(map);
     }
+
+    @ApiOperation(value = "App查询所有员工", notes = "")
+    @PostMapping("/FindAllApp")
+    public List<Staff> FindAllApp(@RequestBody Map map) {
+        return staffService.FindAllApp(map);
+    }
 }

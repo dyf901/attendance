@@ -10,4 +10,6 @@ public interface StaffExamineDao {
     //根据staff_id查询审批信息
     List<Integer> FindExamineId(Map map);
 
+    //统计总数
+    long Total(Map map);
 }

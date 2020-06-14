@@ -23,4 +23,10 @@ public class StaffExamineService implements StaffExamineDao {
     public List<Integer> FindExamineId(Map map) {
         return staffExamineDao.FindExamineId(map);
     }
+
+    //统计总数
+    @Override
+    public long Total(Map map) {
+        return staffExamineDao.Total(map);
+    }
 }

@@ -9,4 +9,7 @@ public interface StaffLogDao {
 
     //根据staff_id查询对应关系
     List<Integer> FindStaffLog(Map map);
+
+    //统计总数
+    long Total(Map map);
 }

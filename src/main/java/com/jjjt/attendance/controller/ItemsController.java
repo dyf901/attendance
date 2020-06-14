@@ -59,6 +59,8 @@ public class ItemsController {
             System.out.println("返回id:" + items.getId());
             String client_name = (String) map.get("client_name");
             if (client_name.equals("")) {
+                map.put("items_id", items.getId());
+                staffItemsService.InsertStaffItems(map);
                 jsonResult.setCode(200);
                 jsonResult.setMessage("客户添加成功,暂无联系人!");
                 return jsonResult;
@@ -71,6 +73,7 @@ public class ItemsController {
                     jsonResult.setMessage("客户添加成功,联系人已添加");
                     return jsonResult;
                 } else {
+                    staffItemsService.InsertStaffItems(map);
                     jsonResult.setCode(20006);
                     jsonResult.setMessage("客户添加成功,联系人添加失败!");
                     return jsonResult;
@@ -107,6 +110,7 @@ public class ItemsController {
         } else {
             List lista = new ArrayList();
             List<Integer> list = staffItemsService.FindItemsId(map);
+            System.out.println(list);
             for (Integer l : list) {
                 lista.add(itemsService.FindItemsById(l));
             }

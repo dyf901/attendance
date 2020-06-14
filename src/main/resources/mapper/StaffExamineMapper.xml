@@ -10,6 +10,14 @@
 
     <!--根据staff_id查询审批信息-->
     <select id="FindExamineId" parameterType="java.util.Map" resultType="int">
-        SELECT `examine_id` FROM `attendance`.`staff_examine` WHERE `staff_id`=#{staff_id}
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT `examine_id` FROM `attendance`.`staff_examine`
+        WHERE `staff_id`=#{staff_id}
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(*) FROM `attendance`.`staff_examine` WHERE `staff_id`=#{staff_id}
     </select>
 </mapper>

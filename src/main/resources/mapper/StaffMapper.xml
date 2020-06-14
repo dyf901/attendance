@@ -120,4 +120,9 @@
     <select id="FindClockstatus" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
         SELECT `clockstatus` FROM `attendance`.`staff` WHERE `id`=#{id}
     </select>
+
+    <!--App查询所有用户-->
+    <select id="FindAllApp" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
+        SELECT `id`,`staff_name` FROM `attendance`.`staff` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
 </mapper>

@@ -109,8 +109,8 @@ public class LogController {
 
     @ApiOperation(value = "查询提交给我的日志信息", notes = "")
     @PostMapping("FindLogByIdY")
-    public JsonResult FindLogByIdY(@RequestBody Map map) {
-        JsonResult jsonResult = new JsonResult();
+    public Page FindLogByIdY(@RequestBody Map map) {
+        Page page = new Page();
         List<Integer> list = staffLogService.FindStaffLog(map);//根据staff_id查询对应的审批信息id
         System.out.println("list:" + list);
         List list1 = new ArrayList();
@@ -123,7 +123,10 @@ public class LogController {
                 list1.add(logService.FindLogByIdY(map));
             }
         }
-        jsonResult.setData(list1);
-        return jsonResult;
+        page.setPageNo((Integer) map.get("pageNo"));
+        page.setPageSize((Integer) map.get("pageSize"));
+        page.setTotal(staffLogService.Total(map));
+        page.setItems(list1);
+        return page;
     }
 }

@@ -23,4 +23,10 @@ public class StaffLogService implements StaffLogDao {
     public List<Integer> FindStaffLog(Map map) {
         return staffLogDao.FindStaffLog(map);
     }
+
+    //统计总数
+    @Override
+    public long Total(Map map) {
+        return staffLogDao.Total(map);
+    }
 }
