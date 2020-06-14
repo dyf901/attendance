@@ -123,6 +123,6 @@
 
     <!--App查询所有用户-->
     <select id="FindAllApp" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Staff">
-        SELECT `id`,`staff_name` FROM `attendance`.`staff` WHERE `conglomerate_id`=#{conglomerate_id}
+        SELECT `id`,`staff_name`,`picture` FROM `attendance`.`staff` WHERE `conglomerate_id`=#{conglomerate_id}
     </select>
 </mapper>

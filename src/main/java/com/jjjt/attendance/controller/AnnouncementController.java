@@ -9,6 +9,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Api(description = "公告接口")
@@ -21,7 +24,16 @@ public class AnnouncementController {
 
     @ApiOperation(value = "发布公告", notes = "")
     @PostMapping("/InsertAnnouncement")
-    public boolean InsertAnnouncement(@RequestBody Map map) {
+    public boolean InsertAnnouncement(@RequestBody Map map) throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time = format.format(now);
+        System.out.println(time);
+        Date date = format.parse(time);
+        //日期转时间戳（毫秒）
+        long times = date.getTime();
+        map.put("uptime",time);
+        map.put("uptimeC",times);
         return announcementService.InsertAnnouncement(map) == 1;
     }
 
