@@ -40,7 +40,7 @@ public class Test {
         return registrationService.FindRegistration(map);
     }
 
-    @ApiOperation(value = "测试",notes = "")
+    /*@ApiOperation(value = "测试",notes = "")
     @PostMapping("/testm")
     public JsonResult testm(Log log) throws ParseException {
         JsonResult jsonResult = new JsonResult();
@@ -56,7 +56,7 @@ public class Test {
         log.setUptimeC(times);
         int s = logService.InsertLog(log);
         System.out.println("返回最近添加的日志id:"+log.getId());
-        /*if (s == 1) {
+        *//*if (s == 1) {
             map.put("log_id",log.getId());
             staffLogService.InsertStaffLog(map);
             jsonResult.setCode(200);
@@ -66,7 +66,7 @@ public class Test {
             jsonResult.setCode(20006);
             jsonResult.setMessage("上传失败!");
             return jsonResult;
-        }*/
+        }*//*
         return jsonResult;
-    }
+    }*/
 }
