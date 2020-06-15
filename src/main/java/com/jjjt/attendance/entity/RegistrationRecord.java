@@ -40,11 +40,14 @@ public class RegistrationRecord {
     @ApiModelProperty(value = "集团名称", name = "conglomerate_name")
     private String conglomerate_name;
 
+    @ApiModelProperty(value = "打卡图片", name = "url")
+    private String url;
+
     public RegistrationRecord() {
         super();
     }
 
-    public RegistrationRecord(int id, int company_id, int staff_id, String time, Long timeC, String address, Long longitude, Long latitude, String remark, int conglomerate_id, String conglomerate_name) {
+    public RegistrationRecord(int id, int company_id, int staff_id, String time, Long timeC, String address, Long longitude, Long latitude, String remark, int conglomerate_id, String conglomerate_name, String url) {
         this.id = id;
         this.company_id = company_id;
         this.staff_id = staff_id;
@@ -56,6 +59,7 @@ public class RegistrationRecord {
         this.remark = remark;
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
+        this.url = url;
     }
 
     public int getId() {
@@ -146,6 +150,14 @@ public class RegistrationRecord {
         this.conglomerate_name = conglomerate_name;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -160,6 +172,7 @@ public class RegistrationRecord {
                 ", remark='" + remark + '\'' +
                 ", conglomerate_id=" + conglomerate_id +
                 ", conglomerate_name='" + conglomerate_name + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

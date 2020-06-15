@@ -61,11 +61,17 @@ public class Registration {
     @ApiModelProperty(value = "公司名称", name = "company_name")
     private String company_name;
 
+    @ApiModelProperty(value = "签到图片", name = "urlD")
+    private String urlD;
+
+    @ApiModelProperty(value = "签退图片", name = "urlT")
+    private String urlT;
+
     public Registration() {
         super();
     }
 
-    public Registration(int id, int company_id, int staff_id, String week, String in_time, String in_address, String out_time, String out_address, String remarkD, String remarkT, int overtime_hours, String stateD, String stateT, String staff_name, String department_name, int conglomerate_id, String conglomerate_name, String company_name) {
+    public Registration(int id, int company_id, int staff_id, String week, String in_time, String in_address, String out_time, String out_address, String remarkD, String remarkT, int overtime_hours, String stateD, String stateT, String staff_name, String department_name, int conglomerate_id, String conglomerate_name, String company_name, String urlD, String urlT) {
         this.id = id;
         this.company_id = company_id;
         this.staff_id = staff_id;
@@ -84,6 +90,8 @@ public class Registration {
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
         this.company_name = company_name;
+        this.urlD = urlD;
+        this.urlT = urlT;
     }
 
     public int getId() {
@@ -230,6 +238,22 @@ public class Registration {
         this.company_name = company_name;
     }
 
+    public String getUrlD() {
+        return urlD;
+    }
+
+    public void setUrlD(String urlD) {
+        this.urlD = urlD;
+    }
+
+    public String getUrlT() {
+        return urlT;
+    }
+
+    public void setUrlT(String urlT) {
+        this.urlT = urlT;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -251,6 +275,8 @@ public class Registration {
                 ", conglomerate_id=" + conglomerate_id +
                 ", conglomerate_name='" + conglomerate_name + '\'' +
                 ", company_name='" + company_name + '\'' +
+                ", urlD='" + urlD + '\'' +
+                ", urlT='" + urlT + '\'' +
                 '}';
     }
 }

@@ -5,12 +5,12 @@
 <mapper namespace="com.jjjt.attendance.dao.RegistrationRecordDao">
     <!--添加打卡记录-->
     <insert id="InsertRegistrationRecord" parameterType="java.util.Map">
-        INSERT INTO `attendance`.`registration_record` (`conglomerate_id`, `company_id`, `staff_id`, `time`, `timeC`, `address`, `longitude`, `latitude`, `remark`) VALUES (#{conglomerate_id}, #{company_id}, #{staff_id}, #{time}, #{timeC}, #{address}, #{longitude}, #{latitude}, #{remark});
+        INSERT INTO `attendance`.`registration_record` (`conglomerate_id`, `company_id`, `staff_id`, `time`, `timeC`, `address`, `longitude`, `latitude`, `remark`, `url`) VALUES (#{conglomerate_id}, #{company_id}, #{staff_id}, #{time}, #{timeC}, #{address}, #{longitude}, #{latitude}, #{remark}, #{url});
     </insert>
 
     <!--查询个人打卡记录-->
     <select id="FindRegistrationRecordByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.RegistrationRecord">
-        SELECT r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`time`, r.`timeC`, r.`address`, r.`longitude`, r.`latitude`, r.`remark`, s.`staff_name` as `staff_name` FROM `attendance`.`registration_record` r
+        SELECT r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`time`, r.`timeC`, r.`address`, r.`longitude`, r.`latitude`, r.`remark`, r.`url`, s.`staff_name` as `staff_name` FROM `attendance`.`registration_record` r
         LEFT JOIN `attendance`.`staff` s ON r.`staff_id`=s.`id`
         WHERE r.`staff_id`=#{staff_id} and year(r.`time`)=#{Year} and  month(r.`time`)=#{Month}  and  day(r.`time`)=#{Day}
         ORDER BY r.`time` DESC

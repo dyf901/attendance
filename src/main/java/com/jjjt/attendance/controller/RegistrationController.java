@@ -84,7 +84,7 @@ public class RegistrationController {
         registration.setRemarkD((String) map.get("remarkD"));
         registration.setStaff_name(staff.getStaff_name());
         registration.setConglomerate_id((Integer) map.get("conglomerate_id"));
-
+        registration.setUrlD((String) map.get("url"));
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String time2 = format.format(now);
@@ -181,7 +181,7 @@ public class RegistrationController {
         registration.setOut_address((String) map.get("out_address"));
         registration.setRemarkT((String) map.get("remarkT"));
         registration.setId((Integer) map.get("registration_id"));
-
+        registration.setUrlT((String) map.get("url"));
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String time2 = format.format(now);
