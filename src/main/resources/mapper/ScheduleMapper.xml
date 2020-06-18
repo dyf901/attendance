@@ -24,9 +24,6 @@
         <if test="content!=null and content!=''">
             `content`=#{content},
         </if>
-        <if test="staff_phone!=null and staff_phone!=''">
-            `staff_phone`=#{staff_phone},
-        </if>
         <if test="schedule_type!=null and schedule_type!=''">
             `schedule_type`=#{schedule_type},
         </if>
