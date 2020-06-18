@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.ScheduleDao">
+    <!--增加跟进信息-->
+    <insert id="InsertSchedule" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`schedule` (`conglomerate_id`, `itmes_id`, `staff_id`, `uptime`, `uptimeC`, `principal`, `content`, `schedule_type`) 
+        VALUES (#{conglomerate_id}, #{itmes_id}, #{staff_id}, #{uptime}, #{uptimeC}, #{principal}, #{content}, #{schedule_type});
+    </insert>
+    
+    <!--删除跟进信息-->
+    <delete id="DeleteSchedule" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`schedule` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改跟进信息-->
+    <update id="UpdateSchedule" parameterType="java.util.Map">
+        UPDATE `attendance`.`schedule`
+        <trim prefix="SET" suffixOverrides=",">
+        <if test="principal!=null and principal!=''">
+            `principal`=#{principal},
+        </if>
+        <if test="content!=null and content!=''">
+            `content`=#{content},
+        </if>
+        <if test="staff_phone!=null and staff_phone!=''">
+            `staff_phone`=#{staff_phone},
+        </if>
+        <if test="schedule_type!=null and schedule_type!=''">
+            `schedule_type`=#{schedule_type},
+        </if>
+        </trim>
+        WHERE (`id`=#{id});
+    </update>
+
+    <!--分页模糊查询跟进信息-->
+    <select id="FindSchedule" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Schedule">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT  s.`id`, s.`conglomerate_id`, s.`itmes_id`, s.`staff_id`, s.`uptime`, s.`uptimeC`, s.`principal`, s.`content`, s.`schedule_type`, l.`itmes_name` as `itmes_name`, a.`staff_name` as `staff_name` FROM `attendance`.`schedule` s
+        LEFT JOIN `attendance`.`conglomerate` z ON s.`conglomerate_id`=z.`id`
+        LEFT JOIN `attendance`.`itmes` l ON s.`itmes_id`=l.`id`
+        LEFT JOIN `attendance`.`staff` a ON s.`staff_id`=a.`id`
+        WHERE s.`conglomerate_id`=#{conglomerate_id}
+        order by s.`uptime` desc
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`schedule` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+
+    <!--查询个人跟进信息-->
+    <select id="FindScheduleByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Schedule">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT  s.`id`, s.`conglomerate_id`, s.`itmes_id`, s.`staff_id`, s.`uptime`, s.`uptimeC`, s.`principal`, s.`content`, s.`schedule_type`, l.`itmes_name` as `itmes_name`, a.`staff_name` as `staff_name` FROM `attendance`.`schedule` s
+        LEFT JOIN `attendance`.`conglomerate` z ON s.`conglomerate_id`=z.`id`
+        LEFT JOIN `attendance`.`itmes` l ON s.`itmes_id`=l.`id`
+        LEFT JOIN `attendance`.`staff` a ON s.`staff_id`=a.`id`
+        WHERE s.`staff_id`=#{staff_id}
+        order by s.`uptime` desc
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计个人总数-->
+    <select id="TotalByStaffId" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`schedule` WHERE `staff_id`=#{staff_id}
+    </select>
+</mapper>
