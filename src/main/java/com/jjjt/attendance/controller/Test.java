@@ -1,5 +1,7 @@
 package com.jjjt.attendance.controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.jjjt.attendance.entity.Examine;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Log;
@@ -9,6 +11,7 @@ import com.jjjt.attendance.service.RegistrationService;
 import com.jjjt.attendance.service.StaffLogService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONArray;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -40,33 +43,19 @@ public class Test {
         return registrationService.FindRegistration(map);
     }
 
-    /*@ApiOperation(value = "测试",notes = "")
+    @ApiOperation(value = "测试",notes = "")
     @PostMapping("/testm")
-    public JsonResult testm(Log log) throws ParseException {
+    public JsonResult testm(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date now = new Date();
-        String time = format.format(now);
-        System.out.println(time);
-        Date date = format.parse(time);
-        //日期转时间戳（毫秒）
-        long times = date.getTime();
+        String s= (String) map.get("list");
+        JSONArray jsonArray = JSONArray.fromObject(s);
 
-        log.setUptime(time);
-        log.setUptimeC(times);
-        int s = logService.InsertLog(log);
-        System.out.println("返回最近添加的日志id:"+log.getId());
-        *//*if (s == 1) {
-            map.put("log_id",log.getId());
-            staffLogService.InsertStaffLog(map);
-            jsonResult.setCode(200);
-            jsonResult.setMessage("上传成功!");
-            return jsonResult;
-        } else {
-            jsonResult.setCode(20006);
-            jsonResult.setMessage("上传失败!");
-            return jsonResult;
-        }*//*
+        for (int i = 0; i < jsonArray.size(); i++) {
+            int a = (int) jsonArray.get(i);
+            System.out.println(a);
+        }
+
+
         return jsonResult;
-    }*/
+    }
 }

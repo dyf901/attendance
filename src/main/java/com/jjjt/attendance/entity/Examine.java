@@ -87,6 +87,12 @@ public class Examine {
     @ApiModelProperty(value = "员工姓名", name = "staff_name")
     private String staff_name;
 
+    @ApiModelProperty(value = "采购类型", name = "procurement_type")
+    private String procurement_type;
+
+    @ApiModelProperty(value = "采购金额", name = "procurement_sum")
+    private double procurement_sum;
+
     @ApiModelProperty(value = "数组",name = "list")
     private List list;
 
@@ -94,7 +100,7 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, List list) {
+    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, List list) {
         this.id = id;
         this.staff_id = staff_id;
         this.itmes_id = itmes_id;
@@ -121,6 +127,8 @@ public class Examine {
         this.end_time = end_time;
         this.end_timeC = end_timeC;
         this.staff_name = staff_name;
+        this.procurement_type = procurement_type;
+        this.procurement_sum = procurement_sum;
         this.list = list;
     }
 
@@ -340,9 +348,25 @@ public class Examine {
         this.list = list;
     }
 
+    public String getProcurement_type() {
+        return procurement_type;
+    }
+
+    public void setProcurement_type(String procurement_type) {
+        this.procurement_type = procurement_type;
+    }
+
+    public double getProcurement_sum() {
+        return procurement_sum;
+    }
+
+    public void setProcurement_sum(double procurement_sum) {
+        this.procurement_sum = procurement_sum;
+    }
+
     @Override
     public String toString() {
-        return "Examine{" +
+        return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
                 ", itmes_id=" + itmes_id +
@@ -369,6 +393,8 @@ public class Examine {
                 ", end_time='" + end_time + '\'' +
                 ", end_timeC=" + end_timeC +
                 ", staff_name='" + staff_name + '\'' +
+                ", procurement_type='" + procurement_type + '\'' +
+                ", procurement_sum=" + procurement_sum +
                 ", list=" + list +
                 '}';
     }

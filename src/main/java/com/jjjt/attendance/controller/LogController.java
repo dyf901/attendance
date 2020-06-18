@@ -7,6 +7,7 @@ import com.jjjt.attendance.service.StaffLogService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONArray;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,7 @@ public class LogController {
     @ApiOperation(value = "添加日志", notes = "传参:staff_id(员工id),company_id(公司id),content(日志内容)")
     @PostMapping("/InsertLog")
     public JsonResult InsertLog(@RequestBody Map map) throws ParseException {
+        System.out.println(map);
         JsonResult jsonResult = new JsonResult();
         Log log = new Log();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -51,12 +53,12 @@ public class LogController {
         int s = logService.InsertLog(log);
         System.out.println("返回最近添加的日志id:"+log.getId());
         if (s == 1) {
-            List l = (List) map.get("list");
-            System.out.println(l);
-            for (int i=0;i<l.size();i++){
-                System.out.println(l.get(i));
+            String list= (String) map.get("list");
+            JSONArray jsonArray = JSONArray.fromObject(list);
+            for (int i=0;i<jsonArray.size();i++){
+                System.out.println(jsonArray.get(i));
                 map.put("log_id",log.getId());
-                map.put("staff_idT",l.get(i));
+                map.put("staff_idT",jsonArray.get(i));
                 staffLogService.InsertStaffLog(map);
             }
             jsonResult.setCode(200);

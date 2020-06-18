@@ -92,11 +92,11 @@ public class ceshi {
         System.out.println("Month: " + ldt.getMonth().getValue());
         System.out.println("DayOfMonth: " + ldt.getDayOfMonth());*/
 
-        String s = "1590043455000";
+        /*String s = "1590043455000";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         long lt = new Long(s);
         Date date1 = new Date(lt);
         String res = simpleDateFormat.format(date1);
-        System.out.println("res:" + res);
+        System.out.println("res:" + res);*/
     }
 }

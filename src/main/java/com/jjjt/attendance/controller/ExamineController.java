@@ -7,6 +7,7 @@ import com.jjjt.attendance.service.StaffExamineService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,10 +26,19 @@ public class ExamineController {
     @Autowired
     private StaffExamineService staffExamineService;
 
-    /*@ApiOperation(value = "新建审批", notes = "")
+    @ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
     public JsonResult InsertExamine(@RequestBody Map map) throws ParseException {
+        System.out.println(map);
         JsonResult jsonResult = new JsonResult();
+        Examine examine = new Examine();
+        examine.setStaff_id((Integer) map.get("staff_id"));
+        examine.setItmes_id((Integer) map.get("itmes_id"));
+        examine.setCompany_id((Integer) map.get("company_id"));
+        examine.setConglomerate_id((Integer) map.get("conglomerate_id"));
+        examine.setExamine_type((String) map.get("examine_type"));
+        examine.setContent((String) map.get("content"));
+
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String time = format.format(now);
@@ -36,8 +46,8 @@ public class ExamineController {
         Date date = format.parse(time);
         //日期转时间戳（毫秒）
         long times = date.getTime();
-        map.put("uptimeC", times);
-        map.put("uptime", time);
+        examine.setUptimeC(times);
+        examine.setUptime(time);
         if (map.get("examine_type").equals("出差")) {
             long outtimeC = (long) map.get("outtimeC");
             long intimeC = (long) map.get("intimeC");
@@ -48,8 +58,12 @@ public class ExamineController {
             Date date2 = new Date(lts);
             String outtime = simpleDateFormat.format(date1);
             String intime = simpleDateFormat.format(date2);
-            map.put("outtime", outtime);
-            map.put("intime", intime);
+            examine.setOuttime(outtime);
+            examine.setIntime(intime);
+            examine.setOutaddress((String) map.get("outaddress"));
+            examine.setIntimeC((Long) map.get("intimeC"));
+            examine.setOuttimeC((Long) map.get("outtimeC"));
+
         } else if (map.get("examine_type").equals("请假")) {
             long start_timeC = (long) map.get("start_timeC");
             long end_timeC = (long) map.get("end_timeC");
@@ -60,12 +74,28 @@ public class ExamineController {
             Date date2 = new Date(lts);
             String start_time = simpleDateFormat.format(date1);
             String end_time = simpleDateFormat.format(date2);
-            map.put("start_time", start_time);
-            map.put("end_time", end_time);
+            examine.setStart_time(start_time);
+            examine.setEnd_time(end_time);
+            examine.setStart_timeC((long) map.get("start_timeC"));
+            examine.setEnd_timeC((long) map.get("end_timeC"));
+        } else if (map.get("examine_type").equals("报销")){
+            examine.setExpenses_type((String) map.get("expenses_type"));
+            examine.setExpenses_sum((Double) map.get("expenses_sum"));
+            examine.setExpenses_picture((String) map.get("expenses_picture"));
+        } else if (map.get("examine_type").equals("采购")){
+            examine.setProcurement_type((String) map.get("procurement_type"));
+            examine.setProcurement_sum((Double) map.get("procurement_sum"));
         }
-        int i = examineService.InsertExamine(map);
+        int i = examineService.InsertExamine(examine);
         if (i == 1) {
-
+            String list= (String) map.get("list");
+            JSONArray jsonArray = JSONArray.fromObject(list);
+            for (int s=0;s<jsonArray.size();s++){
+                System.out.println(jsonArray.get(s));
+                map.put("examine_id",examine.getId());
+                map.put("staff_idT",jsonArray.get(s));
+                staffExamineService.InsertStaffExamine(map);
+            }
             jsonResult.setCode(200);
             jsonResult.setMessage("提交成功!");
             return jsonResult;
@@ -74,8 +104,10 @@ public class ExamineController {
             jsonResult.setMessage("提交失败!");
             return jsonResult;
         }
-    }*/
-    @ApiOperation(value = "新建审批", notes = "")
+    }
+
+
+   /* @ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
     public JsonResult InsertExamine(Examine examine) throws ParseException {
         JsonResult jsonResult = new JsonResult();
@@ -87,8 +119,8 @@ public class ExamineController {
         Date date = format.parse(time);
         //日期转时间戳（毫秒）
         long times = date.getTime();
-        /*map.put("uptimeC", times);
-        map.put("uptime", time);*/
+        *//*map.put("uptimeC", times);
+        map.put("uptime", time);*//*
         examine.setUptimeC(times);
         examine.setUptime(time);
         if (examine.getExamine_type().equals("出差")) {
@@ -101,8 +133,8 @@ public class ExamineController {
             Date date2 = new Date(lts);
             String outtime = simpleDateFormat.format(date1);
             String intime = simpleDateFormat.format(date2);
-            /*map.put("outtime", outtime);
-            map.put("intime", intime);*/
+            *//*map.put("outtime", outtime);
+            map.put("intime", intime);*//*
             examine.setOuttime(outtime);
             examine.setIntime(intime);
         } else if (examine.getExamine_type().equals("请假")) {
@@ -115,19 +147,19 @@ public class ExamineController {
             Date date2 = new Date(lts);
             String start_time = simpleDateFormat.format(date1);
             String end_time = simpleDateFormat.format(date2);
-            /*map.put("start_time", start_time);
-            map.put("end_time", end_time);*/
+            *//*map.put("start_time", start_time);
+            map.put("end_time", end_time);*//*
             examine.setStart_time(start_time);
             examine.setEnd_time(end_time);
         }
         int i = examineService.InsertExamine(examine);
         if (i == 1) {
-            List l = examine.getList();
-            System.out.println(l);
-            for (int s=0;s<l.size();s++){
-                System.out.println(l.get(s));
+            String list= (String) map.get("list");
+            JSONArray jsonArray = JSONArray.fromObject(list);
+            for (int s=0;s<jsonArray.size();s++){
+                System.out.println(jsonArray.get(s));
                 map.put("examine_id",examine.getId());
-                map.put("staff_idT",l.get(s));
+                map.put("staff_idT",jsonArray.get(s));
                 staffExamineService.InsertStaffExamine(map);
             }
             jsonResult.setCode(200);
@@ -138,7 +170,7 @@ public class ExamineController {
             jsonResult.setMessage("提交失败!");
             return jsonResult;
         }
-    }
+    }*/
 
     @ApiOperation(value = "删除审批", notes = "")
     @PostMapping("/DeleteExamine")
@@ -157,7 +189,7 @@ public class ExamineController {
         return page;
     }
 
-    @ApiOperation(value = "查询个人审批记录", notes = "传参:staff_id(登录返回id),pageNo,pageSize")
+    @ApiOperation(value = "查询个人审批记录", notes = "传参:staff_id(登录返回id),pageNo,pageSize,examine_type(请假,审批,加班,报销)")
     @PostMapping("/FindExamineByStaffId")
     public Page FindExamineByStaffId(@RequestBody Map map) {
         System.out.println("map" + map);
@@ -187,7 +219,7 @@ public class ExamineController {
         return examineService.FindExamineById(map);
     }
 
-    @ApiOperation(value = "查询由我审批的审批信息", notes = "")
+    @ApiOperation(value = "查询由我审批的审批信息", notes = "传参:staff_id,state(状态:未审核,通过,未通过),pageNo,pageSize,examine_type(请假,审批,加班,报销)")
     @PostMapping("FindExamineByY")
     public Page FindExamineByY(@RequestBody Map map) {
         Page page = new Page();
