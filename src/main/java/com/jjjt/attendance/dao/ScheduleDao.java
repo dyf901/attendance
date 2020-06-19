@@ -26,4 +26,7 @@ public interface ScheduleDao {
 
     //统计个人总数
     long TotalByStaffId(Map map);
+
+    //查询跟进信息
+    List<Schedule> FindScheduleAll(Map map);
 }

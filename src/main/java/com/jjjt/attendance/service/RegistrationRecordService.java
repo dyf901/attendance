@@ -22,4 +22,9 @@ public class RegistrationRecordService implements RegistrationRecordDao {
     public List<RegistrationRecord> FindRegistrationRecordByStaffId(Map map) {
         return registrationRecordDao.FindRegistrationRecordByStaffId(map);
     }
+
+    @Override
+    public List<RegistrationRecord> FindRegistrationRecordAll(Map map) {
+        return registrationRecordDao.FindRegistrationRecordAll(map);
+    }
 }

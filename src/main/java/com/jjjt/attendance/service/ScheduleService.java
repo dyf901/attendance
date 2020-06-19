@@ -54,4 +54,10 @@ public class ScheduleService implements ScheduleDao {
     public long TotalByStaffId(Map map) {
         return scheduleDao.TotalByStaffId(map);
     }
+
+    //查询跟进信息
+    @Override
+    public List<Schedule> FindScheduleAll(Map map) {
+        return scheduleDao.FindScheduleAll(map);
+    }
 }

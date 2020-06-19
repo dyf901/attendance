@@ -15,4 +15,12 @@
         WHERE r.`staff_id`=#{staff_id} and year(r.`time`)=#{Year} and  month(r.`time`)=#{Month}  and  day(r.`time`)=#{Day}
         ORDER BY r.`time` DESC
     </select>
+
+    <!--查询个人打卡记录-->
+    <select id="FindRegistrationRecordAll" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.RegistrationRecord">
+        SELECT r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`time`, r.`timeC`, r.`address`, r.`longitude`, r.`latitude`, r.`remark`, r.`url`, s.`staff_name` as `staff_name` FROM `attendance`.`registration_record` r
+        LEFT JOIN `attendance`.`staff` s ON r.`staff_id`=s.`id`
+        WHERE r.`conglomerate_id`=#{conglomerate_id} and year(r.`time`)=#{Year} and  month(r.`time`)=#{Month}  and  day(r.`time`)=#{Day}
+        ORDER BY r.`time` DESC
+    </select>
 </mapper>

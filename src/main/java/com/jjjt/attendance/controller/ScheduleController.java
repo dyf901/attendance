@@ -1,8 +1,11 @@
 package com.jjjt.attendance.controller;
 
 import com.jjjt.attendance.entity.JsonResult;
+import com.jjjt.attendance.entity.Schedule;
+import com.jjjt.attendance.entity.Staff;
 import com.jjjt.attendance.service.PositionPermissionService;
 import com.jjjt.attendance.service.ScheduleService;
+import com.jjjt.attendance.service.StaffService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,9 +29,13 @@ public class ScheduleController {
     @Autowired
     private PositionPermissionService positionPermissionService;
 
-    @ApiOperation(value = "增加跟进信息",notes = "传参:`conglomerate_id`(集团id), `itmes_id`(客户id), `staff_id`(员工id), `principal`(负责人), `content`(跟进内容), `schedule_type`(跟进状态)")
+    @Autowired
+    private StaffService staffService;
+
+    @ApiOperation(value = "增加跟进信息",notes = "传参:`conglomerate_id`(集团id), `items_id`(客户id), `staff_id`(员工id), `principal`(负责人), `content`(跟进内容), `schedule_type`(跟进状态)")
     @PostMapping("/InsertSchedule")
     public JsonResult InsertSchedule(@RequestBody Map map) throws ParseException {
+        System.out.println(map);
         JsonResult jsonResult = new JsonResult();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
@@ -73,23 +80,31 @@ public class ScheduleController {
         return page;
     }
 
-    @ApiOperation(value = "分页查询个人跟进信息",notes = "传参:pageNo,pageSize,conglomerate_id,staff_id,position_id(登录返回)")
+    @ApiOperation(value = "分页查询个人跟进信息",notes = "传参:conglomerate_id,staff_id")
     @PostMapping("/FindScheduleByStaffId")
-    public Page FindScheduleByStaffId(@RequestBody Map map){
-        Page page = new Page();
-        page.setPageNo((Integer) map.get("pageNo"));
-        page.setPageSize((Integer) map.get("pageSize"));
+    public JsonResult FindScheduleByStaffId(@RequestBody Map map){
+        System.out.println(map);
+        JsonResult jsonResult = new JsonResult();
+        jsonResult.setCode(200);
+        map.put("id",map.get("staff_id"));
+        Staff staff = staffService.FindStaffById(map);
+        System.out.println("staff:"+staff);
+        map.put("position_id",staff.getPosition_id());
+        System.out.println(staff.getPosition_id());
         List<Integer> list = positionPermissionService.FindPositionPermissionByPositionId(map);
-        for (Integer l : list) {
-            System.out.println("l:" + l);
-            if(l==3) {
-                page.setTotal(scheduleService.Total(map));
-                page.setItems(scheduleService.FindSchedule(map));
-            }else {
-                page.setTotal(scheduleService.TotalByStaffId(map));
-                page.setItems(scheduleService.FindScheduleByStaffId(map));
+        if(list.size()>0){
+            for (Integer l : list) {
+                System.out.println("l:" + l);
+                if(l==3) {
+                    System.out.println("a:"+scheduleService.FindScheduleAll(map));
+                    jsonResult.setData(scheduleService.FindScheduleAll(map));
+                }
             }
+        }else{
+            System.out.println("b"+scheduleService.FindScheduleByStaffId(map));
+            jsonResult.setData(scheduleService.FindScheduleByStaffId(map));
         }
-        return page;
+
+        return jsonResult;
     }
 }
