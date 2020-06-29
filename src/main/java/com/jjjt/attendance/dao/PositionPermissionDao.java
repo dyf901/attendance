@@ -10,4 +10,6 @@ public interface PositionPermissionDao {
     //根据position_id查询对应权限
     List<Integer> FindPositionPermissionByPositionId(Map map);
 
+    //删除position_id对应的权限
+    int DeletePositionPermission(Map map);
 }

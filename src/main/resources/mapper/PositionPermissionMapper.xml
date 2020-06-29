@@ -12,4 +12,9 @@
     <select id="FindPositionPermissionByPositionId" parameterType="java.util.Map" resultType="int">
         SELECT `permission_id` FROM `attendance`.`position_permission` WHERE `position_id`=#{position_id}
     </select>
+
+    <!--删除对应position_id的权限-->
+    <delete id="DeletePositionPermission" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`position_permission`  WHERE `position_id`=#{position_id}
+    </delete>
 </mapper>

@@ -16,14 +16,18 @@ public class StaffExamine {
     @ApiModelProperty(value = "项目id", name = "examine_id")
     private int examine_id;
 
+    @ApiModelProperty(value = "上传时间",name = "")
+    private String uptime;
+
     public StaffExamine(){
         super();
     }
 
-    public StaffExamine(int id, int staff_id, int examine_id) {
+    public StaffExamine(int id, int staff_id, int examine_id, String uptime) {
         this.id = id;
         this.staff_id = staff_id;
         this.examine_id = examine_id;
+        this.uptime = uptime;
     }
 
     public int getId() {
@@ -50,12 +54,21 @@ public class StaffExamine {
         this.examine_id = examine_id;
     }
 
+    public String getUptime() {
+        return uptime;
+    }
+
+    public void setUptime(String uptime) {
+        this.uptime = uptime;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
                 ", examine_id=" + examine_id +
+                ", uptime='" + uptime + '\'' +
                 '}';
     }
 }

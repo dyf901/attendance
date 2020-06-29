@@ -23,4 +23,10 @@ public class PositionPermissionService implements PositionPermissionDao {
     public List<Integer> FindPositionPermissionByPositionId(Map map) {
         return positionPermissionDao.FindPositionPermissionByPositionId(map);
     }
+
+    //删除position_id对应的权限
+    @Override
+    public int DeletePositionPermission(Map map) {
+        return positionPermissionDao.DeletePositionPermission(map);
+    }
 }

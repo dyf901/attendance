@@ -5,7 +5,7 @@
 <mapper namespace="com.jjjt.attendance.dao.StaffExamineDao">
     <!--增加员工审批关联表-->
     <insert id="InsertStaffExamine" parameterType="java.util.Map">
-        INSERT INTO `attendance`.`staff_examine` (`staff_id`, `examine_id`) VALUES (#{staff_idT},#{examine_id});
+        INSERT INTO `attendance`.`staff_examine` (`staff_id`, `examine_id`, `uptime`) VALUES (#{staff_idT},#{examine_id},now());
     </insert>
 
     <!--根据staff_id查询审批信息-->
@@ -13,6 +13,7 @@
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
         SELECT `examine_id` FROM `attendance`.`staff_examine`
         WHERE `staff_id`=#{staff_id}
+        order by `uptime` DESC
         limit #{page},#{pageSize}
     </select>
 

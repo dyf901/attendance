@@ -78,6 +78,7 @@ public class PositionController {
         //String l = (String) map.get("list");
         List l = (List) map.get("list");
         System.out.println(l);
+        int a=positionPermissionService.DeletePositionPermission(map);
         for (int i=0;i<l.size();i++){
             System.out.println(l.get(i));
             map.put("permission_id",l.get(i));

@@ -5,7 +5,7 @@
 <mapper namespace="com.jjjt.attendance.dao.StaffLogDao">
     <!--增加员工日志对应关系-->
     <insert id="InsertStaffLog" parameterType="java.util.Map">
-        INSERT INTO `attendance`.`staff_log` (`staff_id`, `log_id`) VALUES (#{staff_idT},#{log_id});
+        INSERT INTO `attendance`.`staff_log` (`staff_id`, `log_id`, `uptime`) VALUES (#{staff_idT},#{log_id},now());
     </insert>
 
     <!--根据staff_id查询对应关系-->
@@ -13,6 +13,7 @@
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
         SELECT `log_id` FROM `attendance`.`staff_log`
         WHERE `staff_id`=#{staff_id}
+        order by `uptime` DESC
         limit #{page},#{pageSize}
     </select>
 

@@ -16,14 +16,18 @@ public class StaffLog {
     @ApiModelProperty(value = "日志id", name = "log_id")
     private int log_id;
 
+    @ApiModelProperty(value = "上传时间",name = "")
+    private String uptime;
+
     public StaffLog(){
         super();
     }
 
-    public StaffLog(int id, int staff_id, int log_id) {
+    public StaffLog(int id, int staff_id, int log_id, String uptime) {
         this.id = id;
         this.staff_id = staff_id;
         this.log_id = log_id;
+        this.uptime = uptime;
     }
 
     public int getId() {
@@ -50,12 +54,21 @@ public class StaffLog {
         this.log_id = log_id;
     }
 
+    public String getUptime() {
+        return uptime;
+    }
+
+    public void setUptime(String uptime) {
+        this.uptime = uptime;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
                 ", log_id=" + log_id +
+                ", uptime='" + uptime + '\'' +
                 '}';
     }
 }

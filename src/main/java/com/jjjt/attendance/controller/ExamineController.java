@@ -91,7 +91,7 @@ public class ExamineController {
             String list= (String) map.get("list");
             JSONArray jsonArray = JSONArray.fromObject(list);
             for (int s=0;s<jsonArray.size();s++){
-                System.out.println(jsonArray.get(s));
+                System.out.println("json:"+jsonArray.get(s));
                 map.put("examine_id",examine.getId());
                 map.put("staff_idT",jsonArray.get(s));
                 staffExamineService.InsertStaffExamine(map);
@@ -203,14 +203,32 @@ public class ExamineController {
 
     @ApiOperation(value = "审核通过", notes = "")
     @PostMapping("/UpdateStateT")
-    public boolean UpdateStateT(@RequestBody Map map) {
-        return examineService.UpdateStateT(map) == 1;
+    public JsonResult UpdateStateT(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
+        int i = examineService.UpdateStateT(map);
+        if(i==1){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("审核成功");
+        }else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("审核失败");
+        }
+        return jsonResult;
     }
 
     @ApiOperation(value = "审核未通过", notes = "")
     @PostMapping("/UpdateStateW")
-    public boolean UpdateStateW(@RequestBody Map map) {
-        return examineService.UpdateStateW(map) == 1;
+    public JsonResult UpdateStateW(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
+        int i = examineService.UpdateStateW(map);
+        if(i==1){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("审核成功");
+        }else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("审核失败");
+        }
+        return jsonResult;
     }
 
     @ApiOperation(value = "根据id查询详细审批信息", notes = "传参:id(每条记录对应的id)")
