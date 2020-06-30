@@ -134,7 +134,7 @@
     
     <!--修改转正日期-->
     <update id="UpdatePromotionTime" parameterType="java.util.Map">
-        UPDATE `attendance`.`staff` SET `promotion_time`=#{promotion_time} WHERE `id`=#{id}
+        UPDATE `attendance`.`staff` SET `promotion_time`=#{promotion_time} WHERE `id`=#{staff_id}
     </update>
 
     <!--离职-->

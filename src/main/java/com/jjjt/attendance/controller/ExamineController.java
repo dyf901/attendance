@@ -33,7 +33,7 @@ public class ExamineController {
     @ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
     public JsonResult InsertExamine(@RequestBody Map map) throws ParseException {
-        System.out.println(map);
+        System.out.println("map:"+map);
         JsonResult jsonResult = new JsonResult();
         Examine examine = new Examine();
         examine.setStaff_id((Integer) map.get("staff_id"));
@@ -102,6 +102,8 @@ public class ExamineController {
             Date date2 = new Date(lts);
             String entry_time = simpleDateFormat.format(date1);
             String promotion_time = simpleDateFormat.format(date2);
+           // System.out.println(entry_time);
+            //System.out.println(promotion_time);
             examine.setEntry_time(entry_time);
             examine.setPromotion_time(promotion_time);
             examine.setEntry_timeC((long) map.get("entry_timeC"));
@@ -111,15 +113,6 @@ public class ExamineController {
 
         int i = examineService.InsertExamine(examine);
         if (i == 1) {
-            if(map.get("examine_type").equals("转正")){
-                long promotion_timeC = (long) map.get("promotion_timeC");
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                long lts = new Long(promotion_timeC);
-                Date date2 = new Date(lts);
-                String promotion_time = simpleDateFormat.format(date2);
-                map.put("promotion_time",promotion_time);
-                staffService.UpdatePromotionTime(map);
-            }
             String list= (String) map.get("list");
             JSONArray jsonArray = JSONArray.fromObject(list);
             for (int s=0;s<jsonArray.size();s++){
@@ -237,8 +230,24 @@ public class ExamineController {
     @PostMapping("/UpdateStateT")
     public JsonResult UpdateStateT(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
+        Examine examine = examineService.FindExamineById(map);
+        System.out.println("examine:"+examine);
+
         int i = examineService.UpdateStateT(map);
+
         if(i==1){
+            //判断是否是转正审批,是则修改员工信息中的转正时间不是则直接忽略
+            if(examine.getExamine_type().equals("转正")){
+                long promotion_timeC = examine.getPromotion_timeC();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long lts = new Long(promotion_timeC);
+                Date date2 = new Date(lts);
+                String promotion_time = simpleDateFormat.format(date2);
+                map.put("promotion_time",promotion_time);
+                map.put("staff_id",examine.getStaff_id());
+                staffService.UpdatePromotionTime(map);
+            }
+
             jsonResult.setCode(200);
             jsonResult.setMessage("审核成功");
         }else {
