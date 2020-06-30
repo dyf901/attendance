@@ -93,6 +93,21 @@ public class Examine {
     @ApiModelProperty(value = "采购金额", name = "procurement_sum")
     private double procurement_sum;
 
+    @ApiModelProperty(value = "入职时间", name = "entry_time")
+    private String entry_time;
+
+    @ApiModelProperty(value = "入职时间戳", name = "entry_timeC")
+    private long entry_timeC;
+
+    @ApiModelProperty(value = "转正时间", name = "promotion_time")
+    private String promotion_time;
+
+    @ApiModelProperty(value = "转正时间戳", name = "promotion_timeC")
+    private long promotion_timeC;
+
+    @ApiModelProperty(value = "工作岗位", name = "operating_post")
+    private String operating_post;
+
     @ApiModelProperty(value = "数组",name = "list")
     private List list;
 
@@ -100,7 +115,7 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, List list) {
+    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, String entry_time, long entry_timeC, String promotion_time, long promotion_timeC, String operating_post, List list) {
         this.id = id;
         this.staff_id = staff_id;
         this.itmes_id = itmes_id;
@@ -129,6 +144,11 @@ public class Examine {
         this.staff_name = staff_name;
         this.procurement_type = procurement_type;
         this.procurement_sum = procurement_sum;
+        this.entry_time = entry_time;
+        this.entry_timeC = entry_timeC;
+        this.promotion_time = promotion_time;
+        this.promotion_timeC = promotion_timeC;
+        this.operating_post = operating_post;
         this.list = list;
     }
 
@@ -364,6 +384,46 @@ public class Examine {
         this.procurement_sum = procurement_sum;
     }
 
+    public String getEntry_time() {
+        return entry_time;
+    }
+
+    public void setEntry_time(String entry_time) {
+        this.entry_time = entry_time;
+    }
+
+    public long getEntry_timeC() {
+        return entry_timeC;
+    }
+
+    public void setEntry_timeC(long entry_timeC) {
+        this.entry_timeC = entry_timeC;
+    }
+
+    public String getPromotion_time() {
+        return promotion_time;
+    }
+
+    public void setPromotion_time(String promotion_time) {
+        this.promotion_time = promotion_time;
+    }
+
+    public long getPromotion_timeC() {
+        return promotion_timeC;
+    }
+
+    public void setPromotion_timeC(long promotion_timeC) {
+        this.promotion_timeC = promotion_timeC;
+    }
+
+    public String getOperating_post() {
+        return operating_post;
+    }
+
+    public void setOperating_post(String operating_post) {
+        this.operating_post = operating_post;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -395,6 +455,11 @@ public class Examine {
                 ", staff_name='" + staff_name + '\'' +
                 ", procurement_type='" + procurement_type + '\'' +
                 ", procurement_sum=" + procurement_sum +
+                ", entry_time='" + entry_time + '\'' +
+                ", entry_timeC=" + entry_timeC +
+                ", promotion_time='" + promotion_time + '\'' +
+                ", promotion_timeC=" + promotion_timeC +
+                ", operating_post='" + operating_post + '\'' +
                 ", list=" + list +
                 '}';
     }

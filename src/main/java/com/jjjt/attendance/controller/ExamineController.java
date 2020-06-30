@@ -4,6 +4,7 @@ import com.jjjt.attendance.entity.Examine;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.service.ExamineService;
 import com.jjjt.attendance.service.StaffExamineService;
+import com.jjjt.attendance.service.StaffService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -25,6 +26,9 @@ public class ExamineController {
 
     @Autowired
     private StaffExamineService staffExamineService;
+
+    @Autowired
+    private StaffService staffService;
 
     @ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
@@ -78,16 +82,44 @@ public class ExamineController {
             examine.setEnd_time(end_time);
             examine.setStart_timeC((long) map.get("start_timeC"));
             examine.setEnd_timeC((long) map.get("end_timeC"));
+
         } else if (map.get("examine_type").equals("报销")){
             examine.setExpenses_type((String) map.get("expenses_type"));
             examine.setExpenses_sum((Double) map.get("expenses_sum"));
             examine.setExpenses_picture((String) map.get("expenses_picture"));
+
         } else if (map.get("examine_type").equals("采购")){
             examine.setProcurement_type((String) map.get("procurement_type"));
             examine.setProcurement_sum((Double) map.get("procurement_sum"));
+
+        } else if (map.get("examine_type").equals("转正")) {
+            long entry_timeC = (long) map.get("entry_timeC");
+            long promotion_timeC = (long) map.get("promotion_timeC");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            long lt = new Long(entry_timeC);
+            Date date1 = new Date(lt);
+            long lts = new Long(promotion_timeC);
+            Date date2 = new Date(lts);
+            String entry_time = simpleDateFormat.format(date1);
+            String promotion_time = simpleDateFormat.format(date2);
+            examine.setEntry_time(entry_time);
+            examine.setPromotion_time(promotion_time);
+            examine.setEntry_timeC((long) map.get("entry_timeC"));
+            examine.setPromotion_timeC((long) map.get("promotion_timeC"));
+            examine.setOperating_post((String) map.get("operating_post"));
         }
+
         int i = examineService.InsertExamine(examine);
         if (i == 1) {
+            if(map.get("examine_type").equals("转正")){
+                long promotion_timeC = (long) map.get("promotion_timeC");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                long lts = new Long(promotion_timeC);
+                Date date2 = new Date(lts);
+                String promotion_time = simpleDateFormat.format(date2);
+                map.put("promotion_time",promotion_time);
+                staffService.UpdatePromotionTime(map);
+            }
             String list= (String) map.get("list");
             JSONArray jsonArray = JSONArray.fromObject(list);
             for (int s=0;s<jsonArray.size();s++){

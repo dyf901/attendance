@@ -84,4 +84,16 @@ public class StaffService implements StaffDao {
     public List<Staff> FindAllApp(Map map) {
         return staffDao.FindAllApp(map);
     }
+
+    //修改员工转正时间
+    @Override
+    public int UpdatePromotionTime(Map map) {
+        return staffDao.UpdatePromotionTime(map);
+    }
+
+    //离职
+    @Override
+    public int UpdateState(Map map) {
+        return staffDao.UpdateState(map);
+    }
 }

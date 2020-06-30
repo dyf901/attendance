@@ -41,4 +41,10 @@ public interface StaffDao {
 
     //App查询所有员工
     List<Staff> FindAllApp(Map map);
+
+    //修改员工转正时间
+    int UpdatePromotionTime(Map map);
+
+    //离职
+    int UpdateState(Map map);
 }

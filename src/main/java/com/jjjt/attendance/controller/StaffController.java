@@ -35,7 +35,8 @@ public class StaffController {
 
     @ApiOperation(value = "增加员工信息", notes = "")
     @PostMapping("/InsertStaff")
-    public boolean InsertStaff(@RequestBody Map map) {
+    public JsonResult InsertStaff(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
         setNickname();
         String nickname = getNickname();
         map.put("nickname", nickname);
@@ -51,19 +52,31 @@ public class StaffController {
             System.out.println(id.substring(id.length() - 6));
             map.put("password", password);
         }
-
-        int i = staffService.InsertStaff(map);
-        if (i == 1) {
-            Department department = departmentService.FindDepartmentById(map);
-            map.put("person_countD", department.getPerson_count() + 1);
-            int iq = departmentService.UpdatePersonCount(map);
-            Company company = companyService.FindCompanyById(map);
-            map.put("person_countC", company.getPerson_count() + 1);
-            int iqa = companyService.UpdatePersonCount(map);
-            return true;
+        Staff staff=staffService.FindStaffByStaffPhone(map);
+        if (staff==null){
+            int i = staffService.InsertStaff(map);
+            if (i == 1) {
+                Department department = departmentService.FindDepartmentById(map);
+                map.put("person_countD", department.getPerson_count() + 1);
+                int iq = departmentService.UpdatePersonCount(map);
+                Company company = companyService.FindCompanyById(map);
+                map.put("person_countC", company.getPerson_count() + 1);
+                int iqa = companyService.UpdatePersonCount(map);
+                jsonResult.setCode(200);
+                jsonResult.setMessage("员工录入成功!");
+                return jsonResult;
+            } else {
+                jsonResult.setCode(20006);
+                jsonResult.setMessage("信息有误,员工录入失败!");
+                return jsonResult;
+            }
         } else {
-            return false;
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("员工已存在!");
+            return jsonResult;
         }
+
+
     }
 
 
@@ -134,5 +147,11 @@ public class StaffController {
     @PostMapping("/FindAllApp")
     public List<Staff> FindAllApp(@RequestBody Map map) {
         return staffService.FindAllApp(map);
+    }
+
+    @ApiOperation(value = "离职",notes = "")
+    @PostMapping("/UpdateState")
+    public boolean UpdateState(@RequestBody Map map){
+        return staffService.UpdateState(map)==1;
     }
 }

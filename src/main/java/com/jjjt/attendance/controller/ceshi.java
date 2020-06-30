@@ -5,6 +5,8 @@ import com.jjjt.attendance.service.RegistrationService;
 import com.jjjt.attendance.util.TimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -14,8 +16,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ceshi {
-    public static void main(String args[]) throws ParseException {
+    public static void main(String[] args) throws Exception {
+        InetAddress addr = InetAddress.getLocalHost();
+        System.out.println("Local HostAddress:" + addr.getHostAddress());
+        String hostname = addr.getHostName();
+        System.out.println("Local host name: " + hostname);
 
+        String ip=InetAddress.getLocalHost().getHostAddress().toString();
+        System.out.println("IP:"+ip);
+    }
         /*String id = "356923199104260322";
         String lastWord = id.substring(id.length() - 1);
         String reg = "[a-zA-Z]";
@@ -26,7 +35,7 @@ public class ceshi {
             System.out.println(id.substring(id.length() - 6));
         }*/
 
-        //时间毫秒数测试
+    //时间毫秒数测试
         /*long t1=System.currentTimeMillis();
         System.out.println("当前时间毫秒数:"+t1);
         System.out.println("<------------------------------>");*/
@@ -98,5 +107,6 @@ public class ceshi {
         Date date1 = new Date(lt);
         String res = simpleDateFormat.format(date1);
         System.out.println("res:" + res);*/
-    }
+
+
 }
