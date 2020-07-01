@@ -54,7 +54,6 @@ public class RegistrationRecordController {
     public JsonResult FindAll(@RequestBody Map map){
         System.out.println(map);
         JsonResult jsonResult = new JsonResult();
-        jsonResult.setCode(200);
         TimeUtils timeUtils = new TimeUtils();
         String time = (String) map.get("timeC");
         System.out.println(timeUtils.toDate(time));

@@ -95,7 +95,7 @@
         update `attendance`.`staff`
         <trim prefix="SET" suffixOverrides=",">
             <if test="staff_age!=null and staff_age!=''">
-                `staff_ag`e=#{staff_age},
+                `staff_age`=#{staff_age},
             </if>
             <if test="staff_sex!=null and staff_sex!=''">
                 `staff_sex`=#{staff_sex},

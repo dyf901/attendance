@@ -119,6 +119,7 @@ public class ExamineController {
                 System.out.println("json:"+jsonArray.get(s));
                 map.put("examine_id",examine.getId());
                 map.put("staff_idT",jsonArray.get(s));
+                map.put("uptime",time);
                 staffExamineService.InsertStaffExamine(map);
             }
             jsonResult.setCode(200);

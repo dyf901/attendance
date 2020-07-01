@@ -59,6 +59,7 @@ public class LogController {
                 System.out.println(jsonArray.get(i));
                 map.put("log_id",log.getId());
                 map.put("staff_idT",jsonArray.get(i));
+                map.put("uptime",time);
                 staffLogService.InsertStaffLog(map);
             }
             jsonResult.setCode(200);
