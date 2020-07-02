@@ -32,7 +32,7 @@ public class ProjectController {
     @Autowired
     private StaffService staffService;
 
-    @ApiOperation(value = "增加项目", notes = "")
+    @ApiOperation(value = "增加项目", notes = "传参:conglomerate_id(集团id),items_id(客户id),staff_id(负责人id),start_timeC(项目开工时间戳),end_timeC(项目完工时间戳),amount(项目款)")
     @PostMapping("/InsertProject")
     public JsonResult InsertProject(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
@@ -112,7 +112,7 @@ public class ProjectController {
         return page;
     }
 
-    @ApiOperation(value = "分页查询项目信息APP",notes = "")
+    @ApiOperation(value = "分页查询项目信息APP",notes = "传参:conglomerate_id(集团id),staff_id(负责人id),pageNo,pageSize")
     @PostMapping("/FindProjectByStaffId")
     public Page<Project> FindProjectByStaffId(@RequestBody Map map){
         Page<Project> page = new Page<Project>();

@@ -16,7 +16,7 @@
 
     <!--修改项目-->
     <update id="UpdateProject" parameterType="java.util.Map">
-        UPDATE `attendance`.`project` SET
+        UPDATE `attendance`.`project`
         <trim prefix="SET" suffixOverrides=",">
             <if test="staff_id!=null and staff_id!=''">
                 `staff_id`=#{staff_age},

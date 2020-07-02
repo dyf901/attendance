@@ -3,5 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jjjt.attendance.dao.ProjectLogDao">
+    <!--增加项目日志-->
+    <insert id="InsertProjectLog" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`project_log` (`conglomerate_id`, `project_id`, `content`, `url`, `uptime`, `uptimeC`)
+        VALUES (#{conglomerate_id} ,#{project_id}, #{content}, #{url}, #{uptime}, #{uptimeC});
+    </insert>
 
+    <!--删除项目日志-->
+    <delete id="DeleteProjectLog" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`project_log` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改项目日志-->
+    <update id="UpdateProjectLog" parameterType="java.util.Map">
+        UPDATE `attendance`.`project_log`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="content!=null and content!=''">
+                `content`=#{content},
+            </if>
+            <if test="url!=null and url!=''">
+                `url`=#{url},
+            </if>
+            <if test="uptime!=null and uptime!=''">
+                `uptime`=#{uptime},
+            </if>
+            <if test="uptimeC!=null and uptimeC!=''">
+                `uptimeC`=#{uptimeC},
+            </if>
+            <if test="end_timeC!=null and end_timeC!=''">
+                `end_timeC`=#{end_timeC},
+            </if>
+        </trim>
+        WHERE (`id`=#{id});
+    </update>
+
+    <!--查询项目日志-->
+    <select id="FindProjectLog" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.ProjectLog">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
+        INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
+        WHERE l.`conglomerate_id`=#{conglomerate_id}
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(id) FROM `attendance`.`project_log` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+
+    <!--查看个人项目日志-->
+    <select id="FindProjectLogByProjectId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.ProjectLog">
+        SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
+        INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
+        WHERE l.`project_id`=#{project_id}
+    </select>
 </mapper>
