@@ -8,14 +8,14 @@
         <selectKey resultType="int" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO `attendance`.`log` (`staff_id`, `company_id`, `conglomerate_id`, `content`, `tomorrow_plan`, `uptime`, `uptimeC`)
-        VALUES (#{staff_id}, #{company_id}, #{conglomerate_id}, #{content}, #{tomorrow_plan}, #{uptime}, #{uptimeC});
+        INSERT INTO `attendance`.`log` (`staff_id`, `company_id`, `conglomerate_id`, `content`, `tomorrow_plan`, `url`, `uptime`, `uptimeC`)
+        VALUES (#{staff_id}, #{company_id}, #{conglomerate_id}, #{content}, #{tomorrow_plan}, #{url}, #{uptime}, #{uptimeC});
     </insert>
 
     <!--分页模糊查询-->
     <select id="FindLog" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Log">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
+        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`url`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
         LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
         LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
         <where>
@@ -41,7 +41,7 @@
     <!--查询个人日志-->
     <select id="FindLogByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Log">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
+        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`url`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
         LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
         LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
         WHERE l.`staff_id`=#{staff_id}
@@ -56,7 +56,7 @@
 
     <!--根据id查询日志的详细信息-->
     <select id="FindLogById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Log">
-        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
+        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`url`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
         LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
         LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
         WHERE l.`id`=#{id}
@@ -64,7 +64,7 @@
 
     <!--根据id查询详细日志信息(App)-->
     <select id="FindLogByIdY" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Log">
-        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
+        SELECT l.`id`, l.`staff_id`, l.`company_id`, l.`conglomerate_id`, l.`content`, l.`tomorrow_plan`, l.`url`, l.`uptime`, l.`uptimeC`,s.`staff_name` as `staff_name`,z.`company_name` as `company_name` FROM `attendance`.`log` l
         LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
         LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
         <where>

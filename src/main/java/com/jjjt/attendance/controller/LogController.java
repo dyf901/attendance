@@ -50,6 +50,7 @@ public class LogController {
         log.setTomorrow_plan((String) map.get("tomorrow_plan"));
         log.setUptime(time);
         log.setUptimeC(times);
+        log.setUrl((String) map.get("list"));
         int s = logService.InsertLog(log);
         System.out.println("返回最近添加的日志id:"+log.getId());
         if (s == 1) {
