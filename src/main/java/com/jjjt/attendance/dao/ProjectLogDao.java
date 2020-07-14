@@ -21,6 +21,6 @@ public interface ProjectLogDao {
     //统计总数
     long Total(Map map);
 
-    //查看个人项目日志
+    //查找项目对应的项目日志
     List<ProjectLog> FindProjectLogByProjectId (Map map);
 }

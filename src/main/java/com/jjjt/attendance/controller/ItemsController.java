@@ -60,6 +60,10 @@ public class ItemsController {
             String client_name = (String) map.get("client_name");
             if (client_name.equals("")) {
                 map.put("items_id", items.getId());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date now = new Date();
+                String time = format.format(now);
+                map.put("uptime",time);
                 staffItemsService.InsertStaffItems(map);
                 jsonResult.setCode(200);
                 jsonResult.setMessage("客户添加成功,暂无联系人!");
@@ -68,11 +72,19 @@ public class ItemsController {
                 map.put("items_id", items.getId());
                 int l = clientService.InsertClient(map);
                 if (l == 1) {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date now = new Date();
+                    String time = format.format(now);
+                    map.put("uptime",time);
                     staffItemsService.InsertStaffItems(map);
                     jsonResult.setCode(200);
                     jsonResult.setMessage("客户添加成功,联系人已添加");
                     return jsonResult;
                 } else {
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    Date now = new Date();
+                    String time = format.format(now);
+                    map.put("uptime",time);
                     staffItemsService.InsertStaffItems(map);
                     jsonResult.setCode(20006);
                     jsonResult.setMessage("客户添加成功,联系人添加失败!");
@@ -123,6 +135,10 @@ public class ItemsController {
     @PostMapping("/PushItems")
     public JsonResult PushItems(@RequestBody Map map) {
         JsonResult jsonResult = new JsonResult();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time = format.format(now);
+        map.put("uptime",time);
         int i = staffItemsService.InsertStaffItems(map);
         if (i == 1) {
             jsonResult.setCode(200);

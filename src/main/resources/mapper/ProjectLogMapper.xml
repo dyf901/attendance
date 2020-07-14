@@ -43,6 +43,7 @@
         SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
         INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
         WHERE l.`conglomerate_id`=#{conglomerate_id}
+        ORDER BY l.`uptime` DESC
         limit #{page},#{pageSize}
     </select>
 
@@ -51,10 +52,11 @@
         SELECT COUNT(id) FROM `attendance`.`project_log` WHERE `conglomerate_id`=#{conglomerate_id}
     </select>
 
-    <!--查看个人项目日志-->
+    <!--查找项目对应的项目日志-->
     <select id="FindProjectLogByProjectId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.ProjectLog">
         SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
         INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
         WHERE l.`project_id`=#{project_id}
+        ORDER BY l.`uptime` DESC
     </select>
 </mapper>

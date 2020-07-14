@@ -16,7 +16,7 @@ public class StaffLog {
     @ApiModelProperty(value = "日志id", name = "log_id")
     private int log_id;
 
-    @ApiModelProperty(value = "上传时间",name = "")
+    @ApiModelProperty(value = "上传时间",name = "uptime")
     private String uptime;
 
     public StaffLog(){

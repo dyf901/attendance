@@ -35,6 +35,7 @@ public class ProjectController {
     @ApiOperation(value = "增加项目", notes = "传参:conglomerate_id(集团id),items_id(客户id),staff_id(负责人id),start_timeC(项目开工时间戳),end_timeC(项目完工时间戳),amount(项目款)")
     @PostMapping("/InsertProject")
     public JsonResult InsertProject(@RequestBody Map map) throws ParseException {
+        System.out.println("增加项目传参:"+map);
         JsonResult jsonResult = new JsonResult();
         //获取当前时间和时间戳
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -88,15 +89,29 @@ public class ProjectController {
 
     @ApiOperation(value = "修改项目",notes = "")
     @PostMapping("/UpdateProject")
-    public JsonResult UpdateProject(@RequestBody Map map){
+    public JsonResult UpdateProject(@RequestBody Map map) throws ParseException {
+        System.out.println("修改参数:"+map);
         JsonResult jsonResult = new JsonResult();
+
+        String start_time = (String) map.get("start_time");
+        String end_time = (String) map.get("end_time");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date now = new Date();
+        Date date = format.parse(start_time);
+        Date date1 = format.parse(end_time);
+        //日期转时间戳（毫秒）
+        long times = date.getTime();
+        long times1 = date1.getTime();
+        map.put("start_timeC" , times);
+        map.put("end_timeC" , times1);
+
         int i = projectService.UpdateProject(map);
         if(i==1){
             jsonResult.setCode(200);
-            jsonResult.setMessage("删除成功！");
+            jsonResult.setMessage("修改成功！");
         }else {
             jsonResult.setCode(20006);
-            jsonResult.setMessage("删除失败！");
+            jsonResult.setMessage("修改失败！");
         }
         return jsonResult;
     }
@@ -116,6 +131,7 @@ public class ProjectController {
     @PostMapping("/FindProjectByStaffId")
     public Page<Project> FindProjectByStaffId(@RequestBody Map map){
         Page<Project> page = new Page<Project>();
+        System.out.println(map);
         map.put("id",map.get("staff_id"));
         Staff staff = staffService.FindStaffById(map);//获取用户信息查询职位id
         //System.out.println("staff:"+staff);

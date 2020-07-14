@@ -23,17 +23,25 @@
             <if test="start_time!=null and end_time!=null">
                 and  l.`uptime` &gt;= #{start_time} and l.`uptime` &lt;= #{end_time}
             </if>
+            <if test="staff_name!=null and staff_name!=null">
+                and s.`staff_name` like concat("%",#{staff_name},"%")
+            </if>
         </where>
         limit #{page},#{pageSize}
     </select>
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(id) FROM `attendance`.`log`
+        SELECT COUNT(l.id) FROM `attendance`.`log` l
+        LEFT JOIN `attendance`.`staff` s ON l.`staff_id`=s.`id`
+        LEFT JOIN `attendance`.`company` z ON l.`company_id`=z.`id`
         <where>
-            `conglomerate_id`=#{conglomerate_id}
+            l.`conglomerate_id`=#{conglomerate_id}
             <if test="start_time!=null and end_time!=null">
-                and  `uptime` &gt;= #{start_time} and `uptime` &lt;= #{end_time}
+                and  l.`uptime` &gt;= #{start_time} and l.`uptime` &lt;= #{end_time}
+            </if>
+            <if test="staff_name!=null and staff_name!=null">
+                and s.`staff_name` like concat("%",#{staff_name},"%")
             </if>
         </where>
     </select>

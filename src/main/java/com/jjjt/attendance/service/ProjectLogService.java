@@ -43,7 +43,7 @@ public class ProjectLogService implements ProjectLogDao {
         return projectLogDao.Total(map);
     }
 
-    //查看个人项目日志
+    //查找项目对应的项目日志
     @Override
     public List<ProjectLog> FindProjectLogByProjectId(Map map) {
         return projectLogDao.FindProjectLogByProjectId(map);

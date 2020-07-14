@@ -19,7 +19,7 @@
         UPDATE `attendance`.`project`
         <trim prefix="SET" suffixOverrides=",">
             <if test="staff_id!=null and staff_id!=''">
-                `staff_id`=#{staff_age},
+                `staff_id`=#{staff_id},
             </if>
             <if test="start_time!=null and start_time!=''">
                 `start_time`=#{start_time},
@@ -34,10 +34,10 @@
                 `end_timeC`=#{end_timeC},
             </if>
             <if test="amount!=null and amount!=''">
-                `amount`=#{amount}
+                `amount`=#{amount},
             </if>
             <if test="uptime!=null and uptime!=''">
-                `uptime`=#{uptime}
+                `uptime`=#{uptime},
             </if>
             <if test="uptimeC!=null and uptimeC!=''">
                 `uptimeC`=#{uptimeC}

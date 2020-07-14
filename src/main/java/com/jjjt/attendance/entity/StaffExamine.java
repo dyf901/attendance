@@ -16,7 +16,7 @@ public class StaffExamine {
     @ApiModelProperty(value = "项目id", name = "examine_id")
     private int examine_id;
 
-    @ApiModelProperty(value = "上传时间",name = "")
+    @ApiModelProperty(value = "上传时间",name = "uptime")
     private String uptime;
 
     public StaffExamine(){
