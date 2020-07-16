@@ -46,7 +46,7 @@ public class ProjectController {
         //日期转时间戳（毫秒）
         long times = date.getTime();
         map.put("uptime",time);
-        map.put("uptimes",times);
+        map.put("uptimeC",times);
 
         //获取项目开工时间，开工时间戳，完工时间，完工时间戳
         long start_timeC = (long) map.get("start_timeC");
@@ -120,6 +120,16 @@ public class ProjectController {
     @PostMapping("/FindProject")
     public Page<Project> FindProject(@RequestBody Map map){
         Page<Project> page = new Page<Project>();
+        if (map.containsKey("start1") && map.containsKey("end1")) {
+            String start_time = map.get("start1") + " 00:00:00";
+            String end_time = map.get("end1") + " 23:59:59";
+            map.put("start", start_time);
+            map.put("end", end_time);
+        } else {
+            map.put("start_time", null);
+            map.put("end_time", null);
+
+        }
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
         page.setTotal(projectService.Total(map));

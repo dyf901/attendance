@@ -42,14 +42,26 @@
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
         SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
         INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
-        WHERE l.`conglomerate_id`=#{conglomerate_id}
+        <where>
+            l.`conglomerate_id`=#{conglomerate_id}
+            <if test="project_name!=null and project_name!=''">
+                and i.`items_name` like concat("%",#{project_name},"%")
+            </if>
+        </where>
         ORDER BY l.`uptime` DESC
         limit #{page},#{pageSize}
     </select>
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(id) FROM `attendance`.`project_log` WHERE `conglomerate_id`=#{conglomerate_id}
+        SELECT COUNT(l.id) FROM `attendance`.`project_log` l
+        INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
+        <where>
+            l.`conglomerate_id`=#{conglomerate_id}
+            <if test="project_name!=null and project_name!=''">
+                and i.`items_name` like concat("%",#{project_name},"%")
+            </if>
+        </where>
     </select>
 
     <!--查找项目对应的项目日志-->

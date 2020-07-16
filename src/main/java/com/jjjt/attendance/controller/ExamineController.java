@@ -208,6 +208,16 @@ public class ExamineController {
     @PostMapping("/FindExamine")
     public Page FindExamine(@RequestBody Map map) {
         Page page = new Page();
+        if (map.containsKey("start1") && map.containsKey("end1")) {
+            String start_time = map.get("start1") + " 00:00:00";
+            String end_time = map.get("end1") + " 23:59:59";
+            map.put("start", start_time);
+            map.put("end", end_time);
+        } else {
+            map.put("start_time", null);
+            map.put("end_time", null);
+
+        }
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
         page.setTotal(examineService.Total(map));
@@ -250,10 +260,10 @@ public class ExamineController {
             }
 
             jsonResult.setCode(200);
-            jsonResult.setMessage("审核成功");
+            jsonResult.setMessage("审批通过成功!");
         }else {
             jsonResult.setCode(20006);
-            jsonResult.setMessage("审核失败");
+            jsonResult.setMessage("审批通过失败!");
         }
         return jsonResult;
     }
@@ -265,10 +275,10 @@ public class ExamineController {
         int i = examineService.UpdateStateW(map);
         if(i==1){
             jsonResult.setCode(200);
-            jsonResult.setMessage("审核成功");
+            jsonResult.setMessage("审批驳回成功!");
         }else {
             jsonResult.setCode(20006);
-            jsonResult.setMessage("审核失败");
+            jsonResult.setMessage("审批驳回失败!");
         }
         return jsonResult;
     }

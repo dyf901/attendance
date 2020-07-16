@@ -38,14 +38,26 @@
         LEFT JOIN `attendance`.`conglomerate` z ON s.`conglomerate_id`=z.`id`
         LEFT JOIN `attendance`.`items` l ON s.`items_id`=l.`id`
         LEFT JOIN `attendance`.`staff` a ON s.`staff_id`=a.`id`
-        WHERE s.`conglomerate_id`=#{conglomerate_id}
+        <where>
+            s.`conglomerate_id`=#{conglomerate_id}
+            <if test="items_name!=null and items_name!=''">
+                and l.`items_name` like concat("%",#{items_name},"%")
+            </if>
+        </where>
         order by s.`uptime` desc
         limit #{page},#{pageSize}
     </select>
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(id) FROM `attendance`.`schedule` WHERE `conglomerate_id`=#{conglomerate_id}
+        SELECT COUNT(s.id) FROM `attendance`.`schedule` s
+        LEFT JOIN `attendance`.`items` l ON s.`items_id`=l.`id`
+        <where>
+            s.`conglomerate_id`=#{conglomerate_id}
+            <if test="items_name!=null and items_name!=''">
+                and l.`items_name` like concat("%",#{items_name},"%")
+            </if>
+        </where>
     </select>
 
     <!--查询个人跟进信息-->

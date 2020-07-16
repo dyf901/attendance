@@ -52,14 +52,32 @@
         SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
         LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
         LEFT JOIN `attendance`.`staff` s ON p.`staff_id`=s.`id`
-        WHERE p.`conglomerate_id`=#{conglomerate_id}
+        <where>
+                p.`conglomerate_id`=#{conglomerate_id}
+            <if test="items_name!=null and items_name!=''">
+                and i.`items_name` like concat("%",#{items_name},"%")
+            </if>
+            <if test="start!=null and end!=null">
+                and  p.`uptime` &gt;= #{start} and p.`uptime` &lt;= #{end}
+            </if>
+        </where>
         ORDER BY p.`uptime` DESC
         limit #{page},#{pageSize}
     </select>
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(*) FROM `attendance`.`project` WHERE `conglomerate_id`=#{conglomerate_id}
+        SELECT COUNT(p.id) FROM `attendance`.`project` p
+        LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
+        <where>
+            p.`conglomerate_id`=#{conglomerate_id}
+            <if test="items_name!=null and items_name!=''">
+                and i.`items_name` like concat("%",#{items_name},"%")
+            </if>
+            <if test="start!=null and end!=null">
+                and  p.`uptime` &gt;= #{start} and p.`uptime` &lt;= #{end}
+            </if>
+        </where>
     </select>
 
     <!--分页查询个人项目信息-->

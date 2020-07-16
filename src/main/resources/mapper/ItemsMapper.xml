@@ -29,13 +29,13 @@
         <where>
             `conglomerate_id`=#{conglomerate_id}
             <if test="items_name!=null">
-                and `items_name`=#{items_name}
+                and `items_name` like concat ("%",#{items_name},"%")
             </if>
             <if test="bloc_name!=null">
-                and `bloc_name`=#{bloc_name}
+                and `bloc_name` like concat ("%",#{bloc_name},"%")
             </if>
             <if test="type!=null">
-                and `type`=#{type}
+                and `type` like concat ("%",#{type},"%")
             </if>
         </where>
         ORDER BY `uptime` DESC
@@ -48,13 +48,13 @@
         <where>
             `conglomerate_id`=#{conglomerate_id}
             <if test="items_name!=null">
-                and `items_name`=#{items_name}
+                and `items_name` like concat ("%",#{items_name},"%")
             </if>
             <if test="bloc_name!=null">
-                and `bloc_name`=#{bloc_name}
+                and `bloc_name` like concat ("%",#{bloc_name},"%")
             </if>
             <if test="type!=null">
-                and `type`=#{type}
+                and `type` like concat ("%",#{type},"%")
             </if>
         </where>
     </select>
