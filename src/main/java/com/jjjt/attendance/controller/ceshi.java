@@ -17,13 +17,17 @@ import java.util.regex.Pattern;
 
 public class ceshi {
     public static void main(String[] args) throws Exception {
-        InetAddress addr = InetAddress.getLocalHost();
+        /*InetAddress addr = InetAddress.getLocalHost();
         System.out.println("Local HostAddress:" + addr.getHostAddress());
         String hostname = addr.getHostName();
         System.out.println("Local host name: " + hostname);
 
         String ip=InetAddress.getLocalHost().getHostAddress().toString();
-        System.out.println("IP:"+ip);
+        System.out.println("IP:"+ip);*/
+
+        TimeUtils timeUtils = new TimeUtils();
+        String time="1586966400000";
+        System.out.println(timeUtils.toDate(time));
     }
         /*String id = "356923199104260322";
         String lastWord = id.substring(id.length() - 1);

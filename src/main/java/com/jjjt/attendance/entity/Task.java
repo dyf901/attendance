@@ -29,8 +29,8 @@ public class Task {
     @ApiModelProperty(value = "负责人名称", name = "principal_name")
     private String principal_name;
 
-    @ApiModelProperty(value = "参与人(员工id数组)", name = "participant_name")
-    private String participant_name;
+    @ApiModelProperty(value = "参与人(员工id数组)", name = "participant")
+    private String participant;
 
     @ApiModelProperty(value = "任务标题(必填)", name = "task_title")
     private String task_title;
@@ -65,6 +65,9 @@ public class Task {
     @ApiModelProperty(value = "结束图片", name = "end_img")
     private String end_img;
 
+    @ApiModelProperty(value = "审核理由", name = "check")
+    private String check;
+
     @ApiModelProperty(value = "任务状态(进行中,审核中,已完成,已撤销)", name = "state")
     private String state;
 
@@ -75,7 +78,7 @@ public class Task {
         super();
     }
 
-    public Task(int id, int conglomerate_id, String conglomerate_name, int creator_id, String creator_name, int principal_id, String principal_name, String participant_name, String task_title, String task_describe, String start_img, String uptime, long uptimeC, String end_time, long end_timeC, String degree, String task_summarize, String task_reason, String end_img, String state, String status) {
+    public Task(int id, int conglomerate_id, String conglomerate_name, int creator_id, String creator_name, int principal_id, String principal_name, String participant, String task_title, String task_describe, String start_img, String uptime, long uptimeC, String end_time, long end_timeC, String degree, String task_summarize, String task_reason, String end_img, String check, String state, String status) {
         this.id = id;
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
@@ -83,7 +86,7 @@ public class Task {
         this.creator_name = creator_name;
         this.principal_id = principal_id;
         this.principal_name = principal_name;
-        this.participant_name = participant_name;
+        this.participant = participant;
         this.task_title = task_title;
         this.task_describe = task_describe;
         this.start_img = start_img;
@@ -95,6 +98,7 @@ public class Task {
         this.task_summarize = task_summarize;
         this.task_reason = task_reason;
         this.end_img = end_img;
+        this.check = check;
         this.state = state;
         this.status = status;
     }
@@ -155,12 +159,12 @@ public class Task {
         this.principal_name = principal_name;
     }
 
-    public String getParticipant_name() {
-        return participant_name;
+    public String getParticipant() {
+        return participant;
     }
 
-    public void setParticipant_name(String participant_name) {
-        this.participant_name = participant_name;
+    public void setParticipant(String participant) {
+        this.participant = participant;
     }
 
     public String getTask_title() {
@@ -267,6 +271,14 @@ public class Task {
         this.status = status;
     }
 
+    public String getCheck() {
+        return check;
+    }
+
+    public void setCheck(String check) {
+        this.check = check;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -277,7 +289,7 @@ public class Task {
                 ", creator_name='" + creator_name + '\'' +
                 ", principal_id=" + principal_id +
                 ", principal_name='" + principal_name + '\'' +
-                ", participant_name='" + participant_name + '\'' +
+                ", participant='" + participant + '\'' +
                 ", task_title='" + task_title + '\'' +
                 ", task_describe='" + task_describe + '\'' +
                 ", start_img='" + start_img + '\'' +
@@ -289,6 +301,7 @@ public class Task {
                 ", task_summarize='" + task_summarize + '\'' +
                 ", task_reason='" + task_reason + '\'' +
                 ", end_img='" + end_img + '\'' +
+                ", check='" + check + '\'' +
                 ", state='" + state + '\'' +
                 ", status='" + status + '\'' +
                 '}';
