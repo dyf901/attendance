@@ -14,10 +14,30 @@
         DELETE FROM `attendance`.`task` WHERE `id`=#{id}
     </delete>
 
+    <!--撤销任务-->
+    <update id="UpdateTaskState" parameterType="java.util.Map">
+        UPDATE `attendance`.`task` SET `state`='已撤销' WHERE `id`=#{id}
+    </update>
+
+    <!--完成任务-->
+    <update id="UpdateTaskStateW" parameterType="java.util.Map">
+        UPDATE `attendance`.`task` SET `state`='审核中' WHERE `id`=#{id}
+    </update>
+
+    <!--审核通过-->
+    <update id="UpdateTaskT" parameterType="java.util.Map">
+        UPDATE `attendance`.`task` SET `state`='已完成' WHERE `id`=#{id}
+    </update>
+
+    <!--审核未通过-->
+    <update id="UpdateTaskW" parameterType="java.util.Map">
+        UPDATE `attendance`.`task` SET `state`='进行中' WHERE `id`=#{id}
+    </update>
+
     <!--分页模糊查询任务-->
     <select id="FindTask" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
-        <bind name="page" value="pageSize*(pageNo-1)"></bind>t.
-        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`,t.`check`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`,t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
         left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
         <where>
@@ -27,6 +47,9 @@
             </if>
             <if test="start!=null and end!=null">
                 and t.`uptime` &gt;= #{start} and t.`uptime` &lt;= #{end}
+            </if>
+            <if test="state!=null">
+                and t.`state`= #{state}
             </if>
         </where>
         ORDER BY t.`uptime` DESC
@@ -44,8 +67,63 @@
             <if test="start!=null and end!=null">
                 and `uptime` &gt;= #{start} and `uptime` &lt;= #{end}
             </if>
+            <if test="state!=null">
+                and `state`= #{state}
+            </if>
         </where>
     </select>
 
-    <!---->
+    <!--查询我创建的任务App-->
+    <select id="FindTaskByCreatorId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`,t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
+        left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
+        <where>
+            t.`creator_id`=#{creator_id}
+            <if test="task_title!=null and task_title!=''">
+                and t.`task_title` LIKE concat ("%",#{task_title},"%")
+            </if>
+        </where>
+        ORDER BY t.`uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数我创建的任务-->
+    <select id="TotalByCreatorId" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(`id`) FROM `attendance`.`task`
+        <where>
+            `creator_id`= #{creator_id}
+            <if test="task_title!=null and task_title!=''">
+                and `task_title` LIKE concat ("%",#{task_title},"%")
+            </if>
+        </where>
+    </select>
+
+    <!--查询我负责的任务App-->
+    <select id="FindTaskByPrincipalId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`,t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
+        left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
+        <where>
+            t.`principal_id`=#{principal_id}
+            <if test="task_title!=null and task_title!=''">
+                and t.`task_title` LIKE concat ("%",#{task_title},"%")
+            </if>
+        </where>
+        ORDER BY t.`uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数我负责的任务-->
+    <select id="TotalByPrincipalId" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(`id`) FROM `attendance`.`task`
+        <where>
+            `principal_id`= #{principal_id}
+            <if test="task_title!=null and task_title!=''">
+                and `task_title` LIKE concat ("%",#{task_title},"%")
+            </if>
+        </where>
+    </select>
 </mapper>
