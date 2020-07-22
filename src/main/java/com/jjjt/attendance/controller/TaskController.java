@@ -27,7 +27,18 @@ public class TaskController {
     @Autowired
     private StaffTaskService staffTaskService;
 
-    @ApiOperation(value = "发布任务", notes = "")
+    //{"conglomerate_id":1,
+    // "creator_id":11,
+    // "principal_id":11,
+    // "participant":"[11,4,5]",
+    // "task_title":"阿斯顿",
+    // "task_describe":"阿萨德",
+    // "start_img":"",
+    // "end_timeC":1595754633000,
+    // "degree":"紧急"}
+
+
+    @ApiOperation(value = "发布任务", notes = "传参:conglomerate_id(集团id),creator_id(创建人id),principal_id(负责人id),participant(参与人id数组),task_title(任务标题),task_describe(任务描述),start_img(任务图片),end_timeC(结束时间戳),degree(紧急程度)")
     @PostMapping("/InsertTask")
     public JsonResult InsertTask(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
@@ -82,7 +93,7 @@ public class TaskController {
         }
     }
 
-    @ApiOperation(value = "删除任务", notes = "")
+    @ApiOperation(value = "删除任务", notes = "传参:id(任务id)")
     @PostMapping("/DeleteTask")
     public JsonResult DeleteTask(@RequestBody Map map){
         JsonResult jsonResult = new JsonResult();
@@ -98,7 +109,7 @@ public class TaskController {
         return jsonResult;
     }
 
-    @ApiOperation(value = "撤销任务", notes = "")
+    @ApiOperation(value = "撤销任务", notes = "传参:id(任务id)")
     @PostMapping("/UpdateTaskState")
     public JsonResult UpdateTaskState(@RequestBody Map map){
         JsonResult jsonResult = new JsonResult();
@@ -114,7 +125,7 @@ public class TaskController {
         return jsonResult;
     }
 
-    @ApiOperation(value = "完成任务", notes = "")
+    @ApiOperation(value = "完成任务", notes = "传参:id(任务id),task_summarize(任务总结),task_reason(申请理由(申请结束)),end_img(结束图片)")
     @PostMapping("/UpdateTaskStateW")
     public JsonResult UpdateTaskStateW(@RequestBody Map map){
         JsonResult jsonResult = new JsonResult();
@@ -130,7 +141,7 @@ public class TaskController {
         return jsonResult;
     }
 
-    @ApiOperation(value = "审核通过", notes = "")
+    @ApiOperation(value = "审核通过", notes = "传参:id(任务id),check(通过原因)")
     @PostMapping("/UpdateTaskT")
     public JsonResult UpdateTaskT(@RequestBody Map map){
         JsonResult jsonResult = new JsonResult();
@@ -146,7 +157,7 @@ public class TaskController {
         return jsonResult;
     }
 
-    @ApiOperation(value = "审核未通过", notes = "")
+    @ApiOperation(value = "审核未通过", notes = "传参:id(任务id),check(未通过原因)")
     @PostMapping("/UpdateTaskW")
     public JsonResult UpdateTaskW(@RequestBody Map map){
         JsonResult jsonResult = new JsonResult();
