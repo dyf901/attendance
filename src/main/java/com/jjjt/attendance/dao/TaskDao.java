@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface TaskDao {
     //发布任务
-    int InsertTask(Map map);
+    int InsertTask(Task task);
 
     //删除任务
     int DeleteTask(Map map);

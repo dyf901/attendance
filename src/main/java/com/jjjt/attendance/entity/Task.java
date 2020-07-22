@@ -56,6 +56,9 @@ public class Task {
     @ApiModelProperty(value = "任务紧急程度", name = "degree")
     private String degree;
 
+    @ApiModelProperty(value = "任务天数", name = "taskday")
+    private int taskday;
+
     @ApiModelProperty(value = "任务总结", name = "task_summarize")
     private String task_summarize;
 
@@ -78,7 +81,7 @@ public class Task {
         super();
     }
 
-    public Task(int id, int conglomerate_id, String conglomerate_name, int creator_id, String creator_name, int principal_id, String principal_name, String participant, String task_title, String task_describe, String start_img, String uptime, long uptimeC, String end_time, long end_timeC, String degree, String task_summarize, String task_reason, String end_img, String check, String state, String status) {
+    public Task(int id, int conglomerate_id, String conglomerate_name, int creator_id, String creator_name, int principal_id, String principal_name, String participant, String task_title, String task_describe, String start_img, String uptime, long uptimeC, String end_time, long end_timeC, String degree, int taskday, String task_summarize, String task_reason, String end_img, String check, String state, String status) {
         this.id = id;
         this.conglomerate_id = conglomerate_id;
         this.conglomerate_name = conglomerate_name;
@@ -95,6 +98,7 @@ public class Task {
         this.end_time = end_time;
         this.end_timeC = end_timeC;
         this.degree = degree;
+        this.taskday = taskday;
         this.task_summarize = task_summarize;
         this.task_reason = task_reason;
         this.end_img = end_img;
@@ -279,6 +283,14 @@ public class Task {
         this.check = check;
     }
 
+    public int getTaskday() {
+        return taskday;
+    }
+
+    public void setTaskday(int taskday) {
+        this.taskday = taskday;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -298,6 +310,7 @@ public class Task {
                 ", end_time='" + end_time + '\'' +
                 ", end_timeC=" + end_timeC +
                 ", degree='" + degree + '\'' +
+                ", taskday=" + taskday +
                 ", task_summarize='" + task_summarize + '\'' +
                 ", task_reason='" + task_reason + '\'' +
                 ", end_img='" + end_img + '\'' +

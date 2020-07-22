@@ -86,13 +86,25 @@
         SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
         LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
         LEFT JOIN `attendance`.`staff` s ON p.`staff_id`=s.`id`
-        WHERE p.`staff_id`=#{staff_id}
+        <where>
+            p.`staff_id`=#{staff_id}
+            <if test="items_name!=null and items_name!=''">
+                and i.`items_name` like concat("%",#{items_name},"%")
+            </if>
+        </where>
         ORDER BY p.`uptime` DESC
         limit #{page},#{pageSize}
     </select>
 
     <!--统计总数_个人-->
     <select id="TotalByStaffId" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(*) FROM `attendance`.`project` WHERE `staff_id`=#{staff_id}
+        SELECT COUNT(p.id) FROM `attendance`.`project` p
+        LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
+        <where>
+            p.`staff_id`=#{staff_id}
+            <if test="items_name!=null and items_name!=''">
+                and i.`items_name` like concat("%",#{items_name},"%")
+            </if>
+        </where>
     </select>
 </mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.StaffTaskDao">
+    <!--增加员工任务关系-->
+    <insert id="InsertStaffTask" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`staff_task`(`task_id`, `staff_id`, `uptime`) VALUES (#{task_id}, #{staff_id}, #{uptime});
+    </insert>
+
+    <!--根据staff_id查询对应关系-->
+    <select id="FindStaffTask" parameterType="java.util.Map" resultType="int">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT `task_id` FROM `attendance`.`staff_task`
+        WHERE `staff_id`=#{staff_id}
+        order by `uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(*) FROM `attendance`.`staff_task` WHERE `staff_id`=#{staff_id}
+    </select>
+</mapper>

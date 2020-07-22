@@ -2,13 +2,18 @@ package com.jjjt.attendance.controller;
 
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Task;
+import com.jjjt.attendance.service.StaffTaskService;
 import com.jjjt.attendance.service.TaskService;
 import com.jjjt.attendance.util.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @Api(description = "任务接口")
@@ -19,20 +24,62 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private StaffTaskService staffTaskService;
+
     @ApiOperation(value = "发布任务", notes = "")
     @PostMapping("/InsertTask")
-    public JsonResult InsertTask(@RequestBody Map map){
+    public JsonResult InsertTask(@RequestBody Map map) throws ParseException {
         JsonResult jsonResult = new JsonResult();
-        int i = taskService.InsertTask(map);
-        if (i==1){
+        Task task = new Task();
+        long end_timeC = (long) map.get("end_timeC");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lts = new Long(end_timeC);
+        Date date2 = new Date(lts);
+        String end_time = simpleDateFormat.format(date2);//根据时间戳获取时间
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date now = new Date();
+        String time = format.format(now);
+        Date date = format.parse(time);
+        //日期转时间戳（毫秒）
+        long times = date.getTime();//获取当前时间,时间戳
+
+        int taskday= (int) ((date2.getTime()-date.getTime()+1000000)/(60*60*24*1000));//获取任务间隔时间
+
+        //把数据塞进实体类中
+        task.setConglomerate_id((Integer) map.get("conglomerate_id"));
+        task.setCreator_id((Integer) map.get("creator_id"));
+        task.setPrincipal_id((Integer) map.get("principal_id"));
+        task.setParticipant((String) map.get("participant"));
+        task.setTask_title((String) map.get("task_title"));
+        task.setTask_describe((String) map.get("task_describe"));
+        task.setStart_img((String) map.get("start_img"));
+        task.setUptime(time);
+        task.setUptimeC(times);
+        task.setEnd_time(end_time);
+        task.setEnd_timeC(end_timeC);
+        task.setDegree((String) map.get("degree"));
+        task.setTaskday(taskday);
+
+        int i = taskService.InsertTask(task);
+        if(i==1){
+            String list= (String) map.get("participant");
+            JSONArray jsonArray = JSONArray.fromObject(list);
+            for (int s=0;s<jsonArray.size();s++){
+                map.put("task_id",task.getId());
+                map.put("staff_id",jsonArray.get(s));
+                map.put("uptime",time);
+                staffTaskService.InsertStaffTask(map);
+            }
             jsonResult.setCode(200);
             jsonResult.setMessage("任务发布成功!");
+            return jsonResult;
         }else {
             jsonResult.setCode(20006);
             jsonResult.setMessage("任务发布失败!");
+            return jsonResult;
         }
-
-        return jsonResult;
     }
 
     @ApiOperation(value = "删除任务", notes = "")
@@ -126,7 +173,7 @@ public class TaskController {
             return page;
     }
 
-    @ApiOperation(value = "查询我创建的任务App", notes = "")
+    @ApiOperation(value = "查询我派发的任务App", notes = "")
     @PostMapping("/FindTaskByCreatorId")
     public Page<Task> FindTaskByCreatorId(@RequestBody Map map){
         Page<Task> page = new Page<Task>();

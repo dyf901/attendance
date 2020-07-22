@@ -15,8 +15,8 @@ public class TaskService implements TaskDao {
 
     //发布任务
     @Override
-    public int InsertTask(Map map) {
-        return taskDao.InsertTask(map);
+    public int InsertTask(Task task) {
+        return taskDao.InsertTask(task);
     }
 
     //删除任务

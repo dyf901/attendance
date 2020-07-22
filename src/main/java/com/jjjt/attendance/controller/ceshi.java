@@ -25,9 +25,19 @@ public class ceshi {
         String ip=InetAddress.getLocalHost().getHostAddress().toString();
         System.out.println("IP:"+ip);*/
 
-        TimeUtils timeUtils = new TimeUtils();
-        String time="1586966400000";
-        System.out.println(timeUtils.toDate(time));
+        String date2="2020-07-22 09:00:07";
+
+        String date1="2020-07-20 09:02:02";
+
+        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+
+        Date d1=sdf.parse(date1);
+
+        Date d2=sdf.parse(date2);
+
+        int daysBetween= (int) ((d2.getTime()-d1.getTime()+1000000)/(60*60*24*1000));
+
+        System.out.println("1987-01-01 与 2010-01-01 相隔 "+daysBetween+" 天");
     }
         /*String id = "356923199104260322";
         String lastWord = id.substring(id.length() - 1);
