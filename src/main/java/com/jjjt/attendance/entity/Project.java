@@ -19,6 +19,9 @@ public class Project {
     @ApiModelProperty(value = "客户名称", name = "items_name")
     private String items_name;
 
+    @ApiModelProperty(value = "项目名称", name = "project_name")
+    private String project_name;
+
     @ApiModelProperty(value = "项目负责人id", name = "staff_id")
     private int staff_id;
 
@@ -50,11 +53,12 @@ public class Project {
         super();
     }
 
-    public Project(int id, int items_id, int conglomerate_id, String items_name, int staff_id, String staff_name, String start_time, long start_timeC, String end_time, long end_timeC, double amount, String uptime, long uptimeC) {
+    public Project(int id, int items_id, int conglomerate_id, String items_name, String project_name, int staff_id, String staff_name, String start_time, long start_timeC, String end_time, long end_timeC, double amount, String uptime, long uptimeC) {
         this.id = id;
         this.items_id = items_id;
         this.conglomerate_id = conglomerate_id;
         this.items_name = items_name;
+        this.project_name = project_name;
         this.staff_id = staff_id;
         this.staff_name = staff_name;
         this.start_time = start_time;
@@ -96,6 +100,14 @@ public class Project {
 
     public void setItems_name(String items_name) {
         this.items_name = items_name;
+    }
+
+    public String getProject_name() {
+        return project_name;
+    }
+
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
     }
 
     public int getStaff_id() {
@@ -177,6 +189,7 @@ public class Project {
                 ", items_id=" + items_id +
                 ", conglomerate_id=" + conglomerate_id +
                 ", items_name='" + items_name + '\'' +
+                ", project_name='" + project_name + '\'' +
                 ", staff_id=" + staff_id +
                 ", staff_name='" + staff_name + '\'' +
                 ", start_time='" + start_time + '\'' +

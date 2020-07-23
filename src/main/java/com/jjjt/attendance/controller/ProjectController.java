@@ -3,6 +3,7 @@ package com.jjjt.attendance.controller;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Project;
 import com.jjjt.attendance.entity.Staff;
+import com.jjjt.attendance.service.ItemsService;
 import com.jjjt.attendance.service.PositionPermissionService;
 import com.jjjt.attendance.service.ProjectService;
 import com.jjjt.attendance.service.StaffService;
@@ -31,6 +32,9 @@ public class ProjectController {
 
     @Autowired
     private StaffService staffService;
+
+    @Autowired
+    private ItemsService itemsService;
 
     @ApiOperation(value = "增加项目", notes = "传参:conglomerate_id(集团id),items_id(客户id),staff_id(负责人id),start_timeC(项目开工时间戳),end_timeC(项目完工时间戳),amount(项目款)")
     @PostMapping("/InsertProject")
@@ -63,6 +67,8 @@ public class ProjectController {
 
         int i = projectService.InsertProject(map);
         if(i==1){
+            map.put("state","已签约");
+            itemsService.UpdateItemsByState(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("签约成功！");
         }else {

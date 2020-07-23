@@ -49,6 +49,7 @@ public class ItemsController {
         Date date2 = new Date(lts);
         String uptime = simpleDateFormat.format(date2);
         items.setConglomerate_id((Integer) map.get("conglomerate_id"));
+        items.setStaff_id((Integer) map.get("staff_id"));
         items.setItems_name((String) map.get("items_name"));
         items.setBloc_name((String) map.get("bloc_name"));
         items.setType((String) map.get("type"));
@@ -141,6 +142,7 @@ public class ItemsController {
         map.put("uptime",time);
         int i = staffItemsService.InsertStaffItems(map);
         if (i == 1) {
+            itemsService.UpdateItemsByStaffId(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("推送成功!");
             return jsonResult;

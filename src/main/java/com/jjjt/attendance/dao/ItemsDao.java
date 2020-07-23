@@ -26,4 +26,10 @@ public interface ItemsDao {
 
     //根据id查询客户信息
     Items FindItemsById(int id);
+
+    //修改客户状态
+    int UpdateItemsByState(Map map);
+
+    //修改客户签约人
+    int UpdateItemsByStaffId(Map map);
 }

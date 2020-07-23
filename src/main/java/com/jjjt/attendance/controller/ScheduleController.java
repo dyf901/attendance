@@ -3,6 +3,7 @@ package com.jjjt.attendance.controller;
 import com.jjjt.attendance.entity.JsonResult;
 import com.jjjt.attendance.entity.Schedule;
 import com.jjjt.attendance.entity.Staff;
+import com.jjjt.attendance.service.ItemsService;
 import com.jjjt.attendance.service.PositionPermissionService;
 import com.jjjt.attendance.service.ScheduleService;
 import com.jjjt.attendance.service.StaffService;
@@ -32,6 +33,9 @@ public class ScheduleController {
     @Autowired
     private StaffService staffService;
 
+    @Autowired
+    private ItemsService itemsService;
+
     @ApiOperation(value = "增加跟进信息",notes = "传参:`conglomerate_id`(集团id), `items_id`(客户id), `staff_id`(员工id), `principal`(负责人), `content`(跟进内容), `schedule_type`(跟进状态)")
     @PostMapping("/InsertSchedule")
     public JsonResult InsertSchedule(@RequestBody Map map) throws ParseException {
@@ -48,6 +52,8 @@ public class ScheduleController {
         map.put("uptime",time);
         int i = scheduleService.InsertSchedule(map);
         if (i==1){
+            map.put("state","沟通中");
+            itemsService.UpdateItemsByState(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("上传成功!");
         } else {

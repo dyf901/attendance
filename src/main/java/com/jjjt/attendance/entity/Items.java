@@ -13,6 +13,12 @@ public class Items {
     @ApiModelProperty(value = "集团id", name = "id")
     private int conglomerate_id;
 
+    @ApiModelProperty(value = "员工id", name = "staff_id")
+    private int staff_id;
+
+    @ApiModelProperty(value = "员工姓名", name = "staff_name")
+    private int staff_name;
+
     @ApiModelProperty(value = "项目名称", name = "items_name")
     private String items_name;
 
@@ -32,9 +38,11 @@ public class Items {
         super();
     }
 
-    public Items(int id, int conglomerate_id, String items_name, String bloc_name, String type, String uptime, long uptimeC) {
+    public Items(int id, int conglomerate_id, int staff_id, int staff_name, String items_name, String bloc_name, String type, String uptime, long uptimeC) {
         this.id = id;
         this.conglomerate_id = conglomerate_id;
+        this.staff_id = staff_id;
+        this.staff_name = staff_name;
         this.items_name = items_name;
         this.bloc_name = bloc_name;
         this.type = type;
@@ -98,11 +106,29 @@ public class Items {
         this.uptimeC = uptimeC;
     }
 
+    public int getStaff_id() {
+        return staff_id;
+    }
+
+    public void setStaff_id(int staff_id) {
+        this.staff_id = staff_id;
+    }
+
+    public int getStaff_name() {
+        return staff_name;
+    }
+
+    public void setStaff_name(int staff_name) {
+        this.staff_name = staff_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", conglomerate_id=" + conglomerate_id +
+                ", staff_id=" + staff_id +
+                ", staff_name=" + staff_name +
                 ", items_name='" + items_name + '\'' +
                 ", bloc_name='" + bloc_name + '\'' +
                 ", type='" + type + '\'' +

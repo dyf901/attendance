@@ -18,6 +18,12 @@ public class Examine {
     @ApiModelProperty(value = "客户id", name = "itmes_id")
     private int itmes_id;
 
+    @ApiModelProperty(value = "项目id", name = "project_id")
+    private int project_id;
+
+    @ApiModelProperty(value = "项目名称", name = "project_name")
+    private String project_name;
+
     @ApiModelProperty(value = "关联项目", name = "client_company")
     private String client_company;
 
@@ -115,10 +121,12 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, int itmes_id, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, String entry_time, long entry_timeC, String promotion_time, long promotion_timeC, String operating_post, List list) {
+    public Examine(int id, int staff_id, int itmes_id, int project_id, String project_name, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, String entry_time, long entry_timeC, String promotion_time, long promotion_timeC, String operating_post, List list) {
         this.id = id;
         this.staff_id = staff_id;
         this.itmes_id = itmes_id;
+        this.project_id = project_id;
+        this.project_name = project_name;
         this.client_company = client_company;
         this.company_id = company_id;
         this.examine_type = examine_type;
@@ -424,12 +432,30 @@ public class Examine {
         this.operating_post = operating_post;
     }
 
+    public int getProject_id() {
+        return project_id;
+    }
+
+    public void setProject_id(int project_id) {
+        this.project_id = project_id;
+    }
+
+    public String getProject_name() {
+        return project_name;
+    }
+
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
                 ", itmes_id=" + itmes_id +
+                ", project_id=" + project_id +
+                ", project_name='" + project_name + '\'' +
                 ", client_company='" + client_company + '\'' +
                 ", company_id=" + company_id +
                 ", examine_type='" + examine_type + '\'' +
