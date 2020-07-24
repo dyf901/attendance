@@ -172,4 +172,29 @@ public class ProjectController {
         }
         return page;
     }
+
+    @ApiOperation(value = "查询项目信息APP",notes = "传参:conglomerate_id(集团id),staff_id(负责人id)")
+    @PostMapping("/FindProjectByStaffIdB")
+    public JsonResult FindProjectByStaffIdB(@RequestBody Map map){
+        JsonResult jsonResult = new JsonResult();
+        System.out.println(map);
+        map.put("id",map.get("staff_id"));
+        Staff staff = staffService.FindStaffById(map);//获取用户信息查询职位id
+        //System.out.println("staff:"+staff);
+        map.put("position_id",staff.getPosition_id());
+        //System.out.println(staff.getPosition_id());
+        List<Integer> list = positionPermissionService.FindPositionPermissionByPositionId(map);//查询职位id对应的权限id集合
+        if(list.size()>0){//判断集合是否为0
+            for (Integer l : list) {//遍历
+                //System.out.println("l:" + l);
+                if(l==6) {//判断是否具有查看权限
+                    jsonResult.setData(projectService.FindProjectB(map));
+
+                }
+            }
+        }else {
+            jsonResult.setData(projectService.FindProjectByStaffIdB(map));
+        }
+        return jsonResult;
+    }
 }

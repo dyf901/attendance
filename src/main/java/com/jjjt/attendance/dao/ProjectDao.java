@@ -27,4 +27,9 @@ public interface ProjectDao {
     //统计总数_个人
     long TotalByStaffId (Map map);
 
+    //查询个人项目信息
+    List<Project> FindProjectByStaffIdB (Map map);
+
+    //查询项目信息
+    List<Project> FindProjectB (Map map);
 }

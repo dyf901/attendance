@@ -118,6 +118,7 @@ public class ItemsController {
         Staff staff = staffService.FindStaffById(map);
         System.out.println(staff);
         if (staff.getPosition_name().equals("管理员") || staff.getPosition_name().equals("市场总监")) {
+            System.out.println(itemsService.FindItemsApp(map));
             jsonResult.setData(itemsService.FindItemsApp(map));
             return jsonResult;
         } else {
@@ -126,6 +127,30 @@ public class ItemsController {
             System.out.println(list);
             for (Integer l : list) {
                 lista.add(itemsService.FindItemsById(l));
+            }
+            jsonResult.setData(lista);
+            return jsonResult;
+        }
+    }
+
+    @ApiOperation(value = "App查询客户信息", notes = "传参:staff_id,conglomerate_id")
+    @PostMapping("/FindItemsAppB")
+    public JsonResult FindItemsAppB(@RequestBody Map map) {
+        System.out.println(map);
+        JsonResult jsonResult = new JsonResult();
+        map.put("id", map.get("staff_id"));
+        Staff staff = staffService.FindStaffById(map);
+        System.out.println(staff);
+        if (staff.getPosition_name().equals("管理员") || staff.getPosition_name().equals("市场总监")) {
+            System.out.println(itemsService.FindItemsApp(map));
+            jsonResult.setData(itemsService.FindItemsAppB(map));
+            return jsonResult;
+        } else {
+            List lista = new ArrayList();
+            List<Integer> list = staffItemsService.FindItemsId(map);
+            System.out.println(list);
+            for (Integer l : list) {
+                lista.add(itemsService.FindItemsByIdB(l));
             }
             jsonResult.setData(lista);
             return jsonResult;

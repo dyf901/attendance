@@ -66,4 +66,16 @@ public class ItemsService implements ItemsDao {
     public int UpdateItemsByStaffId(Map map) {
         return itemsDao.UpdateItemsByStaffId(map);
     }
+
+    //App查询客户信息B
+    @Override
+    public List<Items> FindItemsAppB(Map map) {
+        return itemsDao.FindItemsAppB(map);
+    }
+
+    //根据id查询客户信息B
+    @Override
+    public Items FindItemsByIdB(int id) {
+        return itemsDao.FindItemsByIdB(id);
+    }
 }

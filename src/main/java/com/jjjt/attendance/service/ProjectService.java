@@ -54,4 +54,16 @@ public class ProjectService implements ProjectDao {
     public long TotalByStaffId(Map map) {
         return projectDao.TotalByStaffId(map);
     }
+
+    //查询个人项目信息
+    @Override
+    public List<Project> FindProjectByStaffIdB(Map map) {
+        return projectDao.FindProjectByStaffIdB(map);
+    }
+
+    //查询项目信息
+    @Override
+    public List<Project> FindProjectB(Map map) {
+        return projectDao.FindProjectB(map);
+    }
 }

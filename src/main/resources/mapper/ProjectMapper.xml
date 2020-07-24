@@ -122,4 +122,18 @@
             </if>
         </where>
     </select>
+
+    <!--查询个人项目信息-->
+    <select id="FindProjectByStaffIdB" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Project">
+        SELECT p.`id`,p.`project_name` FROM `attendance`.`project` p
+        WHERE p.`staff_id`=#{staff_id}
+        ORDER BY p.`uptime` DESC
+    </select>
+
+    <!--分页模糊查询项目信息-->
+    <select id="FindProjectB" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Project">
+        SELECT p.`id`,p.`project_name` FROM `attendance`.`project` p
+        WHERE p.`conglomerate_id`=#{conglomerate_id}
+        ORDER BY p.`uptime` DESC
+    </select>
 </mapper>

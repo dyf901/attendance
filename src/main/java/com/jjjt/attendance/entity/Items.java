@@ -17,7 +17,7 @@ public class Items {
     private int staff_id;
 
     @ApiModelProperty(value = "员工姓名", name = "staff_name")
-    private int staff_name;
+    private String staff_name;
 
     @ApiModelProperty(value = "项目名称", name = "items_name")
     private String items_name;
@@ -38,7 +38,7 @@ public class Items {
         super();
     }
 
-    public Items(int id, int conglomerate_id, int staff_id, int staff_name, String items_name, String bloc_name, String type, String uptime, long uptimeC) {
+    public Items(int id, int conglomerate_id, int staff_id, String staff_name, String items_name, String bloc_name, String type, String uptime, long uptimeC) {
         this.id = id;
         this.conglomerate_id = conglomerate_id;
         this.staff_id = staff_id;
@@ -114,11 +114,11 @@ public class Items {
         this.staff_id = staff_id;
     }
 
-    public int getStaff_name() {
+    public String getStaff_name() {
         return staff_name;
     }
 
-    public void setStaff_name(int staff_name) {
+    public void setStaff_name(String staff_name) {
         this.staff_name = staff_name;
     }
 

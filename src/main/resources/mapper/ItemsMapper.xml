@@ -84,4 +84,17 @@
     <update id="UpdateItemsByStaffId" parameterType="java.util.Map">
         UPDATE `attendance`.`items` SET `staff_id`=#{staff_id} WHERE `id`=#{items_id}
     </update>
+
+    <!--App查询客户信息-->
+    <select id="FindItemsAppB" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Items">
+        SELECT i.`id`, i.`items_name`FROM `attendance`.`items` i
+        WHERE i.`conglomerate_id`=#{conglomerate_id}
+        ORDER BY i.`uptime` DESC
+    </select>
+
+    <!--根据id查询员工信息-->
+    <select id="FindItemsByIdB" parameterType="int" resultType="com.jjjt.attendance.entity.Items">
+       SELECT i.`id`, i.`items_name`FROM `attendance`.`items` i
+        WHERE i.`id`=#{id}
+    </select>
 </mapper>
