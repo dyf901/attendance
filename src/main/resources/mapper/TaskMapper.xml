@@ -129,4 +129,12 @@
             </if>
         </where>
     </select>
+
+    <!--根据id查询任务-->
+    <select id="FindTaskById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
+        left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
+        WHERE t.`id`=#{id}
+    </select>
 </mapper>

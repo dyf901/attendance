@@ -41,4 +41,7 @@ public interface TaskDao {
 
     //统计总数我负责的任务
     long TotalByPrincipalId(Map map);
+
+    //根据id查询任务
+    Task FindTaskById(Map map);
 }

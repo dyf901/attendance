@@ -84,4 +84,10 @@ public class TaskService implements TaskDao {
     public long TotalByPrincipalId(Map map) {
         return taskDao.TotalByPrincipalId(map);
     }
+
+    //根据id查询任务
+    @Override
+    public Task FindTaskById(Map map) {
+        return taskDao.FindTaskById(map);
+    }
 }

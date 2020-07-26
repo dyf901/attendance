@@ -1,7 +1,10 @@
 package com.jjjt.attendance.controller;
 
 import com.jjjt.attendance.entity.JsonResult;
+import com.jjjt.attendance.entity.Staff;
 import com.jjjt.attendance.entity.Task;
+import com.jjjt.attendance.service.PositionPermissionService;
+import com.jjjt.attendance.service.StaffService;
 import com.jjjt.attendance.service.StaffTaskService;
 import com.jjjt.attendance.service.TaskService;
 import com.jjjt.attendance.util.Page;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Api(description = "任务接口")
@@ -27,6 +32,12 @@ public class TaskController {
     @Autowired
     private StaffTaskService staffTaskService;
 
+    @Autowired
+    private StaffService staffService;
+
+    @Autowired
+    private PositionPermissionService positionPermissionService;
+
     //{"conglomerate_id":1,
     // "creator_id":11,
     // "principal_id":11,
@@ -37,6 +48,30 @@ public class TaskController {
     // "end_timeC":1595754633000,
     // "degree":"紧急"}
 
+    @ApiOperation(value = "查看权限",notes = "传参:staff_id(员工id)")
+    @PostMapping("/FindPermission")
+    public JsonResult FindPermission(@RequestBody Map map){
+        JsonResult jsonResult = new JsonResult();
+        Staff staff = staffService.FindStaffById(map);
+        System.out.println("staff:"+staff);
+        map.put("position_id",staff.getPosition_id());
+        System.out.println(staff.getPosition_id());
+        List<Integer> list = positionPermissionService.FindPositionPermissionByPositionId(map);
+        if(list.size()>0){
+            for (Integer l : list) {
+                System.out.println("l:" + l);
+                if(l==7) {
+                    jsonResult.setCode(200);
+                    jsonResult.setMessage("已获得权限");
+                }
+            }
+        }else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("未获得权限!");
+        }
+
+        return jsonResult;
+    }
 
     @ApiOperation(value = "发布任务", notes = "传参:conglomerate_id(集团id),creator_id(创建人id),principal_id(负责人id),participant(参与人id数组),task_title(任务标题),task_describe(任务描述),start_img(任务图片),end_timeC(结束时间戳),degree(紧急程度)")
     @PostMapping("/InsertTask")
@@ -173,7 +208,7 @@ public class TaskController {
         return jsonResult;
     }
 
-    @ApiOperation(value = "分页模糊查询任务", notes = "")
+    @ApiOperation(value = "分页模糊查询任务", notes = "传参:conglomerate_id(集团id),pageNo,pageSize")
         @PostMapping("/FindTask")
         public Page<Task> FindTask(@RequestBody Map map){
             Page<Task> page = new Page<Task>();
@@ -184,7 +219,7 @@ public class TaskController {
             return page;
     }
 
-    @ApiOperation(value = "查询我派发的任务App", notes = "")
+    @ApiOperation(value = "查询我派发的任务App", notes = "传参:creator_id(创建人id),pageNo,pageSize")
     @PostMapping("/FindTaskByCreatorId")
     public Page<Task> FindTaskByCreatorId(@RequestBody Map map){
         Page<Task> page = new Page<Task>();
@@ -195,7 +230,7 @@ public class TaskController {
         return page;
     }
 
-    @ApiOperation(value = "查询我负责的任务App", notes = "")
+    @ApiOperation(value = "查询我负责的任务App", notes = "传参:principal_id(负责人id),pageNo,pageSize")
     @PostMapping("/FindTaskByPrincipalId")
     public Page<Task> FindTaskByPrincipalId(@RequestBody Map map){
         Page<Task> page = new Page<Task>();
@@ -203,6 +238,29 @@ public class TaskController {
         page.setPageSize((Integer) map.get("pageSize"));
         page.setTotal(taskService.TotalByPrincipalId(map));
         page.setItems(taskService.FindTaskByPrincipalId(map));
+        return page;
+    }
+
+    @ApiOperation(value = "查询我参与的任务",notes = "传参:staff_id(员工id),pageNo,pageSize")
+    @PostMapping("/FindTaskByParticipant")
+    public Page<Task> FindTaskByParticipant(@RequestBody Map map){
+        Page<Task> page = new Page<Task>();
+        List<Integer> list = staffTaskService.FindStaffTask(map);
+        System.out.println("list:" + list);
+        List list1 = new ArrayList();
+        for (Integer l : list) {
+            map.put("id", l);
+            System.out.println("详细信息:" + staffTaskService.FindStaffTask(map));
+            if(staffTaskService.FindStaffTask(map)==null){
+
+            }else {
+                list1.add(staffTaskService.FindStaffTask(map));
+            }
+        }
+        page.setPageNo((Integer) map.get("pageNo"));
+        page.setPageSize((Integer) map.get("pageSize"));
+        page.setTotal(staffTaskService.Total(map));
+        page.setItems(list1);
         return page;
     }
 }
