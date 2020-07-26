@@ -250,11 +250,11 @@ public class TaskController {
         List list1 = new ArrayList();
         for (Integer l : list) {
             map.put("id", l);
-            System.out.println("详细信息:" + staffTaskService.FindStaffTask(map));
-            if(staffTaskService.FindStaffTask(map)==null){
+            System.out.println("详细信息:" + taskService.FindTaskById(map));
+            if(taskService.FindTaskById(map)==null){
 
             }else {
-                list1.add(staffTaskService.FindStaffTask(map));
+                list1.add(taskService.FindTaskById(map));
             }
         }
         page.setPageNo((Integer) map.get("pageNo"));
