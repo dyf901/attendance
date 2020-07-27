@@ -40,8 +40,8 @@
     <!--查询项目日志-->
     <select id="FindProjectLog" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.ProjectLog">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
-        INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
+        SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`project_name` AS `project_name` FROM `attendance`.`project_log` l
+        LEFT JOIN `attendance`.`project` i ON l.`project_id`=i.`id`
         <where>
             l.`conglomerate_id`=#{conglomerate_id}
             <if test="project_name!=null and project_name!=''">
@@ -55,19 +55,19 @@
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
         SELECT COUNT(l.id) FROM `attendance`.`project_log` l
-        INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
+        LEFT JOIN `attendance`.`project` i ON l.`project_id`=i.`id`
         <where>
             l.`conglomerate_id`=#{conglomerate_id}
             <if test="project_name!=null and project_name!=''">
-                and i.`items_name` like concat("%",#{project_name},"%")
+                and i.`project_name` like concat("%",#{project_name},"%")
             </if>
         </where>
     </select>
 
     <!--查找项目对应的项目日志-->
     <select id="FindProjectLogByProjectId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.ProjectLog">
-        SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`items_name` AS `project_name` FROM `attendance`.`project_log` l
-        INNER JOIN `attendance`.`items` i ON l.`project_id`=i.`id`
+        SELECT l.`id`, l.`conglomerate_id`, l.`project_id`, l.`content`, l.`url`, l.`uptime`, l.`uptimeC`, i.`project_name` AS `project_name` FROM `attendance`.`project_log` l
+        LEFT JOIN `attendance`.`project` i ON l.`project_id`=i.`id`
         WHERE l.`project_id`=#{project_id}
         ORDER BY l.`uptime` DESC
     </select>

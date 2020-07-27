@@ -92,6 +92,7 @@ public class ProjectLogController {
     @ApiOperation(value = "查找项目对应的项目日志",notes = "")
     @PostMapping("/FindProjectLogByProjectId")
     public JsonResult FindProjectLogByProjectId(@RequestBody Map map){
+        System.out.println(map);
         JsonResult jsonResult = new JsonResult();
         jsonResult.setData(projectLogService.FindProjectLogByProjectId(map));
         jsonResult.setCode(200);
