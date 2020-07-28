@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface ProjectDao {
     //增加项目
-    int InsertProject (Map map);
+    int InsertProject (Project project);
 
     //删除项目
     int DeleteProject (Map map);
@@ -32,4 +32,7 @@ public interface ProjectDao {
 
     //查询项目信息
     List<Project> FindProjectB (Map map);
+
+    //根据id查询项目信息
+    Project FindProjectById(Map map);
 }

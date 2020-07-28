@@ -28,6 +28,9 @@ public class Project {
     @ApiModelProperty(value = "负责人姓名", name = "staff_name")
     private String staff_name;
 
+    @ApiModelProperty(value = "项目参与人", name = "participant")
+    private String participant;
+
     @ApiModelProperty(value = "项目开工时间", name = "start_time")
     private String start_time;
 
@@ -53,7 +56,7 @@ public class Project {
         super();
     }
 
-    public Project(int id, int items_id, int conglomerate_id, String items_name, String project_name, int staff_id, String staff_name, String start_time, long start_timeC, String end_time, long end_timeC, double amount, String uptime, long uptimeC) {
+    public Project(int id, int items_id, int conglomerate_id, String items_name, String project_name, int staff_id, String staff_name, String participant, String start_time, long start_timeC, String end_time, long end_timeC, double amount, String uptime, long uptimeC) {
         this.id = id;
         this.items_id = items_id;
         this.conglomerate_id = conglomerate_id;
@@ -61,6 +64,7 @@ public class Project {
         this.project_name = project_name;
         this.staff_id = staff_id;
         this.staff_name = staff_name;
+        this.participant = participant;
         this.start_time = start_time;
         this.start_timeC = start_timeC;
         this.end_time = end_time;
@@ -182,6 +186,14 @@ public class Project {
         this.uptimeC = uptimeC;
     }
 
+    public String getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(String participant) {
+        this.participant = participant;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -192,6 +204,7 @@ public class Project {
                 ", project_name='" + project_name + '\'' +
                 ", staff_id=" + staff_id +
                 ", staff_name='" + staff_name + '\'' +
+                ", participant='" + participant + '\'' +
                 ", start_time='" + start_time + '\'' +
                 ", start_timeC=" + start_timeC +
                 ", end_time='" + end_time + '\'' +

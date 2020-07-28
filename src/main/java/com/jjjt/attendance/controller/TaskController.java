@@ -51,6 +51,7 @@ public class TaskController {
     @ApiOperation(value = "查看权限",notes = "传参:staff_id(员工id)")
     @PostMapping("/FindPermission")
     public JsonResult FindPermission(@RequestBody Map map){
+
         JsonResult jsonResult = new JsonResult();
         Staff staff = staffService.FindStaffById(map);
         System.out.println("staff:"+staff);
@@ -76,6 +77,7 @@ public class TaskController {
     @ApiOperation(value = "发布任务", notes = "传参:conglomerate_id(集团id),creator_id(创建人id),principal_id(负责人id),participant(参与人id数组),task_title(任务标题),task_describe(任务描述),start_img(任务图片),end_timeC(结束时间戳),degree(紧急程度)")
     @PostMapping("/InsertTask")
     public JsonResult InsertTask(@RequestBody Map map) throws ParseException {
+        System.out.println(map);
         JsonResult jsonResult = new JsonResult();
         Task task = new Task();
         long end_timeC = (long) map.get("end_timeC");

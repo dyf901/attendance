@@ -15,8 +15,8 @@ public class ProjectService implements ProjectDao {
 
     //增加项目
     @Override
-    public int InsertProject(Map map) {
-        return projectDao.InsertProject(map);
+    public int InsertProject(Project project) {
+        return projectDao.InsertProject(project);
     }
 
     //删除项目
@@ -65,5 +65,11 @@ public class ProjectService implements ProjectDao {
     @Override
     public List<Project> FindProjectB(Map map) {
         return projectDao.FindProjectB(map);
+    }
+
+    //根据id查询项目信息
+    @Override
+    public Project FindProjectById(Map map) {
+        return projectDao.FindProjectById(map);
     }
 }
