@@ -51,7 +51,7 @@
             <if test="start!=null and end!=null">
                 and t.`uptime` &gt;= #{start} and t.`uptime` &lt;= #{end}
             </if>
-            <if test="state!=null">
+            <if test="state!=null and state=''">
                 and t.`state`= #{state}
             </if>
         </where>
@@ -70,7 +70,7 @@
             <if test="start!=null and end!=null">
                 and `uptime` &gt;= #{start} and `uptime` &lt;= #{end}
             </if>
-            <if test="state!=null">
+            <if test="state!=null and state=''">
                 and `state`= #{state}
             </if>
         </where>
@@ -87,6 +87,9 @@
             <if test="task_title!=null and task_title!=''">
                 and t.`task_title` LIKE concat ("%",#{task_title},"%")
             </if>
+            <if test="state!=null and state=''">
+                and t.`state`= #{state}
+            </if>
         </where>
         ORDER BY t.`uptime` DESC
         limit #{page},#{pageSize}
@@ -99,6 +102,9 @@
             `creator_id`= #{creator_id}
             <if test="task_title!=null and task_title!=''">
                 and `task_title` LIKE concat ("%",#{task_title},"%")
+            </if>
+            <if test="state!=null and state=''">
+                and `state`= #{state}
             </if>
         </where>
     </select>
@@ -114,6 +120,9 @@
             <if test="task_title!=null and task_title!=''">
                 and t.`task_title` LIKE concat ("%",#{task_title},"%")
             </if>
+            <if test="state!=null and state=''">
+                and `state`= #{state}
+            </if>
         </where>
         ORDER BY t.`uptime` DESC
         limit #{page},#{pageSize}
@@ -127,6 +136,9 @@
             <if test="task_title!=null and task_title!=''">
                 and `task_title` LIKE concat ("%",#{task_title},"%")
             </if>
+            <if test="state!=null and state=''">
+                and `state`= #{state}
+            </if>
         </where>
     </select>
 
@@ -135,6 +147,11 @@
         SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
         left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
-        WHERE t.`id`=#{id}
+        <where>
+            t.`id`= #{id}
+            <if test="state!=null and state=''">
+                and t.`state`= #{state}
+            </if>
+        </where>
     </select>
 </mapper>

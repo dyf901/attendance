@@ -53,6 +53,7 @@ public class TaskController {
     public JsonResult FindPermission(@RequestBody Map map){
 
         JsonResult jsonResult = new JsonResult();
+        map.put("id",map.get("staff_id"));
         Staff staff = staffService.FindStaffById(map);
         System.out.println("staff:"+staff);
         map.put("position_id",staff.getPosition_id());
@@ -64,6 +65,9 @@ public class TaskController {
                 if(l==7) {
                     jsonResult.setCode(200);
                     jsonResult.setMessage("已获得权限");
+                }else {
+                    jsonResult.setCode(20006);
+                    jsonResult.setMessage("未获得权限!");
                 }
             }
         }else {
@@ -221,7 +225,7 @@ public class TaskController {
             return page;
     }
 
-    @ApiOperation(value = "查询我派发的任务App", notes = "传参:creator_id(创建人id),pageNo,pageSize")
+    @ApiOperation(value = "查询我派发的任务App", notes = "传参:creator_id(创建人id),pageNo,pageSize,state")
     @PostMapping("/FindTaskByCreatorId")
     public Page<Task> FindTaskByCreatorId(@RequestBody Map map){
         Page<Task> page = new Page<Task>();
@@ -232,7 +236,7 @@ public class TaskController {
         return page;
     }
 
-    @ApiOperation(value = "查询我负责的任务App", notes = "传参:principal_id(负责人id),pageNo,pageSize")
+    @ApiOperation(value = "查询我负责的任务App", notes = "传参:principal_id(负责人id),pageNo,pageSize,state")
     @PostMapping("/FindTaskByPrincipalId")
     public Page<Task> FindTaskByPrincipalId(@RequestBody Map map){
         Page<Task> page = new Page<Task>();
@@ -243,7 +247,7 @@ public class TaskController {
         return page;
     }
 
-    @ApiOperation(value = "查询我参与的任务",notes = "传参:staff_id(员工id),pageNo,pageSize")
+    @ApiOperation(value = "查询我参与的任务",notes = "传参:staff_id(员工id),pageNo,pageSize,state")
     @PostMapping("/FindTaskByParticipant")
     public Page<Task> FindTaskByParticipant(@RequestBody Map map){
         Page<Task> page = new Page<Task>();
