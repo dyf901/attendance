@@ -228,6 +228,7 @@ public class TaskController {
     @ApiOperation(value = "查询我派发的任务App", notes = "传参:creator_id(创建人id),pageNo,pageSize,state")
     @PostMapping("/FindTaskByCreatorId")
     public Page<Task> FindTaskByCreatorId(@RequestBody Map map){
+        System.out.println(map);
         Page<Task> page = new Page<Task>();
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));

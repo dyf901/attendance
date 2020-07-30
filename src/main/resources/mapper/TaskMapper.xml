@@ -51,7 +51,7 @@
             <if test="start!=null and end!=null">
                 and t.`uptime` &gt;= #{start} and t.`uptime` &lt;= #{end}
             </if>
-            <if test="state!=null and state=''">
+            <if test="state!=null and state!=''">
                 and t.`state`= #{state}
             </if>
         </where>
@@ -70,7 +70,7 @@
             <if test="start!=null and end!=null">
                 and `uptime` &gt;= #{start} and `uptime` &lt;= #{end}
             </if>
-            <if test="state!=null and state=''">
+            <if test="state!=null and state!=''">
                 and `state`= #{state}
             </if>
         </where>
@@ -87,7 +87,7 @@
             <if test="task_title!=null and task_title!=''">
                 and t.`task_title` LIKE concat ("%",#{task_title},"%")
             </if>
-            <if test="state!=null and state=''">
+            <if test="state!=null and state!=''">
                 and t.`state`= #{state}
             </if>
         </where>
@@ -103,7 +103,7 @@
             <if test="task_title!=null and task_title!=''">
                 and `task_title` LIKE concat ("%",#{task_title},"%")
             </if>
-            <if test="state!=null and state=''">
+            <if test="state!=null and state!=''">
                 and `state`= #{state}
             </if>
         </where>
@@ -120,8 +120,8 @@
             <if test="task_title!=null and task_title!=''">
                 and t.`task_title` LIKE concat ("%",#{task_title},"%")
             </if>
-            <if test="state!=null and state=''">
-                and `state`= #{state}
+            <if test="state!=null and state!=''">
+                and t.`state`= #{state}
             </if>
         </where>
         ORDER BY t.`uptime` DESC
@@ -136,7 +136,7 @@
             <if test="task_title!=null and task_title!=''">
                 and `task_title` LIKE concat ("%",#{task_title},"%")
             </if>
-            <if test="state!=null and state=''">
+            <if test="state!=null and state!=''">
                 and `state`= #{state}
             </if>
         </where>
@@ -149,7 +149,7 @@
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
         <where>
             t.`id`= #{id}
-            <if test="state!=null and state=''">
+            <if test="state!=null and state!=''">
                 and t.`state`= #{state}
             </if>
         </where>
