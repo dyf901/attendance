@@ -1,8 +1,11 @@
 package com.jjjt.attendance.controller;
 
 
+import com.jjjt.attendance.entity.Staff;
 import com.jjjt.attendance.service.RegistrationService;
+import com.jjjt.attendance.service.StaffService;
 import com.jjjt.attendance.util.TimeUtils;
+import net.sf.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.InetAddress;
@@ -25,7 +28,7 @@ public class ceshi {
         String ip=InetAddress.getLocalHost().getHostAddress().toString();
         System.out.println("IP:"+ip);*/
 
-        String date2="2020-07-22 09:00:07";
+        /*String date2="2020-07-22 09:00:07";
 
         String date1="2020-07-20 09:02:02";
 
@@ -37,7 +40,20 @@ public class ceshi {
 
         int daysBetween= (int) ((d2.getTime()-d1.getTime()+1000000)/(60*60*24*1000));
 
-        System.out.println("1987-01-01 与 2010-01-01 相隔 "+daysBetween+" 天");
+        System.out.println("1987-01-01 与 2010-01-01 相隔 "+daysBetween+" 天");*/
+       /* Map map = new HashMap();
+        map.put("participant","[4,5,6]");
+
+        String list1= (String) map.get("participant");
+        JSONArray jsonArray1 = JSONArray.fromObject(list1);
+        String sss=null;
+        for (int s=0;s<jsonArray1.size();s++){
+            map.put("id",jsonArray1.get(s));
+            Staff staff=staffService.FindStaffById(map);
+            System.out.println(staff);
+            sss=staff.getStaff_name()+",";
+        }
+        System.out.println(sss);*/
     }
         /*String id = "356923199104260322";
         String lastWord = id.substring(id.length() - 1);

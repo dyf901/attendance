@@ -48,6 +48,24 @@ public class TaskController {
     // "end_timeC":1595754633000,
     // "degree":"紧急"}
 
+    @ApiOperation(value = "sss",notes = "传参:staff_id(员工id)")
+    @PostMapping("/FindPermission1")
+    public void FindPermission1(@RequestBody Map map){
+
+        String list1= (String) map.get("participant");
+        JSONArray jsonArray1 = JSONArray.fromObject(list1);
+        String sss="";
+        for (int s=0;s<jsonArray1.size();s++){
+            map.put("id",jsonArray1.get(s));
+            Staff staff=staffService.FindStaffById(map);
+            System.out.println(staff);
+            sss+=staff.getStaff_name()+",";
+        }
+        System.out.println(sss);
+        String sa=sss.substring(0,sss.length()-1);
+        System.out.println(sa);
+    }
+
     @ApiOperation(value = "查看权限",notes = "传参:staff_id(员工id)")
     @PostMapping("/FindPermission")
     public JsonResult FindPermission(@RequestBody Map map){
@@ -98,6 +116,17 @@ public class TaskController {
         long times = date.getTime();//获取当前时间,时间戳
 
         int taskday= (int) ((date2.getTime()-date.getTime()+1000000)/(60*60*24*1000));//获取任务间隔时间
+
+        String list1= (String) map.get("participant");
+        JSONArray jsonArray1 = JSONArray.fromObject(list1);
+        String sss=null;
+        for (int s=0;s<jsonArray1.size();s++){
+            map.put("id",jsonArray1.get(s));
+            Staff staff=staffService.FindStaffById(map);
+            System.out.println(staff);
+            sss=staff.getStaff_name()+",";
+        }
+        System.out.println(sss);
 
         //把数据塞进实体类中
         task.setConglomerate_id((Integer) map.get("conglomerate_id"));
@@ -230,6 +259,19 @@ public class TaskController {
     public Page<Task> FindTaskByCreatorId(@RequestBody Map map){
         System.out.println(map);
         Page<Task> page = new Page<Task>();
+        /*List<Task> list = taskService.FindTaskByCreatorId(map);
+        for (int i=0;i<list.size();i++){
+            Task task=list.get(i);
+            String list1= task.getParticipant();
+            JSONArray jsonArray = JSONArray.fromObject(list1);
+            for (int s=0;s<jsonArray.size();s++){
+                map.put("id",jsonArray.get(s));
+                Staff staff=staffService.FindStaffById(map);
+                System.out.println(staff);
+
+            }
+        }*/
+
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
         page.setTotal(taskService.TotalByCreatorId(map));
