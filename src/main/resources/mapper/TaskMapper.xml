@@ -8,8 +8,8 @@
     <selectKey resultType="int" order="AFTER" keyProperty="id">
         SELECT LAST_INSERT_ID()
     </selectKey>
-        INSERT INTO `attendance`.`task`(`conglomerate_id`, `creator_id`, `principal_id`, `participant`, `task_title`, `task_describe`, `start_img`, `uptime`, `uptimeC`, `end_time`, `end_timeC`, `degree`, `taskday`)
-        VALUES (#{conglomerate_id}, #{creator_id}, #{principal_id}, #{participant}, #{task_title}, #{task_describe}, #{start_img}, #{uptime}, #{uptimeC}, #{end_time}, #{end_timeC}, #{degree}, #{taskday});
+        INSERT INTO `attendance`.`task`(`conglomerate_id`, `creator_id`, `principal_id`, `participant`, `participant_name`, `task_title`, `task_describe`, `start_img`, `uptime`, `uptimeC`, `end_time`, `end_timeC`, `degree`, `taskday`)
+        VALUES (#{conglomerate_id}, #{creator_id}, #{principal_id}, #{participant}, #{participant_name}, #{task_title}, #{task_describe}, #{start_img}, #{uptime}, #{uptimeC}, #{end_time}, #{end_timeC}, #{degree}, #{taskday});
     </insert>
 
     <!--删除任务-->
@@ -37,10 +37,42 @@
         UPDATE `attendance`.`task` SET `state`='进行中',`check`=#{check} WHERE `id`=#{id}
     </update>
 
+    <!--修改任务-->
+    <update id="UpdateTask" parameterType="java.util.Map">
+        update `attendance`.`task`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="principal_id!=null and principal_id!=''">
+                `principal_id`=#{principal_id},
+            </if>
+            <if test="participant!=null and participant!=''">
+                `participant`=#{participant},
+            </if>
+            <if test="participant_name!=null and participant_name!=''">
+                `participant_name`=#{participant_name},
+            </if>
+            <if test="task_title!=null and task_title!=''">
+                `task_title`=#{task_title},
+            </if>
+            <if test="task_describe!=null and task_describe!=''">
+                `task_describe`=#{task_describe},
+            </if>
+            <if test="end_timeC!=null and end_timeC!=''">
+                `end_timeC`=#{end_timeC}
+            </if>
+            <if test="end_time!=null and end_time!=''">
+                `end_time`=#{end_time}
+            </if>
+            <if test="degree!=null and degree!=''">
+                `degree`=#{degree}
+            </if>
+        </trim>
+        where `id`=#{id}
+    </update>
+
     <!--分页模糊查询任务-->
     <select id="FindTask" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`participant_name`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`task_summarize`, t.`task_reason`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
         left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
         <where>
@@ -79,7 +111,7 @@
     <!--查询我创建的任务App-->
     <select id="FindTaskByCreatorId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`participant_name`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`task_summarize`, t.`task_reason`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
         left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
         <where>
@@ -112,7 +144,7 @@
     <!--查询我负责的任务App-->
     <select id="FindTaskByPrincipalId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`participant_name`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`task_summarize`, t.`task_reason`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
         left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
         <where>
@@ -144,7 +176,7 @@
 
     <!--根据id查询任务-->
     <select id="FindTaskById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Task">
-        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
+        SELECT t.`id`, t.`conglomerate_id`, t.`creator_id`, t.`principal_id`, t.`participant`, t.`participant_name`, t.`task_title`, t.`task_describe`, t.`start_img`, t.`uptime`, t.`uptimeC`, t.`end_time`, t.`end_timeC`, t.`degree`, t.`taskday`, t.`check`, t.`task_summarize`, t.`task_reason`, t.`state`, t.`status`, s.`staff_name` AS `creator_name`, s1.`staff_name` AS `principal_name`  FROM `attendance`.`task` t
         left join `attendance`.`staff` s ON t.`creator_id`=s.`id`
         left join `attendance`.`staff` s1 ON t.`principal_id`=s1.`id`
         <where>

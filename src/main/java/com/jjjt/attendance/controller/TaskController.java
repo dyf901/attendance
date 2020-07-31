@@ -48,24 +48,6 @@ public class TaskController {
     // "end_timeC":1595754633000,
     // "degree":"紧急"}
 
-    @ApiOperation(value = "sss",notes = "传参:staff_id(员工id)")
-    @PostMapping("/FindPermission1")
-    public void FindPermission1(@RequestBody Map map){
-
-        String list1= (String) map.get("participant");
-        JSONArray jsonArray1 = JSONArray.fromObject(list1);
-        String sss="";
-        for (int s=0;s<jsonArray1.size();s++){
-            map.put("id",jsonArray1.get(s));
-            Staff staff=staffService.FindStaffById(map);
-            System.out.println(staff);
-            sss+=staff.getStaff_name()+",";
-        }
-        System.out.println(sss);
-        String sa=sss.substring(0,sss.length()-1);
-        System.out.println(sa);
-    }
-
     @ApiOperation(value = "查看权限",notes = "传参:staff_id(员工id)")
     @PostMapping("/FindPermission")
     public JsonResult FindPermission(@RequestBody Map map){
@@ -73,13 +55,13 @@ public class TaskController {
         JsonResult jsonResult = new JsonResult();
         map.put("id",map.get("staff_id"));
         Staff staff = staffService.FindStaffById(map);
-        System.out.println("staff:"+staff);
+        //System.out.println("staff:"+staff);
         map.put("position_id",staff.getPosition_id());
-        System.out.println(staff.getPosition_id());
+        //System.out.println(staff.getPosition_id());
         List<Integer> list = positionPermissionService.FindPositionPermissionByPositionId(map);
         if(list.size()>0){
             for (Integer l : list) {
-                System.out.println("l:" + l);
+                //System.out.println("l:" + l);
                 if(l==7) {
                     jsonResult.setCode(200);
                     jsonResult.setMessage("已获得权限");
@@ -119,14 +101,14 @@ public class TaskController {
 
         String list1= (String) map.get("participant");
         JSONArray jsonArray1 = JSONArray.fromObject(list1);
-        String sss=null;
+        String sss="";
         for (int s=0;s<jsonArray1.size();s++){
             map.put("id",jsonArray1.get(s));
             Staff staff=staffService.FindStaffById(map);
-            System.out.println(staff);
-            sss=staff.getStaff_name()+",";
+            //System.out.println(staff);
+            sss+=staff.getStaff_name()+",";
         }
-        System.out.println(sss);
+        String participant_name=sss.substring(0,sss.length()-1);
 
         //把数据塞进实体类中
         task.setConglomerate_id((Integer) map.get("conglomerate_id"));
@@ -142,6 +124,7 @@ public class TaskController {
         task.setEnd_timeC(end_timeC);
         task.setDegree((String) map.get("degree"));
         task.setTaskday(taskday);
+        task.setParticipant_name(participant_name);
 
         int i = taskService.InsertTask(task);
         if(i==1){
@@ -257,21 +240,8 @@ public class TaskController {
     @ApiOperation(value = "查询我派发的任务App", notes = "传参:creator_id(创建人id),pageNo,pageSize,state")
     @PostMapping("/FindTaskByCreatorId")
     public Page<Task> FindTaskByCreatorId(@RequestBody Map map){
-        System.out.println(map);
+        //System.out.println(map);
         Page<Task> page = new Page<Task>();
-        /*List<Task> list = taskService.FindTaskByCreatorId(map);
-        for (int i=0;i<list.size();i++){
-            Task task=list.get(i);
-            String list1= task.getParticipant();
-            JSONArray jsonArray = JSONArray.fromObject(list1);
-            for (int s=0;s<jsonArray.size();s++){
-                map.put("id",jsonArray.get(s));
-                Staff staff=staffService.FindStaffById(map);
-                System.out.println(staff);
-
-            }
-        }*/
-
         page.setPageNo((Integer) map.get("pageNo"));
         page.setPageSize((Integer) map.get("pageSize"));
         page.setTotal(taskService.TotalByCreatorId(map));
@@ -295,11 +265,11 @@ public class TaskController {
     public Page<Task> FindTaskByParticipant(@RequestBody Map map){
         Page<Task> page = new Page<Task>();
         List<Integer> list = staffTaskService.FindStaffTask(map);
-        System.out.println("list:" + list);
+        //System.out.println("list:" + list);
         List list1 = new ArrayList();
         for (Integer l : list) {
             map.put("id", l);
-            System.out.println("详细信息:" + taskService.FindTaskById(map));
+            //System.out.println("详细信息:" + taskService.FindTaskById(map));
             if(taskService.FindTaskById(map)==null){
 
             }else {
