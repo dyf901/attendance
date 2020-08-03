@@ -98,6 +98,12 @@ public class ItemsController {
         return jsonResult;
     }
 
+    @ApiOperation(value = "删除客户", notes = "")
+    @PostMapping("/DeleteItems")
+    public boolean DeleteItems(@RequestBody Map map){
+        return itemsService.DeleteItems(map)==1;
+    }
+
     @ApiOperation(value = "分页查询客户信息", notes = "")
     @PostMapping("/FindItems")
     public Page FindItems(@RequestBody Map map) {

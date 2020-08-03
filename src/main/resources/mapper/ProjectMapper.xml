@@ -8,8 +8,8 @@
         <selectKey resultType="int" order="AFTER" keyProperty="id">
             SELECT LAST_INSERT_ID()
         </selectKey>
-        INSERT INTO `attendance`.`project` (`conglomerate_id`, `items_id`, `staff_id`, `participant`, `project_name`, `start_time`, `start_timeC`, `end_time`, `end_timeC`, `amount`, `uptime`, `uptimeC`)
-        VALUES (#{conglomerate_id}, #{items_id}, #{staff_id}, #{participant}, #{project_name}, #{start_time}, #{start_timeC}, #{end_time}, #{end_timeC}, #{amount}, #{uptime}, #{uptimeC});
+        INSERT INTO `attendance`.`project` (`conglomerate_id`, `items_id`, `staff_id`, `participant`, `participant_name`, `project_name`, `start_time`, `start_timeC`, `end_time`, `end_timeC`, `amount`, `uptime`, `uptimeC`)
+        VALUES (#{conglomerate_id}, #{items_id}, #{staff_id}, #{participant}, #{participant_name}, #{project_name}, #{start_time}, #{start_timeC}, #{end_time}, #{end_timeC}, #{amount}, #{uptime}, #{uptimeC});
     </insert>
 
     <!--删除项目-->
@@ -55,7 +55,7 @@
     <!--分页模糊查询项目信息-->
     <select id="FindProject" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Project">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`participant`, p.`project_name`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
+        SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`participant`, p.`participant_name`, p.`project_name`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
         LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
         LEFT JOIN `attendance`.`staff` s ON p.`staff_id`=s.`id`
         <where>
@@ -95,7 +95,7 @@
     <!--分页查询个人项目信息-->
     <select id="FindProjectByStaffId" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Project">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`participant`, p.`project_name`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
+        SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`participant`, p.`participant_name`, p.`project_name`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
         LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
         LEFT JOIN `attendance`.`staff` s ON p.`staff_id`=s.`id`
         <where>
@@ -143,7 +143,7 @@
     <!--根据id查询项目信息-->
     <select id="FindProjectById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Project">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`participant`, p.`project_name`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
+        SELECT p.`id`, p.`conglomerate_id`, p.`items_id`, p.`staff_id`, p.`participant`, p.`participant_name`, p.`project_name`, p.`start_time`, p.`start_timeC`, p.`end_time`, p.`end_timeC`, p.`amount`, p.`uptime`, p.`uptimeC`, i.`items_name` AS `items_name`, s.`staff_name` AS `staff_name` FROM `attendance`.`project` p
         LEFT JOIN `attendance`.`items` i ON p.`items_id`=i.`id`
         LEFT JOIN `attendance`.`staff` s ON p.`staff_id`=s.`id`
         WHERE p.`id`=#{id}

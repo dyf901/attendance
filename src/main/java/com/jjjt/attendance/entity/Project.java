@@ -31,6 +31,9 @@ public class Project {
     @ApiModelProperty(value = "项目参与人", name = "participant")
     private String participant;
 
+    @ApiModelProperty(value = "参与人姓名",name = "participant_name")
+    private String participant_name;
+
     @ApiModelProperty(value = "项目开工时间", name = "start_time")
     private String start_time;
 
@@ -56,7 +59,7 @@ public class Project {
         super();
     }
 
-    public Project(int id, int items_id, int conglomerate_id, String items_name, String project_name, int staff_id, String staff_name, String participant, String start_time, long start_timeC, String end_time, long end_timeC, double amount, String uptime, long uptimeC) {
+    public Project(int id, int items_id, int conglomerate_id, String items_name, String project_name, int staff_id, String staff_name, String participant, String participant_name, String start_time, long start_timeC, String end_time, long end_timeC, double amount, String uptime, long uptimeC) {
         this.id = id;
         this.items_id = items_id;
         this.conglomerate_id = conglomerate_id;
@@ -65,6 +68,7 @@ public class Project {
         this.staff_id = staff_id;
         this.staff_name = staff_name;
         this.participant = participant;
+        this.participant_name = participant_name;
         this.start_time = start_time;
         this.start_timeC = start_timeC;
         this.end_time = end_time;
@@ -194,6 +198,14 @@ public class Project {
         this.participant = participant;
     }
 
+    public String getParticipant_name() {
+        return participant_name;
+    }
+
+    public void setParticipant_name(String participant_name) {
+        this.participant_name = participant_name;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -205,6 +217,7 @@ public class Project {
                 ", staff_id=" + staff_id +
                 ", staff_name='" + staff_name + '\'' +
                 ", participant='" + participant + '\'' +
+                ", participant_name='" + participant_name + '\'' +
                 ", start_time='" + start_time + '\'' +
                 ", start_timeC=" + start_timeC +
                 ", end_time='" + end_time + '\'' +
