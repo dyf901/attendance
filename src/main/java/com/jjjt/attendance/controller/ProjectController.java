@@ -81,20 +81,20 @@ public class ProjectController {
         project.setUptime(time);
         project.setAmount(b);
         project.setProject_name((String) map.get("project_name"));
-        //project.setParticipant((String) map.get("participant"));
+        project.setParticipant((String) map.get("participant"));
 
         int i = projectService.InsertProject(project);
         if(i==1){
-//            String list= (String) map.get("participant");
-//            JSONArray jsonArray = JSONArray.fromObject(list);
-//            for (int s=0;s<jsonArray.size();s++){
-//                map.put("project_id",project.getId());
-//                map.put("staff_id",jsonArray.get(s));
-//                map.put("uptime",time);
-//                staffProjectService.InsertStaffProject(map);
-//            }
-//            map.put("state","已签约");
-//            itemsService.UpdateItemsByState(map);
+            String list= (String) map.get("participant");
+            JSONArray jsonArray = JSONArray.fromObject(list);
+            for (int s=0;s<jsonArray.size();s++){
+                map.put("project_id",project.getId());
+                map.put("staff_id",jsonArray.get(s));
+                map.put("uptime",time);
+                staffProjectService.InsertStaffProject(map);
+            }
+            map.put("state","已签约");
+            itemsService.UpdateItemsByState(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("签约成功！");
         }else {
