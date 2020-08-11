@@ -200,8 +200,17 @@ public class ExamineController {
 
     @ApiOperation(value = "删除审批", notes = "")
     @PostMapping("/DeleteExamine")
-    public boolean DeleteExamine(@RequestBody Map map) {
-        return examineService.DeleteExamine(map) == 1;
+    public JsonResult DeleteExamine(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
+        int i=examineService.DeleteExamine(map);
+        if(i==1){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("删除成功");
+        }else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("删除失败");
+        }
+        return jsonResult;
     }
 
     @ApiOperation(value = "分页查询审批信息", notes = "")

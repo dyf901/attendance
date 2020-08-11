@@ -26,12 +26,11 @@
     <!--分页模糊查询打卡信息-->
     <select id="FindRegistration" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Registration">
         <bind name="page" value="pageSize*(pageNo-1)"></bind>
-        SELECT  r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`staff_name`, r.`week`, r.`department_name`, r.`in_time`, r.`in_address`, r.`out_time`, r.`out_address`, r.`remarkD`, r.`remarkT`, r.`overtime_hours`, r.`stateD`, r.`stateT`, r.`urlD`, r.`urlT`,l.`company_name` as `company_name` FROM `attendance`.`registration` r
-        LEFT JOIN `attendance`.`company` l ON r.`company_id`=l.`id`
+        SELECT  r.`id`, r.`conglomerate_id`, r.`company_id`, r.`staff_id`, r.`staff_name`, r.`week`, r.`department_name`, r.`in_time`, r.`in_address`, r.`out_time`, r.`out_address`, r.`remarkD`, r.`remarkT`, r.`overtime_hours`, r.`stateD`, r.`stateT`, r.`urlD`, r.`urlT` FROM `attendance`.`registration` r
         <where>
             r.`conglomerate_id`=#{conglomerate_id}
             <if test="staff_name!=null and staff_name!=''">
-                and `staff_name` like concat("%",#{staff_name},"%")
+                and r.`staff_name` like concat("%",#{staff_name},"%")
             </if>
             <if test="department_name!=null and department_name!=''">
                 and r.`department_name`=#{department_name}
