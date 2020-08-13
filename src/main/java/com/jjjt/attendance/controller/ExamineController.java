@@ -91,6 +91,8 @@ public class ExamineController {
         } else if (map.get("examine_type").equals("采购")){
             examine.setProcurement_type((String) map.get("procurement_type"));
             examine.setProcurement_sum((Double) map.get("procurement_sum"));
+            examine.setProcurement_img((String) map.get("procurement_img"));
+            examine.setProject_id((Integer) map.get("project_id"));
 
         } else if (map.get("examine_type").equals("转正")) {
             long entry_timeC = (long) map.get("entry_timeC");

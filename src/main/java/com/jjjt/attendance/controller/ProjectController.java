@@ -64,13 +64,24 @@ public class ProjectController {
         String start_time = simpleDateFormat.format(date1);
         String end_time = simpleDateFormat.format(date2);
 
-        String conglomerate_id= (String) map.get("conglomerate_id");
+        /*String conglomerate_id= (String) map.get("conglomerate_id");
         int a= Integer.parseInt(conglomerate_id);
 
         String amount= (String) map.get("amount");
-        double b= Double.parseDouble(amount);
+        double b= Double.parseDouble(amount);*/
 
-        project.setConglomerate_id(a);
+        String list1= (String) map.get("participant");
+        JSONArray jsonArray1 = JSONArray.fromObject(list1);
+        String sss="";
+        for (int s=0;s<jsonArray1.size();s++){
+            map.put("id",jsonArray1.get(s));
+            Staff staff=staffService.FindStaffById(map);
+            //System.out.println(staff);
+            sss+=staff.getStaff_name()+",";
+        }
+        String participant_name=sss.substring(0,sss.length()-1);
+
+        project.setConglomerate_id((Integer) map.get("conglomerate_id"));
         project.setItems_id((Integer) map.get("items_id"));
         project.setStaff_id((Integer) map.get("staff_id"));
         project.setStart_timeC((Long) map.get("start_timeC"));
@@ -79,9 +90,10 @@ public class ProjectController {
         project.setEnd_time(end_time);
         project.setUptimeC(times);
         project.setUptime(time);
-        project.setAmount(b);
+        project.setAmount((Double) map.get("amount"));
         project.setProject_name((String) map.get("project_name"));
         project.setParticipant((String) map.get("participant"));
+        project.setParticipant_name(participant_name);
 
         int i = projectService.InsertProject(project);
         if(i==1){
@@ -125,17 +137,18 @@ public class ProjectController {
         System.out.println("修改参数:"+map);
         JsonResult jsonResult = new JsonResult();
 
-        String start_time = (String) map.get("start_time");
-        String end_time = (String) map.get("end_time");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date now = new Date();
-        Date date = format.parse(start_time);
-        Date date1 = format.parse(end_time);
+        long start_timeC = (long) map.get("start_timeC");
+        long end_timeC = (long) map.get("end_timeC");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        long lt = new Long(start_timeC);
+        Date date1 = new Date(lt);
+        long lts = new Long(end_timeC);
+        Date date2 = new Date(lts);
+        String start_time = simpleDateFormat.format(date1);
+        String end_time = simpleDateFormat.format(date2);
         //日期转时间戳（毫秒）
-        long times = date.getTime();
-        long times1 = date1.getTime();
-        map.put("start_timeC" , times);
-        map.put("end_timeC" , times1);
+        map.put("start_time" , start_time);
+        map.put("end_time" , end_time);
 
         int i = projectService.UpdateProject(map);
         if(i==1){

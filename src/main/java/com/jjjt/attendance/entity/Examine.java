@@ -99,6 +99,9 @@ public class Examine {
     @ApiModelProperty(value = "采购金额", name = "procurement_sum")
     private double procurement_sum;
 
+    @ApiModelProperty(value = "采购清单", name = "procurement_img")
+    private String procurement_img;
+
     @ApiModelProperty(value = "入职时间", name = "entry_time")
     private String entry_time;
 
@@ -121,7 +124,7 @@ public class Examine {
         super();
     }
 
-    public Examine(int id, int staff_id, int itmes_id, int project_id, String project_name, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, String entry_time, long entry_timeC, String promotion_time, long promotion_timeC, String operating_post, List list) {
+    public Examine(int id, int staff_id, int itmes_id, int project_id, String project_name, String client_company, int company_id, String examine_type, String content, String uptime, Long uptimeC, String expenses_type, double expenses_sum, String expenses_picture, String outtime, Long outtimeC, String intime, Long intimeC, String outaddress, String state, int conglomerate_id, String conglomerate_name, String company_name, String start_time, long start_timeC, String end_time, long end_timeC, String staff_name, String procurement_type, double procurement_sum, String procurement_img, String entry_time, long entry_timeC, String promotion_time, long promotion_timeC, String operating_post, List list) {
         this.id = id;
         this.staff_id = staff_id;
         this.itmes_id = itmes_id;
@@ -152,6 +155,7 @@ public class Examine {
         this.staff_name = staff_name;
         this.procurement_type = procurement_type;
         this.procurement_sum = procurement_sum;
+        this.procurement_img = procurement_img;
         this.entry_time = entry_time;
         this.entry_timeC = entry_timeC;
         this.promotion_time = promotion_time;
@@ -446,6 +450,14 @@ public class Examine {
 
     public void setProject_name(String project_name) {
         this.project_name = project_name;
+    }
+
+    public String getProcurement_img() {
+        return procurement_img;
+    }
+
+    public void setProcurement_img(String procurement_img) {
+        this.procurement_img = procurement_img;
     }
 
     @Override
