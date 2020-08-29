@@ -206,6 +206,7 @@ public class ExamineController {
         JsonResult jsonResult = new JsonResult();
         int i=examineService.DeleteExamine(map);
         if(i==1){
+            staffExamineService.DeleteStaffExamine(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("删除成功");
         }else {
@@ -258,6 +259,7 @@ public class ExamineController {
         int i = examineService.UpdateStateT(map);
 
         if(i==1){
+            staffExamineService.UpdateStaffExamineByStateT(map);
             //判断是否是转正审批,是则修改员工信息中的转正时间不是则直接忽略
             if(examine.getExamine_type().equals("转正")){
                 long promotion_timeC = examine.getPromotion_timeC();
@@ -285,6 +287,7 @@ public class ExamineController {
         JsonResult jsonResult = new JsonResult();
         int i = examineService.UpdateStateW(map);
         if(i==1){
+            staffExamineService.UpdateStaffExamineByStateW(map);
             jsonResult.setCode(200);
             jsonResult.setMessage("审批驳回成功!");
         }else {

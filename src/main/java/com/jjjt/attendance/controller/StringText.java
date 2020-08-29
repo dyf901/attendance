@@ -55,11 +55,12 @@ public class StringText {
         System.out.println(text1.substring(3,5));//截取从3到5的所有字符(不包含第五位)*/
 
         String str1="2020-8-13 17:54:25";
-        String str2="2020-8-13 18:00:00";
+        String str2="2020-8-14 18:00:00";
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String time = format.format(now);
+        System.out.println(time);
 
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date one;
@@ -88,6 +89,6 @@ public class StringText {
         }
         System.out.println("-------------------->");
         System.out.println("距离下班还剩:"+day + "天" + hour + "小时" + min + "分" + sec + "秒");
-        System.out.println("今天收益: 500");
+        //System.out.println("今天收益: 500");
     }
 }

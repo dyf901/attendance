@@ -16,18 +16,26 @@ public class StaffExamine {
     @ApiModelProperty(value = "项目id", name = "examine_id")
     private int examine_id;
 
+    @ApiModelProperty(value = "审批类型(审批,报销,出差,加班,请假)", name = "examine_type")
+    private String examine_type;
+
     @ApiModelProperty(value = "上传时间",name = "uptime")
     private String uptime;
+
+    @ApiModelProperty(value = "审批状态", name = "state")
+    private String state;
 
     public StaffExamine(){
         super();
     }
 
-    public StaffExamine(int id, int staff_id, int examine_id, String uptime) {
+    public StaffExamine(int id, int staff_id, int examine_id, String examine_type, String uptime, String state) {
         this.id = id;
         this.staff_id = staff_id;
         this.examine_id = examine_id;
+        this.examine_type = examine_type;
         this.uptime = uptime;
+        this.state = state;
     }
 
     public int getId() {
@@ -62,13 +70,31 @@ public class StaffExamine {
         this.uptime = uptime;
     }
 
+    public String getExamine_type() {
+        return examine_type;
+    }
+
+    public void setExamine_type(String examine_type) {
+        this.examine_type = examine_type;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     @Override
     public String toString() {
         return "{" +
                 "id=" + id +
                 ", staff_id=" + staff_id +
                 ", examine_id=" + examine_id +
+                ", examine_type='" + examine_type + '\'' +
                 ", uptime='" + uptime + '\'' +
+                ", state='" + state + '\'' +
                 '}';
     }
 }

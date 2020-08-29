@@ -12,4 +12,14 @@ public interface StaffExamineDao {
 
     //统计总数
     long Total(Map map);
+
+    //删除关联信息
+    int DeleteStaffExamine(Map map);
+
+    //修改状态_通过
+    int UpdateStaffExamineByStateT(Map map);
+
+    //修改状态_通过
+    int UpdateStaffExamineByStateW(Map map);
+
 }

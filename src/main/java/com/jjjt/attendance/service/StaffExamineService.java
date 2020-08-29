@@ -29,4 +29,22 @@ public class StaffExamineService implements StaffExamineDao {
     public long Total(Map map) {
         return staffExamineDao.Total(map);
     }
+
+    //删除关联信息
+    @Override
+    public int DeleteStaffExamine(Map map) {
+        return staffExamineDao.DeleteStaffExamine(map);
+    }
+
+    //修改状态_通过
+    @Override
+    public int UpdateStaffExamineByStateT(Map map) {
+        return staffExamineDao.UpdateStaffExamineByStateT(map);
+    }
+
+    //修改状态_未通过
+    @Override
+    public int UpdateStaffExamineByStateW(Map map) {
+        return staffExamineDao.UpdateStaffExamineByStateW(map);
+    }
 }

@@ -126,8 +126,8 @@
             <if test="state!=null and state!=''">
                 and e.`state`=#{state}
             </if>
-            <if test="examine_type!=null">
-                and `examine_type`=#{examine_type}
+            <if test="examine_type!=null and examine_type!=''">
+                and e.`examine_type`=#{examine_type}
             </if>
         </where>
     </select>
