@@ -306,6 +306,7 @@ public class ExamineController {
     @ApiOperation(value = "查询由我审批的审批信息", notes = "传参:staff_id,state(状态:未审核,通过,未通过),pageNo,pageSize,examine_type(请假,审批,加班,报销)")
     @PostMapping("FindExamineByY")
     public Page FindExamineByY(@RequestBody Map map) {
+        System.out.println("传参Map:"+map);
         Page page = new Page();
         List<Integer> list = staffExamineService.FindExamineId(map);//根据staff_id查询对应的审批信息id
         System.out.println("list:" + list);

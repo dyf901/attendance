@@ -194,11 +194,18 @@ public class RegistrationController {
         map.put("time", time2);
         map.put("timeC", times);
         map.put("remark", map.get("remarkT"));
-        registrationRecordService.InsertRegistrationRecord(map);
+        Staff staffa=staffService.FindStaffById(map);
+        if (staffa.getClockstatus().equals("0")) {
+            registrationRecordService.InsertRegistrationRecord(map);
+        }
         if (time1 < time && current > zero) {
             registration.setStateT("早退");
-            int s = registrationService.UpdateRegistration(registration);//添加打卡记录
+            int s=0;
+            if (staffa.getClockstatus().equals("0")){
+                s = registrationService.UpdateRegistration(registration);//添加打卡记录
+            }
             if (s == 1) {
+                staffService.UpdateClockstatusByIdT(map);
                 jsonResult.setCode(200);
                 jsonResult.setMessage("打卡成功");
                 return jsonResult;
@@ -209,7 +216,10 @@ public class RegistrationController {
             }
         } else {
             registration.setStateT("正常");
-            int s = registrationService.UpdateRegistration(registration);//添加打卡记录
+            int s=0;
+            if (staffa.getClockstatus().equals("0")){
+                s = registrationService.UpdateRegistration(registration);//添加打卡记录
+            }
             if (s == 1) {
                 jsonResult.setCode(200);
                 jsonResult.setMessage("打卡成功");
@@ -253,7 +263,6 @@ public class RegistrationController {
 
         HSSFRow row = sheet.createRow(0);
         //在excel表中添加表头
-
         for (int i = 0; i < headers.length; i++) {
             HSSFCell cell = row.createCell(i);
             HSSFRichTextString text = new HSSFRichTextString(headers[i]);

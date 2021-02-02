@@ -21,6 +21,7 @@ public class AppLogin {
     @ApiOperation(value = "App登录", notes = "传参:staff_phone(员工手机号),password(密码)")
     @PostMapping("/AppLogin")
     public JsonResult AppLogin(@RequestBody Map map) {
+
         JsonResult jsonResult = new JsonResult();
         Staff staff = staffService.FindStaffByStaffPhone(map);
         if (staff != null) {
@@ -29,6 +30,7 @@ public class AppLogin {
                 jsonResult.setMessage("登录成功!");
                 jsonResult.setData(staff);
                 return jsonResult;
+
             } else {
                 jsonResult.setCode(20006);
                 jsonResult.setMessage("密码错误,登录失败!");
@@ -39,5 +41,6 @@ public class AppLogin {
             jsonResult.setMessage("账号不存在!");
             return jsonResult;
         }
+
     }
 }

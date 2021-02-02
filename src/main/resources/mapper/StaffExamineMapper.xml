@@ -27,7 +27,15 @@
 
     <!--统计总数-->
     <select id="Total" parameterType="java.util.Map" resultType="long">
-        SELECT COUNT(*) FROM `attendance`.`staff_examine` WHERE `staff_id`=#{staff_id}
+        SELECT COUNT(*) FROM `attendance`.`staff_examine` <where>
+        `staff_id`=#{staff_id}
+        <if test="state!=null and state!=''">
+            and `state`=#{state}
+        </if>
+        <if test="examine_type!=null">
+            and `examine_type`=#{examine_type}
+        </if>
+    </where>
     </select>
     
     <!--删除审批关联信息-->

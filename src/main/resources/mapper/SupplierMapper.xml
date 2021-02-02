@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.SupplierDao">
+    <!--增加供应商信息-->
+    <insert id="InsertSupplier" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`supplier` (`conglomerate_id`, `contacts`, `contacts_phone`, `company`, `account`, `city`, `address`, `commodity`, `blacklist`, `uptime`)
+        VALUES (#{conglomerate_id}, #{contacts}, #{contacts_phone}, #{company}, #{account}, #{city}, #{address}, #{commodity}, #{blacklist}, #{uptime});
+    </insert>
+
+    <!--删除供应商信息-->
+    <delete id="DeleteSupplier" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`supplier` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改供应商信息-->
+    <update id="UpdateSupplier" parameterType="java.util.Map">
+        UPDATE `attendance`.`supplier`
+        <trim  prefix="SET" suffixOverrides=",">
+            <if test="contacts!=null and contacts!=''">
+                `contacts`=#{contacts}
+            </if>
+            <if test="contacts_phone!=null and contacts_phone!=''">
+                `contacts_phone`=#{contacts_phone}
+            </if>
+            <if test="company!=null and company!=''">
+                `company`=#{company}
+            </if>
+            <if test="account!=null and account!=''">
+                `account`=#{account}
+            </if>
+            <if test="city!=null and city!=''">
+                `city`=#{city}
+            </if>
+            <if test="address!=null and address!=''">
+                `address`=#{address}
+            </if>
+            <if test="commodity!=null and commodity!=''">
+                `commodity`=#{commodity}
+            </if>
+            <if test="blacklist!=null and blacklist!=''">
+                `blacklist`=#{blacklist}
+            </if>
+        </trim>
+    </update>
+    
+    <!--分页模糊查询供应商信息-->
+    <select id="FindSupplier" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Supplier">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT `id`, `conglomerate_id`, `contacts`, `contacts_phone`, `company`, `account`, `city`, `address`, `commodity`, `blacklist`
+        FROM `attendance`.`supplier`
+        <where>
+            `conglomerate_id`=#{conglomerate_id}
+            <if test="contacts!=null and contacts!=''">
+                AND `contacts`=#{contacts}
+            </if>
+            <if test="city!=null and city!=''">
+                AND `city`=#{city}
+            </if>
+            <if test="commodity!=null and commodity!=''">
+                AND `commodity`=#{commodity}
+            </if>
+        </where>
+        ORDER BY `uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="long">
+        SELECT COUNT(`id`) FROM `attendance`.`supplier`
+        <where>
+            `conglomerate_id`=#{conglomerate_id}
+            <if test="contacts!=null and contacts!=''">
+                AND `contacts`=#{contacts}
+            </if>
+            <if test="city!=null and city!=''">
+                AND `city`=#{city}
+            </if>
+            <if test="commodity!=null and commodity!=''">
+                AND `commodity`=#{commodity}
+            </if>
+        </where>
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--下拉框选择供应商-->
+    <select id="SelectSupplier" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Supplier">
+        SELECT  `id`, `conglomerate_id`, `contacts`, `contacts_phone`, `company`, `account`, `city`, `address`, `commodity`, `blacklist`
+        FROM `attendance`.`supplier` WHERE `conglomerate_id`=#{conglomerate_id}
+    </select>
+</mapper>

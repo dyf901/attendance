@@ -33,6 +33,9 @@ public interface StaffDao {
     //根据id修改员工状态
     int UpdateClockstatusById(Map map);
 
+    //根据id修改员工状态为2
+    int UpdateClockstatusByIdT(Map map);
+
     //手机修改员工信息
     int UpdateStaffApp(Map map);
 
@@ -47,4 +50,6 @@ public interface StaffDao {
 
     //离职
     int UpdateState(Map map);
+
+
 }

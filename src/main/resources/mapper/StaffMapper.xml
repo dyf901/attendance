@@ -90,6 +90,11 @@
         UPDATE `attendance`.`staff` SET `clockstatus`='0' WHERE `id`=#{id}
     </update>
 
+    <!--修改打卡状态-->
+    <update id="UpdateClockstatusByIdT" parameterType="java.util.Map">
+        UPDATE `attendance`.`staff` SET `clockstatus`='2' WHERE `id`=#{id}
+    </update>
+
     <!--手机修改员工信息-->
     <update id="UpdateStaffApp" parameterType="java.util.Map">
     update `attendance`.`staff`
