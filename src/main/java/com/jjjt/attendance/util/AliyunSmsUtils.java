@@ -7,14 +7,12 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
-import org.springframework.beans.factory.annotation.Value;
 
 /**
  * 阿里云短信服务：
  * 注意：需要 签名名称、模版CODE 以及 RAM访问控制中的 AccessKeyID 和 AccessKeySecret  
  */
 public class AliyunSmsUtils {
-
 
     //产品名称:云通信短信API产品,开发者无需替换
     static final String product = "Dysmsapi";
