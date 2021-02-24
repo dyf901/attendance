@@ -102,4 +102,10 @@ public class StaffService implements StaffDao {
     public int UpdateState(Map map) {
         return staffDao.UpdateState(map);
     }
+
+    //审批短信信息查询
+    @Override
+    public Staff FindStaffByIdS(Map map) {
+        return staffDao.FindStaffByIdS(map);
+    }
 }

@@ -183,4 +183,21 @@ public class ItemsController {
             return jsonResult;
         }
     }
+
+    @ApiOperation(value = "修改客户信息", notes = "传参:id(客户id)")
+    @PostMapping("/UpdateItems")
+    public JsonResult UpdateItems(@RequestBody Map map){
+        System.out.println("map:"+map);
+        JsonResult jsonResult = new JsonResult();
+        int i = itemsService.UpdateItems(map);
+        if (i==1){
+            jsonResult.setMessage("修改成功!");
+            jsonResult.setCode(200);
+            return jsonResult;
+        }else {
+            jsonResult.setMessage("修改失败!");
+            jsonResult.setCode(20006);
+            return jsonResult;
+        }
+    }
 }

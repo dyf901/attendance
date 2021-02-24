@@ -26,4 +26,7 @@ public interface LogDao {
 
     //根据id查询日志的详细信息(App)
     Log FindLogByIdY(Map map);
+
+    //根据id删除日志信息
+    int DeleteLog(Map map);
 }

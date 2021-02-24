@@ -19,7 +19,19 @@
 
     <!--修改客户信息-->
     <update id="UpdateItems" parameterType="java.util.Map">
-        UPDATE `attendance`.`items` SET  `items_name`=#{items_name}, `bloc_name`=#{bloc_name}, `type`=#{type} WHERE (`id`=#{id});
+        UPDATE `attendance`.`items`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="items_name!=null and items_name!=''">
+                `items_name`=#{items_name},
+            </if>
+            <if test="bloc_name!=null and bloc_name!=''">
+                `bloc_name`=#{bloc_name},
+            </if>
+            <if test="type!=null and type!=''">
+                `type`=#{type},
+            </if>
+        </trim>
+        WHERE (`id`=#{id});
     </update>
 
     <!--分页模糊查询客户信息-->

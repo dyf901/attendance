@@ -124,11 +124,11 @@ public class Items {
 
     @Override
     public String toString() {
-        return "{" +
+        return "Items{" +
                 "id=" + id +
                 ", conglomerate_id=" + conglomerate_id +
                 ", staff_id=" + staff_id +
-                ", staff_name=" + staff_name +
+                ", staff_name='" + staff_name + '\'' +
                 ", items_name='" + items_name + '\'' +
                 ", bloc_name='" + bloc_name + '\'' +
                 ", type='" + type + '\'' +

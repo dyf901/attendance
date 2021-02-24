@@ -133,4 +133,20 @@ public class LogController {
         page.setItems(list1);
         return page;
     }
+
+    @ApiOperation(value = "根据id删除日志信息", notes = "传参:id(日志信息的id)")
+    @PostMapping("/DeleteLog")
+    public JsonResult DeleteLog(@RequestBody Map map) {
+        JsonResult jsonResult = new JsonResult();
+        int i = logService.DeleteLog(map);
+        if (i==1){
+            jsonResult.setCode(200);
+            jsonResult.setMessage("删除成功!");
+            return jsonResult;
+        }else {
+            jsonResult.setCode(20006);
+            jsonResult.setMessage("删除失败!");
+            return jsonResult;
+        }
+    }
 }

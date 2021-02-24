@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.BalanceDao">
+    <!--增加支出申请单-->
+    <insert id="InsertBalance" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`balance` (`company_id`, `items_id`, `project_id`, `supplier_id`, `cost_types`, `payment_amount`, `payment_time`, `explain`, `picture`, `state`) 
+        VALUES (#{company_id}, #{items_id}, #{project_id}, #{supplier_id}, #{cost_types}, #{payment_amount}, #{payment_time}, #{explain}, #{picture}, #{state});
+    </insert>
+    
+    <!--删除支出申请单-->
+    <delete id="DeleteBalance" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`balance` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改支出申请单-->
+
+
+    <!--查询支出申请单-->
+    <select id="FindBalance" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Balance">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT s.`id`, s.`company_id`, s.`items_id`, s.`project_id`, s.`supplier_id`, s.`cost_types`, s.`payment_amount`, s.`payment_time`, s.`explain`, s.`picture`, s.`state`, l.`company_name` AS `company_name`, d.`items_name` AS `items_name`, p.`project_name` AS `project_name`, s.`supplier_name` AS `supplier_name` FROM `attendance`.`balance` s
+        LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
+        LEFT JOIN `attendance`.`items` d ON s.`items_id`=d.`id`
+        LEFT JOIN `attendance`.`project` p ON s.`project_id`=p.`id`
+        LEFT JOIN `attendance`.`supplier` z ON s.`supplier_id`=z.`id`
+        <where>
+            s.conglomerate_id=#{conglomerate_id}
+            <if test="project_id!=null and project_id!=''">
+                and s.`project_id`= #{project_id}
+            </if>
+            <if test="items_id!=null and items_id!=''">
+                and s.`items_id`=#{items_id}
+            </if>
+        </where>
+        ORDER BY s.`uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Balance">
+        SELECT COUNT(`id`) FROM `attendance`.`balance`
+        <where>
+            s.conglomerate_id=#{conglomerate_id}
+            <if test="project_id!=null and project_id!=''">
+                and s.`project_id`= #{project_id}
+            </if>
+            <if test="items_id!=null and items_id!=''">
+                and s.`items_id`=#{items_id}
+            </if>
+        </where>
+    </select>
+
+    <!--根据id查询详细信息-->
+    <select id="FindBalanceById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Balance">
+        SELECT s.`id`, s.`company_id`, s.`items_id`, s.`project_id`, s.`supplier_id`, s.`cost_types`, s.`payment_amount`, s.`payment_time`, s.`explain`, s.`picture`, s.`state`, l.`company_name` AS `company_name`, d.`items_name` AS `items_name`, p.`project_name` AS `project_name`, s.`supplier_name` AS `supplier_name` FROM `attendance`.`balance` s
+        LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
+        LEFT JOIN `attendance`.`items` d ON s.`items_id`=d.`id`
+        LEFT JOIN `attendance`.`project` p ON s.`project_id`=p.`id`
+        LEFT JOIN `attendance`.`supplier` z ON s.`supplier_id`=z.`id`
+        WHERE `id`=#{id}
+    </select>
+
+    <!--导入收支明细-->
+    <select id="SelectBalance" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Balance">
+        SELECT s.`id`, s.`company_id`, s.`items_id`, s.`project_id`, s.`supplier_id`, s.`cost_types`, s.`payment_amount`, s.`payment_time`, s.`explain`, s.`picture`, s.`state`, l.`company_name` AS `company_name`, d.`items_name` AS `items_name`, p.`project_name` AS `project_name`, s.`supplier_name` AS `supplier_name` FROM `attendance`.`balance` s
+        LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
+        LEFT JOIN `attendance`.`items` d ON s.`items_id`=d.`id`
+        LEFT JOIN `attendance`.`project` p ON s.`project_id`=p.`id`
+        LEFT JOIN `attendance`.`supplier` z ON s.`supplier_id`=z.`id`
+        WHERE s.conglomerate_id=#{conglomerate_id}
+    </select>
+</mapper>

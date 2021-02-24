@@ -51,5 +51,6 @@ public interface StaffDao {
     //离职
     int UpdateState(Map map);
 
-
+    //审批短信信息查询
+    Staff FindStaffByIdS(Map map);
 }

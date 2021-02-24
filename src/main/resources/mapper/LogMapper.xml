@@ -85,4 +85,9 @@
             </if>
         </where>
     </select>
+
+    <!--根据id删除日志信息-->
+    <delete id="DeleteLog" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`log` WHERE `id`=#{id}
+    </delete>
 </mapper>

@@ -1,7 +1,9 @@
 package com.jjjt.attendance.controller;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.jjjt.attendance.entity.Examine;
 import com.jjjt.attendance.entity.JsonResult;
+import com.jjjt.attendance.entity.Staff;
 import com.jjjt.attendance.service.ExamineService;
 import com.jjjt.attendance.service.StaffExamineService;
 import com.jjjt.attendance.service.StaffService;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.jjjt.attendance.util.ShenPiSmsUtils.sendSms;
 
 @Api(description = "审批接口")
 @RestController
@@ -32,7 +36,11 @@ public class ExamineController {
 
     @ApiOperation(value = "新建审批", notes = "")
     @PostMapping("/InsertExamine")
-    public JsonResult InsertExamine(@RequestBody Map map) throws ParseException {
+    public JsonResult InsertExamine(@RequestBody Map map) throws Exception {
+        String type = (String) map.get("examine_type");
+        map.put("id",map.get("staff_id"));
+        Staff staffl = staffService.FindStaffById(map);
+        String name = staffl.getStaff_name();
         System.out.println("map:"+map);
         JsonResult jsonResult = new JsonResult();
         Examine examine = new Examine();
@@ -121,7 +129,11 @@ public class ExamineController {
                 System.out.println("json:"+jsonArray.get(s));
                 map.put("examine_id",examine.getId());
                 map.put("staff_idT",jsonArray.get(s));
+                map.put("idS",jsonArray.get(s));
                 map.put("uptime",time);
+                Staff staff =staffService.FindStaffByIdS(map);
+                SendSmsResponse sendSmsResponse = sendSms(staff.getStaff_phone(),name,type);
+
                 staffExamineService.InsertStaffExamine(map);
             }
             jsonResult.setCode(200);

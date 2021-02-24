@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jjjt.attendance.dao.BudgetDao">
+    <!--增加收支明细-->
+    <insert id="InsertBudget" parameterType="java.util.Map">
+        INSERT INTO `attendance`.`budget` (`conglomerate_id`, `company_id`, `items_id`, `project_id`, `supplier_id`, `cost_types`, `payment_amount`, `payment_time`, `explain`, `picture`, `uptime`, `state`, `status`) 
+        VALUES (#{conglomerate_id}, #{company_id}, #{items_id}, #{project_id}, #{supplier_id}, #{cost_types}, #{payment_amount}, #{payment_time}, #{explain}, #{picture}, #{uptime}, #{state}, #{status});
+    </insert>
+
+    <!--删除收支明细-->
+    <delete id="DeleteBudget" parameterType="java.util.Map">
+        DELETE FROM `attendance`.`budget` WHERE `id`=#{id}
+    </delete>
+
+    <!--修改收支明细-->
+    <update id="UpdateBudget" parameterType="java.util.Map">
+        UPDATE `attendance`.`budget`
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="company_id!=null and company_id!=''">
+                `company_id`=#{company_id},
+            </if>
+            <if test="items_id!=null and items_id!=''">
+                `items_id`=#{items_id},
+            </if>
+            <if test="project_id!=null and project_id!=''">
+                `project_id`=#{project_id},
+            </if>
+            <if test="supplier_id!=null and supplier_id!=''">
+                `supplier_id`=#{supplier_id},
+            </if>
+            <if test="cost_types!=null and cost_types!=''">
+                `cost_types`=#{cost_types},
+            </if>
+            <if test="payment_amount!=null and payment_amount!=''">
+                `payment_amount`=#{payment_amount},
+            </if>
+            <if test="payment_time!=null and payment_time!=''">
+                `payment_time`=#{payment_time},
+            </if>
+            <if test="explain!=null and explain!=''">
+                `explain`=#{explain},
+            </if>
+            <if test="picture!=null and picture!=''">
+                `picture`=#{picture},
+            </if>
+            <if test="state!=null and state!=''">
+                `state`=#{state},
+            </if>
+            <if test="status!=null and status!=''">
+                `status`=#{status},
+            </if>
+            <if test="uptime!=null and uptime!=''">
+                `uptime`=#{uptime},
+            </if>
+        </trim>
+        WHERE (`id`=#{id});
+    </update>
+
+    <!--分页模糊查询收支明细-->
+    <select id="FindBudget" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Budget">
+        <bind name="page" value="pageSize*(pageNo-1)"></bind>
+        SELECT s.`id`, s.`company_id`, s.`items_id`, s.`project_id`, s.`supplier_id`, s.`cost_types`, s.`payment_amount`, s.`payment_time`, s.`explain`, s.`picture`, s.`state`, s.`status`, l.`company_name` AS `company_name`, d.`items_name` AS `items_name`, p.`project_name` AS `project_name`, s.`supplier_name` AS `supplier_name` FROM `attendance`.`budget` s
+        LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
+        LEFT JOIN `attendance`.`items` d ON s.`items_id`=d.`id`
+        LEFT JOIN `attendance`.`project` p ON s.`project_id`=p.`id`
+        LEFT JOIN `attendance`.`supplier` z ON s.`supplier_id`=z.`id`
+        <where>
+            s.conglomerate_id=#{conglomerate_id}
+            <if test="project_id!=null and project_id!=''">
+                and s.`project_id`= #{project_id}
+            </if>
+            <if test="items_id!=null and items_id!=''">
+                and s.`items_id`=#{items_id}
+            </if>
+            <if test="supplier_id!=null and supplier_id!=''">
+                and s.`supplier_id`=#{supplier_id}
+            </if>
+            <if test="status!=null and status!=''">
+                and s.`status`=#{status}
+            </if>
+        </where>
+        ORDER BY s.`uptime` DESC
+        limit #{page},#{pageSize}
+    </select>
+
+    <!--统计总数-->
+    <select id="Total" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Balance">
+        SELECT COUNT(`id`) FROM `attendance`.`budget`
+        <where>
+            s.conglomerate_id=#{conglomerate_id}
+            <if test="project_id!=null and project_id!=''">
+                and s.`project_id`= #{project_id}
+            </if>
+            <if test="items_id!=null and items_id!=''">
+                and s.`items_id`=#{items_id}
+            </if>
+            <if test="supplier_id!=null and supplier_id!=''">
+                and s.`supplier_id`=#{supplier_id}
+            </if>
+            <if test="status!=null and status!=''">
+                and s.`status`=#{status}
+            </if>
+        </where>
+    </select>
+
+    <!--根据id查询收支明细-->
+    <select id="FindBudgetById" parameterType="java.util.Map" resultType="com.jjjt.attendance.entity.Budget">
+        SELECT s.`id`, s.`company_id`, s.`items_id`, s.`project_id`, s.`supplier_id`, s.`cost_types`, s.`payment_amount`, s.`payment_time`, s.`explain`, s.`picture`, s.`state`, s.`status`, l.`company_name` AS `company_name`, d.`items_name` AS `items_name`, p.`project_name` AS `project_name`, s.`supplier_name` AS `supplier_name` FROM `attendance`.`budget` s
+        LEFT JOIN `attendance`.`company` l ON s.`company_id`=l.`id`
+        LEFT JOIN `attendance`.`items` d ON s.`items_id`=d.`id`
+        LEFT JOIN `attendance`.`project` p ON s.`project_id`=p.`id`
+        LEFT JOIN `attendance`.`supplier` z ON s.`supplier_id`=z.`id`
+        WHERE `id`=#{id}
+    </select>
+</mapper>

@@ -54,4 +54,10 @@ public class LogService implements LogDao {
     public Log FindLogByIdY(Map map) {
         return logDao.FindLogByIdY(map);
     }
+
+    //根据id删除日志信息
+    @Override
+    public int DeleteLog(Map map) {
+        return logDao.DeleteLog(map);
+    }
 }
